@@ -449,6 +449,24 @@ h3 i {
     color: #2c3e50;
     border-bottom: 2px solid #007bff; /* Petite ligne bleue décorative */
     padding-bottom: 5px;
+    /* --- PIED DE PAGE (FOOTER) --- */
+footer {
+    background-color: #222; /* Un peu plus foncé que le bleu nuit */
+    color: #aaa;
+    text-align: center;
+    padding: 20px;
+    font-size: 0.9rem;
+    border-top: 3px solid #007bff; /* Petite ligne bleue de finition */
+}
+
+footer p {
+    margin: 5px 0;
+}
+
+footer strong {
+    color: white;
+}
     font-size: 1.2rem;
     text-align: left; /* Alignement à gauche pour faire pro */
+
 }
