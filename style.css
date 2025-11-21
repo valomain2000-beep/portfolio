@@ -470,3 +470,20 @@ footer strong {
     text-align: left; /* Alignement à gauche pour faire pro */
 
 }
+/* --- PIED DE PAGE (FOOTER) --- */
+footer {
+    background-color: #222; /* Un peu plus foncé que le bleu nuit */
+    color: #aaa;
+    text-align: center;
+    padding: 20px;
+    font-size: 0.9rem;
+    border-top: 3px solid #007bff; /* Petite ligne bleue de finition */
+}
+
+footer p {
+    margin: 5px 0;
+}
+
+footer strong {
+    color: white;
+}
