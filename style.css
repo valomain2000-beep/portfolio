@@ -1,0 +1,454 @@
+/* Reset de base */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9;
+    color: #333;
+}
+
+/* Navigation */
+nav {
+    background-color: #333;
+    color: white;
+    padding: 1rem;
+}
+
+.nav-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* Hero Header */
+.hero {
+    text-align: center;
+    padding: 50px 20px;
+    background-color: #2c3e50;
+    color: white;
+}
+
+/* Section Projets */
+#projets {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+/* --- CORRECTION 1 : TITRES H2 --- */
+/* Par défaut, les titres sont foncés (pour être vus sur le fond blanc) */
+h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #2c3e50; 
+}
+
+/* Exception : Les titres dans le Hero et le Contact doivent rester blancs */
+.hero h2, #contact h2 {
+    color: white;
+}
+
+/* --- FILTRES --- */
+.filter-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    padding: 8px 16px;
+    border: none;
+    background-color: #e0e0e0;
+    cursor: pointer;
+    transition: 0.3s;
+    border-radius: 20px;
+    font-weight: bold;
+}
+
+.filter-btn:hover, .filter-btn.active {
+    background-color: #555;
+    color: white;
+}
+
+/* Grille des projets */
+.projects-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+/* Cartes */
+.project-card {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.3s ease;
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+}
+
+.project-card.hide {
+    display: none;
+}
+
+.tag {
+    display: inline-block;
+    background: #f1f1f1;
+    color: #555;
+    padding: 4px 8px;
+    font-size: 0.85em;
+    border-radius: 4px;
+    margin-top: 10px;
+    font-weight: bold;
+    align-self: flex-start;
+}
+
+/* --- CORRECTION 2 : SECTION CONTACT --- */
+/* Elle est ici ! J'ai remis le fond foncé et le texte blanc */
+#contact {
+    text-align: center;
+    padding: 40px;
+    background-color: #2c3e50; /* Fond Bleu Nuit */
+    color: white;              /* Texte Blanc */
+    margin-top: 40px;
+}
+
+#contact a {
+    color: white; /* Icônes en blanc */
+    transition: 0.3s;
+}
+
+#contact a:hover {
+    color: #007bff; /* Bleu clair au survol */
+}
+
+/* --- BOUTONS DÉTAILS COLORÉS --- */
+
+.btn-details {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+/* Système = Bleu */
+.project-card[data-category="systeme"] .btn-details {
+    background-color: #007bff;
+}
+.project-card[data-category="systeme"] .btn-details:hover {
+    background-color: #0056b3;
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0,123,255,0.3);
+}
+
+/* Réseau = Vert */
+.project-card[data-category="reseau"] .btn-details {
+    background-color: #28a745;
+}
+.project-card[data-category="reseau"] .btn-details:hover {
+    background-color: #1e7e34;
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(40,167,69,0.3);
+}
+
+/* Cyber = Rouge */
+.project-card[data-category="cyber"] .btn-details {
+    background-color: #dc3545;
+}
+.project-card[data-category="cyber"] .btn-details:hover {
+    background-color: #bd2130;
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(220,53,69,0.3);
+}
+
+/* --- MODALE (POP-UP) --- */
+
+.modal {
+    display: none; 
+    position: fixed; 
+    z-index: 1000; 
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.7); 
+    backdrop-filter: blur(5px);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 10% auto; 
+    padding: 30px;
+    border-radius: 10px;
+    width: 80%;
+    max-width: 600px; 
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    position: relative; /* IMPORTANT pour positionner le bouton croix */
+    animation: slideDown 0.4s ease;
+}
+
+@keyframes slideDown {
+    from { transform: translateY(-50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+/* Bouton Croix */
+.close-btn {
+    position: absolute; 
+    top: 10px;          
+    right: 15px;        
+    color: #aaa;
+    font-size: 40px;    
+    font-weight: bold;
+    cursor: pointer;    
+    transition: 0.2s;
+    line-height: 1;     
+    padding: 5px;       
+    z-index: 1010;      
+}
+
+.close-btn:hover {
+    color: #333;       
+    transform: scale(1.1); 
+}
+
+/* Style interne de la modale */
+#modal-title {
+    color: #2c3e50;
+    margin-top: 10px; 
+    margin-right: 30px; 
+}
+
+#modal-image {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+    margin: 20px 0;
+    border: 1px solid #ddd;
+}
+
+#modal-desc {
+    line-height: 1.6;
+    color: #555;
+    text-align: justify;
+}
+
+/* --- BOUTONS HERO (CV & GITHUB) --- */
+
+.hero-buttons {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.btn-hero {
+    padding: 12px 25px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.1rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px; 
+}
+
+/* Bouton Principal (CV) */
+.btn-hero.primary {
+    background-color: #e74c3c; 
+    color: white;
+    box-shadow: 0 4px 15px rgba(231, 76, 60, 0.4);
+}
+
+.btn-hero.primary:hover {
+    background-color: #c0392b;
+    transform: translateY(-3px);
+}
+
+/* Bouton Secondaire (GitHub) */
+.btn-hero.secondary {
+    background-color: transparent;
+    border: 2px solid white;
+    color: white;
+}
+
+.btn-hero.secondary:hover {
+    background-color: white;
+    color: #2c3e50;
+    transform: translateY(-3px);
+}
+
+/* Petit ajustement pour les icônes dans les titres */
+h3 i {
+    margin-right: 8px;
+    color: #555; 
+}
+/* --- STYLE POUR LE NOUVEAU BOUTON NOTES --- */
+.btn-hero.notes {
+    background-color: #f39c12; /* Orange (Distinct du rouge et du blanc) */
+    color: white;
+    box-shadow: 0 4px 15px rgba(243, 156, 18, 0.4);
+    border: none;
+}
+
+.btn-hero.notes:hover {
+    background-color: #d35400; /* Orange foncé */
+    transform: translateY(-3px);
+}
+
+/* --- STYLE DE LA PAGE NOTES (LISTE) --- */
+
+.notes-list {
+    max-width: 800px;
+    margin: 0 auto;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.note-item {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    border-bottom: 1px solid #eee;
+    text-decoration: none;
+    color: #333;
+    transition: background 0.2s;
+}
+
+.note-item:last-child {
+    border-bottom: none;
+}
+
+.note-item:hover {
+    background-color: #f9f9f9;
+}
+
+.note-icon {
+    font-size: 30px;
+    margin-right: 20px;
+    color: #2c3e50;
+    width: 40px;
+    text-align: center;
+}
+
+/* Couleurs des icones selon le type */
+.fa-file-pdf { color: #e74c3c; }   /* Rouge pour PDF */
+.fa-file-word { color: #3498db; }  /* Bleu pour Word */
+.fa-file-code { color: #f1c40f; }  /* Jaune pour Code */
+
+.note-info {
+    flex-grow: 1; /* Prend toute la place disponible */
+}
+
+.note-info h3 {
+    margin: 0 0 5px 0;
+    font-size: 1.1rem;
+    color: #2c3e50;
+    text-align: left; /* Force l'alignement à gauche */
+}
+
+.note-info p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #777;
+}
+
+.note-arrow {
+    color: #ccc;
+}
+/* --- VISIONNEUSE PDF (Version Optimisée) --- */
+
+/* On modifie la boîte blanche uniquement quand c'est pour un PDF */
+.modal-content.pdf-viewer {
+    width: 95%;        /* Plus large : 95% de l'écran */
+    height: 95vh;      /* Plus haut : 95% de la hauteur de l'écran */
+    margin: 2vh auto;  /* C'EST ICI QUE ÇA CHANGE : Seulement 2% de marge haut (au lieu de 10%) */
+    max-width: 1400px; /* On permet une plus grande largeur sur grand écran */
+    padding: 0;        
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/* L'en-tête de la fenêtre (Titre + Croix) */
+.pdf-header {
+    padding: 8px 20px; /* J'ai réduit l'espace (avant c'était 15px) pour gagner de la place */
+    background-color: #f9f9f9;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-shrink: 0; /* Empêche l'en-tête de s'écraser */
+}
+
+.pdf-header h3 {
+    margin: 0;
+    color: #2c3e50;
+    font-size: 1rem; /* Titre un peu plus petit pour être discret */
+}
+
+/* La croix de fermeture spécifique au PDF */
+.close-pdf {
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #aaa;
+    line-height: 1;
+}
+
+.close-pdf:hover {
+    color: #e74c3c;
+}
+
+/* L'iframe qui contient le document */
+#pdf-frame {
+    width: 100%;
+    flex-grow: 1; /* Prend tout l'espace restant en hauteur */
+    border: none;
+    background-color: #eee; 
+}
+/* --- CORRECTION ICÔNE CV --- */
+/* Force l'icône à être blanche quand elle est dans le bouton rouge */
+.btn-hero.primary i {
+    color: white !important;
+}
+/* --- TITRES DES CATÉGORIES (Page Notes) --- */
+.category-title {
+    max-width: 800px;
+    margin: 30px auto 10px auto; /* Centré horizontalement */
+    color: #2c3e50;
+    border-bottom: 2px solid #007bff; /* Petite ligne bleue décorative */
+    padding-bottom: 5px;
+    font-size: 1.2rem;
+    text-align: left; /* Alignement à gauche pour faire pro */
+}
