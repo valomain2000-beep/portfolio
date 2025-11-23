@@ -1,15 +1,15 @@
-/* --- 1. RESET & FOND SOMBRE (DARK MODE) --- */
+/* Reset de base */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #1e1e1e; /* Fond principal gris très foncé */
-    color: #e0e0e0; /* Texte gris clair pour la lecture */
+    background-color: #1e1e1e; /* Fond gris foncé (Dark Mode) */
+    color: #e0e0e0; /* Texte gris clair */
 }
 
-/* --- 2. NAVIGATION --- */
+/* Navigation */
 nav {
-    background-color: #111; /* Menu encore plus sombre */
+    background-color: #111;
     color: white;
     padding: 1rem;
     border-bottom: 1px solid #333;
@@ -40,53 +40,46 @@ nav a:hover {
     color: #007bff;
 }
 
-/* --- 3. HERO HEADER (ACCUEIL) --- */
+/* --- HERO HEADER --- */
 .hero {
     text-align: center;
     padding: 60px 20px;
-    background: linear-gradient(135deg, #2c3e50 0%, #000000 100%); /* Dégradé sombre */
+    background: linear-gradient(135deg, #2c3e50 0%, #000000 100%);
     color: white;
     border-bottom: 3px solid #007bff;
 }
 
-/* TITRE TYPING EFFECT (Machine à écrire - Boucle) */
+/* --- CORRECTION MACHINE À ÉCRIRE --- */
 .typing-container {
     display: inline-block;
 }
 
 .typing-effect {
-    overflow: hidden;
-    border-right: 3px solid #007bff; /* Le curseur */
+    /* Police Monospace OBLIGATOIRE pour que l'effet ne coupe pas les lettres */
+    font-family: Consolas, "Courier New", monospace; 
+    overflow: hidden; 
+    border-right: 3px solid #007bff; /* Curseur */
     white-space: nowrap; 
     margin: 0 auto;
     letter-spacing: 2px;
     max-width: 100%;
     
-    /* MODIFICATION ICI : 
-       - On passe la durée à 6s pour avoir le temps de la pause.
-       - On ajoute 'infinite' pour que ça tourne en rond.
-       - 'alternate' permettrait d'écrire/effacer, mais ici on va faire une boucle simple.
-    */
+    /* 33 caractères dans la phrase = 33 steps */
+    width: 33ch; 
+    
     animation: 
-        typing 6s steps(40, end) infinite,
+        typing 6s steps(33) infinite alternate, /* 'alternate' pour écrire puis effacer proprement */
         blink-caret .75s step-end infinite;
 }
 
-/* Animation d'écriture avec PAUSE */
+/* Animation fluide : Écrit, Pause, Efface */
 @keyframes typing {
-    0% { width: 0; }       /* Départ vide */
-    50% { width: 100%; }   /* Écrit le texte (3 secondes) */
-    90% { width: 100%; }   /* RESTE AFFICHÉ (Pause lecture) */
-    100% { width: 0; }     /* Revient à 0 pour recommencer */
+    0% { width: 0; }
+    40% { width: 33ch; } /* Écrit */
+    90% { width: 33ch; } /* Pause lecture */
+    100% { width: 33ch; } /* Reste affiché avant de repartir en arrière (si alternate) */
 }
 
-@keyframes blink-caret { 
-    from, to { border-color: transparent } 
-    50% { border-color: #007bff; } 
-}
-
-/* Animation d'écriture */
-@keyframes typing { from { width: 0 } to { width: 100% } }
 @keyframes blink-caret { from, to { border-color: transparent } 50% { border-color: #007bff; } }
 
 /* --- BOUTONS HERO --- */
@@ -100,7 +93,7 @@ nav a:hover {
 .btn-hero.notes { background-color: #f39c12; color: white; box-shadow: 0 4px 15px rgba(243, 156, 18, 0.4); border: none; }
 .btn-hero.notes:hover { background-color: #d35400; transform: translateY(-3px); }
 
-/* --- 4. SECTIONS GÉNÉRALES --- */
+/* --- SECTIONS GÉNÉRALES --- */
 #projets {
     max-width: 1000px;
     margin: 40px auto;
@@ -110,12 +103,12 @@ nav a:hover {
 h2 {
     text-align: center;
     margin-bottom: 30px;
-    color: #fff; /* Blanc partout en dark mode */
+    color: #fff;
 }
 
 h3 i { margin-right: 8px; color: #aaa; }
 
-/* --- 5. FILTRES --- */
+/* --- FILTRES --- */
 .filter-container {
     display: flex;
     justify-content: center;
@@ -141,7 +134,7 @@ h3 i { margin-right: 8px; color: #aaa; }
     border-color: #007bff;
 }
 
-/* --- 6. GRILLE & CARTES (DARK MODE) --- */
+/* --- GRILLE & CARTES (DARK MODE) --- */
 .projects-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -149,7 +142,7 @@ h3 i { margin-right: 8px; color: #aaa; }
 }
 
 .project-card {
-    background: #2d2d2d; /* Carte gris foncé */
+    background: #2d2d2d;
     padding: 20px;
     border-radius: 10px;
     border: 1px solid #444;
@@ -159,21 +152,19 @@ h3 i { margin-right: 8px; color: #aaa; }
     transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s;
 }
 
-/* EFFET CYBER GLOW AU SURVOL */
 .project-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(0, 123, 255, 0.3); /* Lueur bleue */
+    box-shadow: 0 5px 15px rgba(0, 123, 255, 0.3);
     border-color: #007bff;
 }
 
 .project-card h3 { color: white; }
 .project-card p { color: #bbb; }
-
 .project-card.hide { display: none; }
 
 .tag {
     display: inline-block;
-    background: #444; /* Tag plus sombre */
+    background: #444;
     color: #fff;
     padding: 4px 8px;
     font-size: 0.85em;
@@ -183,7 +174,7 @@ h3 i { margin-right: 8px; color: #aaa; }
     align-self: flex-start;
 }
 
-/* --- 7. ANIMATION SCROLL REVEAL (APPARITION) --- */
+/* --- ANIMATION SCROLL REVEAL --- */
 .reveal {
     opacity: 0;
     transform: translateY(50px);
@@ -195,7 +186,7 @@ h3 i { margin-right: 8px; color: #aaa; }
     transform: translateY(0);
 }
 
-/* --- 8. BOUTONS DÉTAILS --- */
+/* --- BOUTONS DÉTAILS --- */
 .btn-details {
     display: inline-block;
     margin-top: 20px;
@@ -217,7 +208,7 @@ h3 i { margin-right: 8px; color: #aaa; }
 .project-card[data-category="cyber"] .btn-details { background-color: #dc3545; }
 .project-card[data-category="cyber"] .btn-details:hover { background-color: #bd2130; box-shadow: 0 0 10px #dc3545; }
 
-/* --- 9. PAGE NOTES (ACCORDÉON DARK) --- */
+/* --- PAGE NOTES & DOSSIERS --- */
 .category-title {
     max-width: 800px;
     margin: 30px auto 10px auto;
@@ -239,7 +230,7 @@ details.folder-group {
 }
 
 details.folder-group:hover {
-    box-shadow: 0 0 15px rgba(255, 255, 255, 0.05); /* Lueur blanche très légère */
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.05);
     border-color: #666;
 }
 
@@ -270,16 +261,26 @@ details.folder-group[open] summary::after { transform: rotate(180deg); }
 .note-item:last-child { border-bottom: none; }
 .note-item:hover { background-color: #383838; }
 
-.note-icon { font-size: 30px; margin-right: 20px; width: 40px; text-align: center; }
+/* ESPACEMENT ICÔNES CORRIGÉ */
+.note-icon { 
+    font-size: 30px; 
+    margin-right: 40px; /* Plus d'espace */
+    width: 50px; 
+    text-align: center; 
+    border-right: 1px solid #444; /* Petite ligne de séparation */
+    padding-right: 20px;
+}
+
 .fa-file-pdf { color: #e74c3c; }
 .fa-file-word { color: #3498db; }
 .fa-file-code { color: #f1c40f; }
 
+.note-info { flex-grow: 1; }
 .note-info h3 { margin: 0 0 5px 0; font-size: 1.1rem; color: #fff; text-align: left; }
 .note-info p { margin: 0; font-size: 0.9rem; color: #aaa; }
 .note-arrow { color: #666; }
 
-/* --- 10. MODALE (POP-UP) --- */
+/* --- MODALE --- */
 .modal {
     display: none; 
     position: fixed; 
@@ -288,12 +289,12 @@ details.folder-group[open] summary::after { transform: rotate(180deg); }
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0,0,0,0.8); /* Fond plus sombre */
+    background-color: rgba(0,0,0,0.8);
     backdrop-filter: blur(5px);
 }
 
 .modal-content {
-    background-color: #2d2d2d; /* Fenêtre sombre */
+    background-color: #2d2d2d;
     color: white;
     margin: 10% auto; 
     padding: 30px;
@@ -322,9 +323,8 @@ details.folder-group[open] summary::after { transform: rotate(180deg); }
 .close-pdf:hover { color: #e74c3c; }
 #pdf-frame { width: 100%; flex-grow: 1; border: none; background-color: #eee; }
 
-/* --- 11. CONTACT & FOOTER --- */
+/* --- CONTACT & FOOTER --- */
 #contact { background-color: #111; color: white; border-top: 1px solid #333; padding: 40px; text-align: center; margin-top: 40px;}
 footer { background-color: #000; color: #888; text-align: center; padding: 20px; font-size: 0.9rem; border-top: 3px solid #007bff; }
 footer p { margin: 5px 0; }
 footer strong { color: white; }
-
