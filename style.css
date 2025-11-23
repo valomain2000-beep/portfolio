@@ -7,7 +7,11 @@ body {
     margin: 0;
     padding: 0;
     background-color: #1e1e1e; 
-    color: #e0e0e0; 
+    color: #e0e0e0;
+    /* Espace pour le footer fixe */
+    padding-bottom: 100px !important; 
+    min-height: 100vh;
+    position: relative;
 }
 
 /* --- NAVIGATION --- */
@@ -257,7 +261,7 @@ h3 i { margin-right: 8px; color: #aaa; }
 .project-card[data-category="cyber"] .btn-details { background-color: #dc3545; }
 .project-card[data-category="cyber"] .btn-details:hover { background-color: #bd2130; box-shadow: 0 0 10px #dc3545; }
 
-/* --- DOSSIERS ACCORDÉON (Géré par JS pour l'animation) --- */
+/* --- DOSSIERS ACCORDÉON (Géré par JS) --- */
 .category-title {
     max-width: 800px;
     margin: 30px auto 10px auto;
@@ -274,9 +278,9 @@ details.folder-group {
     background: #2d2d2d;
     border-radius: 10px;
     border: 1px solid #444;
-    overflow: hidden; /* IMPORTANT pour que le contenu ne dépasse pas pendant l'anim */
+    overflow: hidden; /* IMPORTANT pour l'animation JS */
     transition: box-shadow 0.3s, border-color 0.3s;
-    /* J'ai supprimé les keyframes d'animation ici */
+    /* SUPPRESSION DES ANIMATIONS CSS ICI POUR LAISSER LE JS FAIRE */
 }
 
 details.folder-group:hover {
@@ -304,7 +308,7 @@ details.folder-group summary:hover { background-color: #333; }
 details.folder-group summary i { margin-right: 10px; color: #f39c12; }
 details.folder-group summary::after { content: '▼'; font-size: 0.8em; color: #888; transition: transform 0.3s ease; }
 
-/* La rotation de la flèche reste gérée par CSS */
+/* Rotation de la flèche */
 details.folder-group[open] summary::after { transform: rotate(180deg); }
 
 .notes-list { background: #2d2d2d; }
@@ -408,26 +412,22 @@ details.folder-group[open] summary::after { transform: rotate(180deg); }
 
 /* --- CONTACT & FOOTER --- */
 #contact { background-color: #111; color: white; border-top: 1px solid #333; padding: 40px; text-align: center; margin-top: 40px;}
-footer { background-color: #000; color: #888; text-align: center; padding: 20px; font-size: 0.9rem; border-top: 3px solid #007bff; }
-footer p { margin: 5px 0; }
-footer strong { color: white; }
 
-/* --- PIED DE PAGE FIXE (FOOTER) --- */
+/* PIED DE PAGE FIXE (STICKY FOOTER) */
 footer {
     background-color: #000;
     color: #888;
     text-align: center;
-    padding: 15px 0; /* Un peu plus fin pour ne pas prendre trop de place */
+    padding: 15px 0;
     font-size: 0.9rem;
     border-top: 3px solid #007bff;
     
-    /* C'EST ICI QUE LA MAGIE OPÈRE : */
-    position: fixed; /* Fixe l'élément par rapport à l'écran */
-    bottom: 0;       /* Collé tout en bas */
-    left: 0;         /* Collé à gauche */
-    width: 100%;     /* Prend toute la largeur */
-    z-index: 1000;   /* S'assure qu'il est au-dessus du reste */
-    box-shadow: 0 -2px 10px rgba(0,0,0,0.5); /* Petite ombre pour le détacher du fond */
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.5);
 }
 
 footer p {
@@ -436,12 +436,4 @@ footer p {
 
 footer strong {
     color: white;
-}
-
-/* --- AJUSTEMENT DU CORPS DE PAGE --- */
-/* On ajoute un "coussin" en bas de page pour que le contenu ne soit pas caché derrière le footer */
-body {
-    padding-bottom: 100px !important; /* Espace réservé pour le footer */
-    min-height: 100vh; /* S'assure que la page prend au moins toute la hauteur */
-    position: relative;
 }
