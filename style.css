@@ -123,7 +123,7 @@ nav a:hover {
 /* Notes : 26ch (23 lettres + 3 marge) - Même logique appliquée ici ! */
 .typing-notes { 
     width: 26ch; 
-    animation: typing-notes 4s steps(26) infinite alternate, blink-caret .75s step-end infinite; 
+    animation: typing-notes 2.7s steps(26) infinite alternate, blink-caret .75s step-end infinite; 
 }
 
 @keyframes typing-home { 
@@ -314,3 +314,4 @@ footer {
 
 footer p { margin: 5px 0; }
 footer strong { color: white; }
+
