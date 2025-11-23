@@ -9,39 +9,37 @@ body {
     background-color: #1e1e1e; 
     color: #e0e0e0;
     
-    /* C'EST ICI LE SECRET DU FOOTER : */
+    /* Structure pour le Footer en bas */
     display: flex;
     flex-direction: column;
-    min-height: 100vh; /* La page fait au minimum 100% de la hauteur de l'écran */
+    min-height: 100vh;
 }
 
-/* Le contenu principal pousse le footer vers le bas */
-section, header, nav {
-    flex-shrink: 0;
+/* IMPORTANT : On force les sections à prendre toute la largeur */
+nav, header, section, footer {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* La section principale grandit pour pousser le footer */
+section#projets {
+    flex: 1;
+    max-width: 1200px; /* Plus large pour accueillir 2 dossiers côte à côte */
+    margin: 40px auto;
+    padding: 0 20px;
 }
 
 /* --- NAVIGATION --- */
 nav {
     background-color: #111;
-    color: white;
     padding: 1rem;
     border-bottom: 1px solid #333;
 }
 
-.nav-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-/* Style spécifique pour le bouton "Retour" (Notes) */
 .nav-content.full-width {
     width: 100%;
-    max-width: 100%;
-    margin: 0;
-    justify-content: flex-start; 
+    display: flex;
+    justify-content: flex-start;
 }
 
 .back-link {
@@ -60,25 +58,6 @@ nav {
     transform: translateX(-5px); 
 }
 
-.back-link i { font-size: 0.9em; }
-
-nav ul {
-    list-style: none;
-    display: flex;
-    gap: 20px;
-}
-
-nav a {
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
-    transition: color 0.3s;
-}
-
-nav a:hover {
-    color: #007bff;
-}
-
 /* --- HERO HEADER --- */
 .hero {
     text-align: center;
@@ -88,7 +67,6 @@ nav a:hover {
     position: relative;
 }
 
-/* Petite ligne bleue centrée */
 .hero::after {
     content: '';
     display: block;
@@ -99,11 +77,8 @@ nav a:hover {
     border-radius: 2px;
 }
 
-/* --- MACHINE À ÉCRIRE (TYPING EFFECT) --- */
-.typing-container {
-    display: inline-block;
-}
-
+/* --- MACHINE À ÉCRIRE --- */
+.typing-container { display: inline-block; }
 .typing-effect {
     font-family: "Iosevka ExtraLight", "Iosevka", "Source Code Pro", "Consolas", monospace;
     font-weight: 200;
@@ -112,93 +87,30 @@ nav a:hover {
     white-space: nowrap; 
     margin: 0 auto;
     letter-spacing: 1px;
-    max-width: 100%;
 }
 
-/* Accueil : 36 caractères */
-.typing-home {
-    width: 36ch; 
-    animation: typing-home 4s steps(36) infinite alternate, blink-caret .75s step-end infinite;
-}
+.typing-home { width: 36ch; animation: typing-home 4s steps(36) infinite alternate, blink-caret .75s step-end infinite; }
+.typing-notes { width: 24ch; animation: typing-notes 4s steps(24) infinite alternate, blink-caret .75s step-end infinite; }
 
-/* Notes : 24 caractères */
-.typing-notes {
-    width: 24ch; 
-    animation: typing-notes 4s steps(24) infinite alternate, blink-caret .75s step-end infinite;
-}
-
-@keyframes typing-home {
-    0% { width: 0; }
-    60% { width: 36ch; }
-    100% { width: 36ch; }
-}
-
-@keyframes typing-notes {
-    0% { width: 0; }
-    60% { width: 24ch; }
-    100% { width: 24ch; }
-}
-
+@keyframes typing-home { 0% { width: 0; } 60% { width: 36ch; } 100% { width: 36ch; } }
+@keyframes typing-notes { 0% { width: 0; } 60% { width: 24ch; } 100% { width: 24ch; } }
 @keyframes blink-caret { from, to { border-color: transparent } 50% { border-color: #007bff; } }
 
-/* --- BOUTONS HERO --- */
+/* --- BOUTONS --- */
 .hero-buttons { margin-top: 30px; display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
 .btn-hero { padding: 12px 25px; border-radius: 30px; text-decoration: none; font-weight: bold; font-size: 1.1rem; transition: transform 0.3s ease, box-shadow 0.3s ease; display: inline-flex; align-items: center; gap: 10px; }
-.btn-hero.primary { background-color: #e74c3c; color: white; box-shadow: 0 4px 15px rgba(231, 76, 60, 0.4); }
-.btn-hero.primary i { color: white !important; } 
-.btn-hero.primary:hover { background-color: #c0392b; transform: translateY(-3px); box-shadow: 0 6px 20px rgba(231, 76, 60, 0.6); }
-.btn-hero.secondary { background-color: transparent; border: 2px solid white; color: white; }
+.btn-hero.primary { background-color: #e74c3c; color: white; }
+.btn-hero.primary:hover { background-color: #c0392b; transform: translateY(-3px); }
+.btn-hero.secondary { border: 2px solid white; color: white; }
 .btn-hero.secondary:hover { background-color: white; color: #2c3e50; transform: translateY(-3px); }
-.btn-hero.notes { background-color: #f39c12; color: white; box-shadow: 0 4px 15px rgba(243, 156, 18, 0.4); border: none; }
+.btn-hero.notes { background-color: #f39c12; color: white; }
 .btn-hero.notes:hover { background-color: #d35400; transform: translateY(-3px); }
 
-/* --- SECTIONS GÉNÉRALES --- */
-#projets {
-    max-width: 1000px;
-    margin: 40px auto;
-    padding: 0 20px;
-    flex: 1; /* Permet à la section de grandir pour pousser le footer */
-}
-
-h2 {
-    text-align: center;
-    margin-bottom: 30px;
-    color: #fff;
-}
-
-h3 i { margin-right: 8px; color: #aaa; }
-
-/* --- FILTRES --- */
-.filter-container {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-bottom: 30px;
-    flex-wrap: wrap;
-}
-
-.filter-btn {
-    padding: 8px 16px;
-    border: 1px solid #444;
-    background-color: #2d2d2d;
-    color: #ccc;
-    cursor: pointer;
-    transition: 0.3s;
-    border-radius: 20px;
-    font-weight: bold;
-}
-
-.filter-btn:hover, .filter-btn.active {
-    background-color: #007bff;
-    color: white;
-    border-color: #007bff;
-}
-
-/* --- GRILLE & CARTES --- */
+/* --- GRILLE PROJETS (Index) --- */
 .projects-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* CÔTE À CÔTE */
+    gap: 30px;
 }
 
 .project-card {
@@ -206,99 +118,37 @@ h3 i { margin-right: 8px; color: #aaa; }
     padding: 20px;
     border-radius: 10px;
     border: 1px solid #444;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-
-.project-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(0, 123, 255, 0.3);
-    border-color: #007bff;
-}
-
-.project-card h3 { color: white; }
+.project-card:hover { transform: translateY(-5px); border-color: #007bff; box-shadow: 0 5px 15px rgba(0, 123, 255, 0.3); }
+.project-card h3 { color: white; margin-top: 0; }
 .project-card p { color: #bbb; }
 .project-card.hide { display: none; }
+.tag { display: inline-block; background: #444; color: #fff; padding: 4px 8px; border-radius: 4px; font-size: 0.85em; margin-top: 10px; }
+.btn-details { display: inline-block; margin-top: 20px; padding: 10px 20px; color: white; text-decoration: none; border-radius: 5px; background: #007bff; }
 
-.tag {
-    display: inline-block;
-    background: #444;
-    color: #fff;
-    padding: 4px 8px;
-    font-size: 0.85em;
-    border-radius: 4px;
-    margin-top: 10px;
-    font-weight: bold;
-    align-self: flex-start;
+/* --- GRILLE DOSSIERS (Notes) - CÔTE À CÔTE --- */
+.folders-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); /* Grille automatique */
+    gap: 30px; /* Espace entre les dossiers */
+    align-items: start; /* Aligne les dossiers en haut */
 }
 
-/* --- ANIMATION SCROLL REVEAL --- */
-.reveal {
-    opacity: 0;
-    transform: translateY(50px);
-    transition: all 0.8s ease-out;
-}
-
-.reveal.active {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* --- BOUTONS DÉTAILS --- */
-.btn-details {
-    display: inline-block;
-    margin-top: 20px;
-    padding: 10px 20px;
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
-    font-weight: bold;
-    text-align: center;
-    transition: all 0.3s ease;
-}
-
-.project-card[data-category="systeme"] .btn-details { background-color: #007bff; }
-.project-card[data-category="systeme"] .btn-details:hover { background-color: #0056b3; box-shadow: 0 0 10px #007bff; }
-
-.project-card[data-category="reseau"] .btn-details { background-color: #28a745; }
-.project-card[data-category="reseau"] .btn-details:hover { background-color: #1e7e34; box-shadow: 0 0 10px #28a745; }
-
-.project-card[data-category="cyber"] .btn-details { background-color: #dc3545; }
-.project-card[data-category="cyber"] .btn-details:hover { background-color: #bd2130; box-shadow: 0 0 10px #dc3545; }
-
-/* --- DOSSIERS ACCORDÉON (Géré par JS) --- */
-.category-title {
-    max-width: 800px;
-    margin: 30px auto 10px auto;
-    color: #fff;
-    border-bottom: 2px solid #007bff;
-    padding-bottom: 5px;
-    font-size: 1.2rem;
-    text-align: left;
-}
-
+/* Style des dossiers */
 details.folder-group {
-    max-width: 800px;
-    margin: 20px auto;
     background: #2d2d2d;
     border-radius: 10px;
     border: 1px solid #444;
     overflow: hidden; 
-    transition: box-shadow 0.3s, border-color 0.3s;
-}
-
-details.folder-group:hover {
-    box-shadow: 0 0 15px rgba(255, 255, 255, 0.05);
-    border-color: #666;
+    transition: border-color 0.3s;
+    width: 100%; /* Prend la place dans la grille */
 }
 
 details.folder-group summary {
     padding: 15px 20px;
     cursor: pointer;
     font-weight: bold;
-    font-size: 1.1rem;
     background-color: #252525;
     color: #fff;
     list-style: none;
@@ -306,132 +156,37 @@ details.folder-group summary {
     align-items: center;
     justify-content: space-between;
     border-bottom: 1px solid #444;
-    position: relative;
-    z-index: 10;
 }
 
 details.folder-group summary:hover { background-color: #333; }
 details.folder-group summary i { margin-right: 10px; color: #f39c12; }
-details.folder-group summary::after { content: '▼'; font-size: 0.8em; color: #888; transition: transform 0.3s ease; }
-
-/* Rotation de la flèche */
+details.folder-group summary::after { content: '▼'; color: #888; transition: transform 0.3s ease; }
 details.folder-group[open] summary::after { transform: rotate(180deg); }
 
+/* Liste dans les dossiers */
 .notes-list { background: #2d2d2d; overflow: hidden; }
-
-.note-item {
-    display: flex; align-items: center; padding: 20px; border-bottom: 1px solid #444; text-decoration: none; color: #ddd; transition: background 0.2s;
-}
-.note-item:last-child { border-bottom: none; }
+.note-item { display: flex; align-items: center; padding: 15px; border-bottom: 1px solid #444; text-decoration: none; color: #ddd; transition: background 0.2s; }
 .note-item:hover { background-color: #383838; }
+.note-icon { font-size: 24px; margin-right: 15px; width: 30px; text-align: center; }
+.fa-file-pdf { color: #e74c3c; } .fa-file-word { color: #3498db; } .fa-file-code { color: #f1c40f; }
+.note-info h3 { margin: 0; font-size: 1rem; color: #fff; }
+.note-info p { margin: 0; font-size: 0.8rem; color: #aaa; }
 
-.note-icon { 
-    font-size: 30px; 
-    margin-right: 40px; 
-    width: 50px; 
-    text-align: center; 
-    border-right: 1px solid #444; 
-    padding-right: 20px;
-}
+/* --- MODALE & PDF --- */
+.modal { display: none; position: fixed; z-index: 1000; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); backdrop-filter: blur(5px); }
+.modal-content { background: #2d2d2d; color: white; margin: 5% auto; padding: 30px; border-radius: 10px; width: 90%; max-width: 600px; position: relative; }
+.modal-content.pdf-viewer { height: 90vh; max-width: 1200px; padding: 0; display: flex; flex-direction: column; }
+.pdf-header { padding: 10px 20px; background: #222; display: flex; justify-content: space-between; align-items: center; }
+.pdf-header h3 { margin: 0; color: white; font-size: 1rem; }
+.close-pdf { font-size: 28px; cursor: pointer; color: #aaa; }
+#pdf-frame { flex-grow: 1; border: none; background: #eee; }
 
-.fa-file-pdf { color: #e74c3c; }
-.fa-file-word { color: #3498db; }
-.fa-file-code { color: #f1c40f; }
-
-.note-info { flex-grow: 1; }
-.note-info h3 { margin: 0 0 5px 0; font-size: 1.1rem; color: #fff; text-align: left; }
-.note-info p { margin: 0; font-size: 0.9rem; color: #aaa; }
-.note-arrow { color: #666; }
-
-/* --- MODALE UNIVERSELLE --- */
-.modal {
-    display: none; 
-    position: fixed; 
-    z-index: 1000; 
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0,0,0,0.8);
-    backdrop-filter: blur(5px);
-}
-
-.modal-content {
-    background-color: #2d2d2d;
-    color: white;
-    margin: 10% auto; 
-    padding: 30px;
-    border-radius: 10px;
-    width: 80%;
-    max-width: 600px; 
-    box-shadow: 0 5px 25px rgba(0,0,0,0.5);
-    position: relative;
-    animation: slideDown 0.4s ease;
-    border: 1px solid #555;
-}
-
-@keyframes slideDown { from { transform: translateY(-50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-
-.close-btn { position: absolute; top: 10px; right: 15px; color: #aaa; font-size: 40px; font-weight: bold; cursor: pointer; transition: 0.2s; line-height: 1; padding: 5px; z-index: 1010; }
-.close-btn:hover { color: #fff; transform: scale(1.1); }
-
-#modal-title { color: #fff; margin-top: 10px; margin-right: 30px; }
-#modal-desc { line-height: 1.6; color: #ccc; text-align: justify; }
-
-/* --- VISIONNEUSE PDF --- */
-.modal-content.pdf-viewer { 
-    width: 95%; 
-    height: 95vh; 
-    margin: 2vh auto; 
-    max-width: 1400px; 
-    padding: 0; 
-    display: flex; 
-    flex-direction: column; 
-    overflow: hidden; 
-    background: #333; 
-    position: relative;
-}
-
-.pdf-header { 
-    padding: 8px 20px; 
-    background-color: #222; 
-    border-bottom: 1px solid #444; 
-    display: flex; 
-    justify-content: space-between; 
-    align-items: center;            
-    flex-shrink: 0; 
-}
-
-.pdf-header h3 { margin: 0; color: #fff; font-size: 1rem; }
-
-.close-pdf { 
-    font-size: 32px; 
-    font-weight: bold; 
-    cursor: pointer; 
-    color: #aaa; 
-    line-height: 1; 
-}
-
-.close-pdf:hover { color: #e74c3c; transform: scale(1.1); transition: 0.2s; }
-
-#pdf-frame { width: 100%; flex-grow: 1; border: none; background-color: #eee; }
-
-/* --- CONTACT & FOOTER --- */
-#contact { background-color: #111; color: white; border-top: 1px solid #333; padding: 40px; text-align: center; margin-top: 40px;}
-
-/* PIED DE PAGE (STICKY BOTTOM) */
+/* --- FOOTER (COLLÉ EN BAS) --- */
 footer {
     background-color: #000;
     color: #888;
     text-align: center;
     padding: 20px;
-    font-size: 0.9rem;
     border-top: 3px solid #007bff;
-    
-    /* Le footer est poussé tout en bas grâce au flex sur body */
-    margin-top: auto; 
-    width: 100%;
+    margin-top: auto; /* Pousse le footer en bas */
 }
-
-footer p { margin: 5px 0; }
-footer strong { color: white; }
