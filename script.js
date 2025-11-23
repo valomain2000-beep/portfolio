@@ -1,5 +1,3 @@
-/* --- SCRIPT CENTRALISÉ POUR LE PORTFOLIO --- */
-
 document.addEventListener('DOMContentLoaded', () => {
 
     // =========================================
@@ -11,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const summary = acc.querySelector("summary");
 
         summary.addEventListener("click", (e) => {
-            e.preventDefault(); // On bloque le comportement par défaut (instantané)
+            e.preventDefault(); // On empêche l'ouverture instantanée
 
             if (acc.open) {
                 // --- SI OUVERT : ON FERME EN DOUCEUR ---
@@ -24,13 +22,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
 
                 animation.onfinish = () => {
-                    acc.open = false; // On ferme vraiment à la fin de l'anim
+                    acc.open = false; // On ferme la balise à la fin de l'animation
                 };
 
             } else {
                 // --- SI FERMÉ : ON OUVRE EN DOUCEUR ---
                 const startHeight = `${acc.offsetHeight}px`;
-                acc.open = true; // On ouvre d'abord pour calculer la taille
+                acc.open = true; // On ouvre pour calculer la taille du contenu
                 const endHeight = `${acc.offsetHeight}px`;
 
                 acc.animate({ height: [startHeight, endHeight] }, {
@@ -41,9 +39,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-
     // =========================================
-    // 2. LOGIQUE FILTRES (Page Accueil)
+    // 2. LOGIQUE FILTRES (Index)
     // =========================================
     const filterButtons = document.querySelectorAll('.filter-btn');
     const projectCards = document.querySelectorAll('.project-card');
@@ -59,7 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 projectCards.forEach(card => {
                     if (filterValue === 'all' || card.getAttribute('data-category') === filterValue) {
                         card.classList.remove('hide');
-                        card.classList.add('active'); 
+                        card.classList.add('active');
                     } else {
                         card.classList.add('hide');
                         card.classList.remove('active');
@@ -70,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // =========================================
-    // 3. MODALE PROJETS (Page Accueil)
+    // 3. MODALE PROJETS
     // =========================================
     const modal = document.getElementById("modal");
     const modalTitle = document.getElementById("modal-title");
@@ -96,20 +93,15 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         if(closeBtn) {
-            closeBtn.addEventListener("click", () => {
-                modal.style.display = "none";
-            });
+            closeBtn.addEventListener("click", () => { modal.style.display = "none"; });
         }
-
         window.addEventListener("click", (e) => {
-            if (e.target == modal) {
-                modal.style.display = "none";
-            }
+            if (e.target == modal) { modal.style.display = "none"; }
         });
     }
 
     // =========================================
-    // 4. MODALE VISIONNEUSE PDF (Page Notes)
+    // 4. VISIONNEUSE PDF
     // =========================================
     const pdfLinks = document.querySelectorAll('.view-pdf');
     const pdfModal = document.getElementById('pdf-modal');
@@ -123,7 +115,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 e.preventDefault(); 
                 const fileUrl = link.getAttribute('href');
                 const title = link.getAttribute('data-title') || "Document PDF";
-                
                 pdfFrame.src = fileUrl;
                 pdfTitle.innerText = title;
                 pdfModal.style.display = "block";
@@ -133,10 +124,9 @@ document.addEventListener('DOMContentLoaded', () => {
         if (closePdfBtn) {
             closePdfBtn.addEventListener('click', () => {
                 pdfModal.style.display = "none";
-                pdfFrame.src = ""; 
+                pdfFrame.src = "";
             });
         }
-
         window.addEventListener('click', (e) => {
             if (e.target == pdfModal) {
                 pdfModal.style.display = "none";
@@ -153,20 +143,12 @@ document.addEventListener('DOMContentLoaded', () => {
     function reveal() {
         const windowHeight = window.innerHeight;
         const elementVisible = 50; 
-
         revealElements.forEach((element) => {
             const elementTop = element.getBoundingClientRect().top;
-            
-            if (!element.classList.contains('reveal')) {
-                element.classList.add('reveal');
-            }
-
-            if (elementTop < windowHeight - elementVisible) {
-                element.classList.add('active');
-            }
+            if (!element.classList.contains('reveal')) { element.classList.add('reveal'); }
+            if (elementTop < windowHeight - elementVisible) { element.classList.add('active'); }
         });
     }
-
     window.addEventListener('scroll', reveal);
     reveal(); 
 });
