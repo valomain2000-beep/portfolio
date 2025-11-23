@@ -193,14 +193,13 @@ h3 i { margin-right: 8px; color: #aaa; }
 .project-card[data-category="cyber"] .btn-details { background-color: #dc3545; }
 .project-card[data-category="cyber"] .btn-details:hover { background-color: #bd2130; box-shadow: 0 0 10px #dc3545; }
 
-/* --- PAGE NOTES : LISTE VERTICALE (Modifié) --- */
-/* C'est ici que j'ai rétabli la liste verticale centrée */
+/* --- PAGE NOTES : LISTE VERTICALE (CORRECTION) --- */
 .folders-container {
     display: flex;
-    flex-direction: column; /* Les dossiers s'empilent */
-    gap: 20px;
-    max-width: 800px; /* Largeur contrôlée pour le style liste */
-    margin: 0 auto; /* Centré */
+    flex-direction: column; /* Les dossiers s'empilent les uns sous les autres */
+    gap: 30px;
+    max-width: 800px; /* Largeur contrôlée pour faire une belle liste */
+    margin: 0 auto;   /* Centré */
 }
 
 .category-title { max-width: 100%; margin: 30px auto 10px auto; color: #fff; border-bottom: 2px solid #007bff; padding-bottom: 5px; font-size: 1.2rem; text-align: left; }
