@@ -8,10 +8,11 @@ body {
     padding: 0;
     background-color: #1e1e1e; 
     color: #e0e0e0;
-    /* Espace pour le footer fixe */
-    padding-bottom: 100px !important; 
-    min-height: 100vh;
-    position: relative;
+    
+    /* CONFIGURATION POUR LE FOOTER EN BAS */
+    min-height: 100vh;      /* La page fait au moins 100% de la hauteur de l'écran */
+    display: flex;          /* On active le mode flexible */
+    flex-direction: column; /* Les éléments s'empilent verticalement */
 }
 
 /* --- NAVIGATION --- */
@@ -413,27 +414,21 @@ details.folder-group[open] summary::after { transform: rotate(180deg); }
 /* --- CONTACT & FOOTER --- */
 #contact { background-color: #111; color: white; border-top: 1px solid #333; padding: 40px; text-align: center; margin-top: 40px;}
 
-/* PIED DE PAGE FIXE (STICKY FOOTER) */
+/* --- PIED DE PAGE (FOOTER) --- */
 footer {
     background-color: #000;
     color: #888;
     text-align: center;
-    padding: 15px 0;
+    padding: 20px;
     font-size: 0.9rem;
     border-top: 3px solid #007bff;
     
-    position: fixed;
-    bottom: 0;
-    left: 0;
+    /* C'EST ICI QUE LA MAGIE OPÈRE : */
+    margin-top: auto; /* Pousse le footer tout en bas de l'espace disponible */
     width: 100%;
-    z-index: 1000;
-    box-shadow: 0 -2px 10px rgba(0,0,0,0.5);
+    
+    /* On a supprimé position: fixed, bottom, left, z-index */
 }
 
-footer p {
-    margin: 5px 0;
-}
-
-footer strong {
-    color: white;
-}
+footer p { margin: 5px 0; }
+footer strong { color: white; }
