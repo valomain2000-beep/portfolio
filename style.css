@@ -43,13 +43,25 @@ nav a:hover {
     color: #007bff;
 }
 
-/* --- HERO HEADER --- */
+/* --- 1. HERO HEADER (Ligne bleue raccourcie) --- */
 .hero {
     text-align: center;
-    padding: 60px 20px;
+    padding: 60px 20px 20px 20px; /* Ajustement du padding bas */
     background: linear-gradient(135deg, #2c3e50 0%, #000000 100%);
     color: white;
-    border-bottom: 3px solid #007bff;
+    position: relative;
+    /* J'ai SUPPRIMÉ la ligne 'border-bottom' ici */
+}
+
+/* NOUVEAU : Crée la petite ligne bleue centrée */
+.hero::after {
+    content: '';
+    display: block;
+    width: 150px; /* La largeur réduite que vous vouliez */
+    height: 4px;  /* Épaisseur */
+    background-color: #007bff; /* Bleu */
+    margin: 40px auto 0 auto; /* Centré horizontalement avec espace au-dessus */
+    border-radius: 2px; /* Bords arrondis pour faire propre */
 }
 
 /* --- MACHINE À ÉCRIRE (OPTIMISÉE AVEC MARGE DE SÉCURITÉ) --- */
@@ -75,9 +87,11 @@ nav a:hover {
     animation: typing-home 4s steps(36) infinite alternate, blink-caret .75s step-end infinite;
 }
 
+/* --- 2. MACHINE À ÉCRIRE (Largeur exacte) --- */
+/* Variante Notes : "Journal de Bord & Notes" = 23 caractères exacts */
 .typing-notes {
-    width: 26ch;
-    animation: typing-notes 4s steps(26) infinite alternate, blink-caret .75s step-end infinite;
+    width: 23ch; /* Réglé pile sur le texte pour que le curseur colle */
+    animation: typing-notes 4s steps(23) infinite alternate, blink-caret .75s step-end infinite;
 }
 
 /* Animation adaptée à la nouvelle largeur */
@@ -87,10 +101,11 @@ nav a:hover {
     100% { width: 36ch; } /* Reste en pause */
 }
 
+/* Animation ajustée à 23ch */
 @keyframes typing-notes {
     0% { width: 0; }
-    60% { width: 26ch; } /* Écrit tout + une petite marge vide */
-    100% { width: 26ch; } /* Reste affiché */
+    60% { width: 23ch; } /* Écrit le texte exact */
+    100% { width: 23ch; } /* Reste en pause */
 }
 
 @keyframes blink-caret { 
@@ -375,6 +390,7 @@ details.folder-group[open] summary::after { transform: rotate(180deg); }
 footer { background-color: #000; color: #888; text-align: center; padding: 20px; font-size: 0.9rem; border-top: 3px solid #007bff; }
 footer p { margin: 5px 0; }
 footer strong { color: white; }
+
 
 
 
