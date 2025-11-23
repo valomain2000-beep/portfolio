@@ -105,15 +105,15 @@ nav a:hover {
     max-width: 100%;
 }
 
-/* Accueil : "Administrateur Systèmes & Réseaux" (+ marge sécurité) */
+/* Accueil : "Administrateur Systèmes & Réseaux" + marge */
 .typing-home {
     width: 36ch; 
     animation: typing-home 4s steps(36) infinite alternate, blink-caret .75s step-end infinite;
 }
 
-/* Notes : "Journal de Bord & Notes" (+ marge sécurité) */
+/* Notes : "Journal de Bord & Notes" + marge */
 .typing-notes {
-    width: 26ch;
+    width: 26ch; 
     animation: typing-notes 4s steps(26) infinite alternate, blink-caret .75s step-end infinite;
 }
 
@@ -274,8 +274,9 @@ details.folder-group {
     background: #2d2d2d;
     border-radius: 10px;
     border: 1px solid #444;
-    overflow: hidden; /* Important pour que le contenu ne dépasse pas pendant l'anim */
+    overflow: hidden; /* IMPORTANT pour que le contenu ne dépasse pas pendant l'anim */
     transition: box-shadow 0.3s, border-color 0.3s;
+    /* J'ai supprimé les keyframes d'animation ici */
 }
 
 details.folder-group:hover {
@@ -305,18 +306,6 @@ details.folder-group summary::after { content: '▼'; font-size: 0.8em; color: #
 
 /* La rotation de la flèche reste gérée par CSS */
 details.folder-group[open] summary::after { transform: rotate(180deg); }
-
-/* On a supprimé les keyframes CSS ici, c'est le JS qui va animer la hauteur */
-
-/* ANIMATION D'OUVERTURE */
-details.folder-group[open] .notes-list {
-    animation: slideDownList 0.4s ease-out forwards;
-}
-
-@keyframes slideDownList {
-    from { opacity: 0; transform: translateY(-20px); max-height: 0; }
-    to { opacity: 1; transform: translateY(0); max-height: 1000px; }
-}
 
 .notes-list { background: #2d2d2d; }
 
@@ -422,4 +411,3 @@ details.folder-group[open] .notes-list {
 footer { background-color: #000; color: #888; text-align: center; padding: 20px; font-size: 0.9rem; border-top: 3px solid #007bff; }
 footer p { margin: 5px 0; }
 footer strong { color: white; }
-
