@@ -49,21 +49,40 @@ nav a:hover {
     border-bottom: 3px solid #007bff;
 }
 
-/* TITRE TYPING EFFECT (Machine à écrire) */
+/* TITRE TYPING EFFECT (Machine à écrire - Boucle) */
 .typing-container {
     display: inline-block;
 }
 
 .typing-effect {
-    overflow: hidden; /* Cache le texte qui dépasse */
-    border-right: 3px solid #007bff; /* Curseur */
+    overflow: hidden;
+    border-right: 3px solid #007bff; /* Le curseur */
     white-space: nowrap; 
     margin: 0 auto;
     letter-spacing: 2px;
-    animation: 
-        typing 3.5s steps(40, end),
-        blink-caret .75s step-end infinite;
     max-width: 100%;
+    
+    /* MODIFICATION ICI : 
+       - On passe la durée à 6s pour avoir le temps de la pause.
+       - On ajoute 'infinite' pour que ça tourne en rond.
+       - 'alternate' permettrait d'écrire/effacer, mais ici on va faire une boucle simple.
+    */
+    animation: 
+        typing 6s steps(40, end) infinite,
+        blink-caret .75s step-end infinite;
+}
+
+/* Animation d'écriture avec PAUSE */
+@keyframes typing {
+    0% { width: 0; }       /* Départ vide */
+    50% { width: 100%; }   /* Écrit le texte (3 secondes) */
+    90% { width: 100%; }   /* RESTE AFFICHÉ (Pause lecture) */
+    100% { width: 0; }     /* Revient à 0 pour recommencer */
+}
+
+@keyframes blink-caret { 
+    from, to { border-color: transparent } 
+    50% { border-color: #007bff; } 
 }
 
 /* Animation d'écriture */
@@ -308,3 +327,4 @@ details.folder-group[open] summary::after { transform: rotate(180deg); }
 footer { background-color: #000; color: #888; text-align: center; padding: 20px; font-size: 0.9rem; border-top: 3px solid #007bff; }
 footer p { margin: 5px 0; }
 footer strong { color: white; }
+
