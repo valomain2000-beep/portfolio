@@ -91,7 +91,7 @@ nav a:hover {
 /* Variante Notes : "Journal de Bord & Notes" = 23 caractères exacts */
 .typing-notes {
     width: 25ch; /* Réglé pile sur le texte pour que le curseur colle */
-    animation: typing-notes 4s steps(23) infinite alternate, blink-caret .75s step-end infinite;
+    animation: typing-notes 4s steps(25) infinite alternate, blink-caret .75s step-end infinite;
 }
 
 /* Animation adaptée à la nouvelle largeur */
@@ -390,6 +390,7 @@ details.folder-group[open] summary::after { transform: rotate(180deg); }
 footer { background-color: #000; color: #888; text-align: center; padding: 20px; font-size: 0.9rem; border-top: 3px solid #007bff; }
 footer p { margin: 5px 0; }
 footer strong { color: white; }
+
 
 
 
