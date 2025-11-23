@@ -3,7 +3,7 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     // =========================================
-    // 1. LOGIQUE FILTRES (Page Accueil uniquement)
+    // 1. LOGIQUE FILTRES (Page Accueil)
     // =========================================
     const filterButtons = document.querySelectorAll('.filter-btn');
     const projectCards = document.querySelectorAll('.project-card');
