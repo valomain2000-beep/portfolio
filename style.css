@@ -114,13 +114,30 @@ nav a:hover {
     max-width: 100%;
 }
 
-/* Accueil : 36ch */
-.typing-home { width: 36ch; animation: typing-home 4s steps(36) infinite alternate, blink-caret .75s step-end infinite; }
-/* Notes : 24ch */
-.typing-notes { width: 24ch; animation: typing-notes 4s steps(24) infinite alternate, blink-caret .75s step-end infinite; }
+/* Accueil : 36ch (33 lettres + 3 marge) - C'est celui qui est parfait */
+.typing-home { 
+    width: 36ch; 
+    animation: typing-home 4s steps(36) infinite alternate, blink-caret .75s step-end infinite; 
+}
 
-@keyframes typing-home { 0% { width: 0; } 60% { width: 36ch; } 100% { width: 36ch; } }
-@keyframes typing-notes { 0% { width: 0; } 60% { width: 24ch; } 100% { width: 24ch; } }
+/* Notes : 26ch (23 lettres + 3 marge) - Même logique appliquée ici ! */
+.typing-notes { 
+    width: 26ch; 
+    animation: typing-notes 4s steps(26) infinite alternate, blink-caret .75s step-end infinite; 
+}
+
+@keyframes typing-home { 
+    0% { width: 0; } 
+    60% { width: 36ch; } 
+    100% { width: 36ch; } 
+}
+
+@keyframes typing-notes { 
+    0% { width: 0; } 
+    60% { width: 26ch; } 
+    100% { width: 26ch; } 
+}
+
 @keyframes blink-caret { from, to { border-color: transparent } 50% { border-color: #007bff; } }
 
 /* --- BOUTONS HERO --- */
@@ -155,7 +172,7 @@ h3 i { margin-right: 8px; color: #aaa; }
 .filter-btn { padding: 8px 16px; border: 1px solid #444; background-color: #2d2d2d; color: #ccc; cursor: pointer; transition: 0.3s; border-radius: 20px; font-weight: bold; }
 .filter-btn:hover, .filter-btn.active { background-color: #007bff; color: white; border-color: #007bff; }
 
-/* --- GRILLE PROJETS (ACCUEIL - RESTE EN GRILLE) --- */
+/* --- GRILLE PROJETS (ACCUEIL) --- */
 .projects-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -193,13 +210,13 @@ h3 i { margin-right: 8px; color: #aaa; }
 .project-card[data-category="cyber"] .btn-details { background-color: #dc3545; }
 .project-card[data-category="cyber"] .btn-details:hover { background-color: #bd2130; box-shadow: 0 0 10px #dc3545; }
 
-/* --- PAGE NOTES : LISTE VERTICALE (CORRECTION) --- */
+/* --- PAGE NOTES : LISTE VERTICALE --- */
 .folders-container {
     display: flex;
-    flex-direction: column; /* Les dossiers s'empilent les uns sous les autres */
+    flex-direction: column;
     gap: 30px;
-    max-width: 800px; /* Largeur contrôlée pour faire une belle liste */
-    margin: 0 auto;   /* Centré */
+    max-width: 800px;
+    margin: 0 auto;
 }
 
 .category-title { max-width: 100%; margin: 30px auto 10px auto; color: #fff; border-bottom: 2px solid #007bff; padding-bottom: 5px; font-size: 1.2rem; text-align: left; }
@@ -291,9 +308,7 @@ footer {
     padding: 20px;
     font-size: 0.9rem;
     border-top: 3px solid #007bff;
-    
-    /* Le footer est poussé tout en bas grâce au flex sur body */
-    margin-top: auto; 
+    margin-top: auto; /* Pousse le footer tout en bas */
     width: 100%;
 }
 
