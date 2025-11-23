@@ -1,9 +1,14 @@
 /* --- IMPORTS DE POLICES --- */
+/* 1. Police style "Code" pour les animations machine à écrire */
 @import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@200;400;700&display=swap');
+
+/* 2. Police "Satoshi" pour tout le reste du site (via Fontshare CDN) */
+@import url('https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700,900&display=swap');
 
 /* --- RESET & STRUCTURE PRINCIPALE --- */
 body {
-    font-family: Arial, sans-serif;
+    /* MODIFICATION ICI : On applique Satoshi partout par défaut */
+    font-family: 'Satoshi', sans-serif; 
     margin: 0;
     padding: 0;
     background-color: #1e1e1e; 
@@ -46,7 +51,7 @@ nav {
 
 .back-link {
     font-size: 1.3rem;
-    font-weight: bold;
+    font-weight: 700; /* Satoshi Bold */
     color: #ccc;     
     text-decoration: none;
     display: inline-flex;
@@ -73,7 +78,7 @@ nav ul {
 nav a {
     color: white;
     text-decoration: none;
-    font-weight: bold;
+    font-weight: 700; /* Satoshi Bold */
     transition: color 0.3s;
 }
 
@@ -100,10 +105,11 @@ nav a:hover {
     border-radius: 2px;
 }
 
-/* --- MACHINE À ÉCRIRE --- */
+/* --- MACHINE À ÉCRIRE (EXCEPTION POLICE) --- */
 .typing-container { display: inline-block; }
 
 .typing-effect {
+    /* ICI ON GARDE LA POLICE "CODE" SPÉCIFIQUE */
     font-family: "Iosevka ExtraLight", "Iosevka", "Source Code Pro", "Consolas", monospace;
     font-weight: 200;
     overflow: hidden; 
@@ -114,35 +120,18 @@ nav a:hover {
     max-width: 100%;
 }
 
-/* Accueil : 36ch (33 lettres + 3 marge) - C'est celui qui est parfait */
-.typing-home { 
-    width: 36ch; 
-    animation: typing-home 4s steps(36) infinite alternate, blink-caret .75s step-end infinite; 
-}
+/* Accueil : 36ch */
+.typing-home { width: 36ch; animation: typing-home 4s steps(36) infinite alternate, blink-caret .75s step-end infinite; }
+/* Notes : 26ch */
+.typing-notes { width: 26ch; animation: typing-notes 4s steps(26) infinite alternate, blink-caret .75s step-end infinite; }
 
-/* Notes : 26ch (23 lettres + 3 marge) - Même logique appliquée ici ! */
-.typing-notes { 
-    width: 26ch; 
-    animation: typing-notes 2.7s steps(26) infinite alternate, blink-caret .75s step-end infinite; 
-}
-
-@keyframes typing-home { 
-    0% { width: 0; } 
-    60% { width: 36ch; } 
-    100% { width: 36ch; } 
-}
-
-@keyframes typing-notes { 
-    0% { width: 0; } 
-    60% { width: 26ch; } 
-    100% { width: 26ch; } 
-}
-
+@keyframes typing-home { 0% { width: 0; } 60% { width: 36ch; } 100% { width: 36ch; } }
+@keyframes typing-notes { 0% { width: 0; } 60% { width: 26ch; } 100% { width: 26ch; } }
 @keyframes blink-caret { from, to { border-color: transparent } 50% { border-color: #007bff; } }
 
 /* --- BOUTONS HERO --- */
 .hero-buttons { margin-top: 30px; display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
-.btn-hero { padding: 12px 25px; border-radius: 30px; text-decoration: none; font-weight: bold; font-size: 1.1rem; transition: transform 0.3s ease, box-shadow 0.3s ease; display: inline-flex; align-items: center; gap: 10px; }
+.btn-hero { padding: 12px 25px; border-radius: 30px; text-decoration: none; font-weight: 700; font-size: 1.1rem; transition: transform 0.3s ease, box-shadow 0.3s ease; display: inline-flex; align-items: center; gap: 10px; }
 .btn-hero.primary { background-color: #e74c3c; color: white; box-shadow: 0 4px 15px rgba(231, 76, 60, 0.4); }
 .btn-hero.primary i { color: white !important; } 
 .btn-hero.primary:hover { background-color: #c0392b; transform: translateY(-3px); box-shadow: 0 6px 20px rgba(231, 76, 60, 0.6); }
@@ -163,13 +152,14 @@ h2 {
     text-align: center;
     margin-bottom: 30px;
     color: #fff;
+    font-weight: 700;
 }
 
 h3 i { margin-right: 8px; color: #aaa; }
 
 /* --- FILTRES --- */
 .filter-container { display: flex; justify-content: center; gap: 10px; margin-bottom: 30px; flex-wrap: wrap; }
-.filter-btn { padding: 8px 16px; border: 1px solid #444; background-color: #2d2d2d; color: #ccc; cursor: pointer; transition: 0.3s; border-radius: 20px; font-weight: bold; }
+.filter-btn { padding: 8px 16px; border: 1px solid #444; background-color: #2d2d2d; color: #ccc; cursor: pointer; transition: 0.3s; border-radius: 20px; font-weight: 500; }
 .filter-btn:hover, .filter-btn.active { background-color: #007bff; color: white; border-color: #007bff; }
 
 /* --- GRILLE PROJETS (ACCUEIL) --- */
@@ -191,18 +181,18 @@ h3 i { margin-right: 8px; color: #aaa; }
 }
 
 .project-card:hover { transform: translateY(-5px); box-shadow: 0 5px 15px rgba(0, 123, 255, 0.3); border-color: #007bff; }
-.project-card h3 { color: white; }
-.project-card p { color: #bbb; }
+.project-card h3 { color: white; font-weight: 700; }
+.project-card p { color: #bbb; font-weight: 400; }
 .project-card.hide { display: none; }
 
-.tag { display: inline-block; background: #444; color: #fff; padding: 4px 8px; font-size: 0.85em; border-radius: 4px; margin-top: 10px; font-weight: bold; align-self: flex-start; }
+.tag { display: inline-block; background: #444; color: #fff; padding: 4px 8px; font-size: 0.85em; border-radius: 4px; margin-top: 10px; font-weight: 700; align-self: flex-start; }
 
 /* --- ANIMATION SCROLL REVEAL --- */
 .reveal { opacity: 0; transform: translateY(50px); transition: all 0.8s ease-out; }
 .reveal.active { opacity: 1; transform: translateY(0); }
 
 /* --- BOUTONS DÉTAILS --- */
-.btn-details { display: inline-block; margin-top: 20px; padding: 10px 20px; color: white; text-decoration: none; border-radius: 5px; font-weight: bold; text-align: center; transition: all 0.3s ease; }
+.btn-details { display: inline-block; margin-top: 20px; padding: 10px 20px; color: white; text-decoration: none; border-radius: 5px; font-weight: 700; text-align: center; transition: all 0.3s ease; }
 .project-card[data-category="systeme"] .btn-details { background-color: #007bff; }
 .project-card[data-category="systeme"] .btn-details:hover { background-color: #0056b3; box-shadow: 0 0 10px #007bff; }
 .project-card[data-category="reseau"] .btn-details { background-color: #28a745; }
@@ -219,7 +209,7 @@ h3 i { margin-right: 8px; color: #aaa; }
     margin: 0 auto;
 }
 
-.category-title { max-width: 100%; margin: 30px auto 10px auto; color: #fff; border-bottom: 2px solid #007bff; padding-bottom: 5px; font-size: 1.2rem; text-align: left; }
+.category-title { max-width: 100%; margin: 30px auto 10px auto; color: #fff; border-bottom: 2px solid #007bff; padding-bottom: 5px; font-size: 1.2rem; text-align: left; font-weight: 700; }
 
 /* DOSSIERS ACCORDÉON (Géré par JS) */
 details.folder-group {
@@ -236,7 +226,7 @@ details.folder-group:hover { box-shadow: 0 0 15px rgba(255, 255, 255, 0.05); bor
 details.folder-group summary {
     padding: 15px 20px;
     cursor: pointer;
-    font-weight: bold;
+    font-weight: 700;
     font-size: 1.1rem;
     background-color: #252525;
     color: #fff;
@@ -276,8 +266,8 @@ details.folder-group[open] summary::after { transform: rotate(180deg); }
 .fa-file-pdf { color: #e74c3c; } .fa-file-word { color: #3498db; } .fa-file-code { color: #f1c40f; }
 
 .note-info { flex-grow: 1; }
-.note-info h3 { margin: 0 0 5px 0; font-size: 1.1rem; color: #fff; text-align: left; }
-.note-info p { margin: 0; font-size: 0.9rem; color: #aaa; }
+.note-info h3 { margin: 0 0 5px 0; font-size: 1.1rem; color: #fff; text-align: left; font-weight: 700; }
+.note-info p { margin: 0; font-size: 0.9rem; color: #aaa; font-weight: 400; }
 .note-arrow { color: #666; }
 
 /* --- MODALE UNIVERSELLE --- */
@@ -286,13 +276,13 @@ details.folder-group[open] summary::after { transform: rotate(180deg); }
 @keyframes slideDown { from { transform: translateY(-50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
 .close-btn { position: absolute; top: 10px; right: 15px; color: #aaa; font-size: 40px; font-weight: bold; cursor: pointer; transition: 0.2s; line-height: 1; padding: 5px; z-index: 1010; }
 .close-btn:hover { color: #fff; transform: scale(1.1); }
-#modal-title { color: #fff; margin-top: 10px; margin-right: 30px; }
-#modal-desc { line-height: 1.6; color: #ccc; text-align: justify; }
+#modal-title { color: #fff; margin-top: 10px; margin-right: 30px; font-weight: 700; }
+#modal-desc { line-height: 1.6; color: #ccc; text-align: justify; font-weight: 400; }
 
 /* --- VISIONNEUSE PDF --- */
 .modal-content.pdf-viewer { width: 95%; height: 95vh; margin: 2vh auto; max-width: 1400px; padding: 0; display: flex; flex-direction: column; overflow: hidden; background: #333; position: relative; }
 .pdf-header { padding: 8px 20px; background-color: #222; border-bottom: 1px solid #444; display: flex; justify-content: space-between; align-items: center; flex-shrink: 0; }
-.pdf-header h3 { margin: 0; color: #fff; font-size: 1rem; }
+.pdf-header h3 { margin: 0; color: #fff; font-size: 1rem; font-weight: 700; }
 .close-pdf { font-size: 32px; font-weight: bold; cursor: pointer; color: #aaa; line-height: 1; }
 .close-pdf:hover { color: #e74c3c; transform: scale(1.1); transition: 0.2s; }
 #pdf-frame { width: 100%; flex-grow: 1; border: none; background-color: #eee; }
@@ -314,4 +304,3 @@ footer {
 
 footer p { margin: 5px 0; }
 footer strong { color: white; }
-
