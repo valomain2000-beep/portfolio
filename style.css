@@ -8,6 +8,7 @@ body {
     padding: 0;
     background-color: #1e1e1e; 
     color: #e0e0e0;
+    /* Espace pour le footer fixe */
     padding-bottom: 100px !important; 
     min-height: 100vh;
     position: relative;
@@ -29,11 +30,12 @@ nav {
     margin: 0 auto;
 }
 
+/* Configuration spécifique pour le bouton "Retour" (Notes) */
 .nav-content.full-width {
     width: 100%;
     max-width: 100%;
     margin: 0;
-    justify-content: flex-start; 
+    justify-content: flex-start; /* Aligné à gauche */
 }
 
 .back-link {
@@ -80,6 +82,7 @@ nav a:hover {
     position: relative;
 }
 
+/* Petite ligne bleue centrée */
 .hero::after {
     content: '';
     display: block;
@@ -90,7 +93,7 @@ nav a:hover {
     border-radius: 2px;
 }
 
-/* --- MACHINE À ÉCRIRE --- */
+/* --- MACHINE À ÉCRIRE (TYPING EFFECT) --- */
 .typing-container {
     display: inline-block;
 }
@@ -106,14 +109,16 @@ nav a:hover {
     max-width: 100%;
 }
 
+/* Accueil : "Administrateur Systèmes & Réseaux" + marge */
 .typing-home {
     width: 36ch; 
     animation: typing-home 4s steps(36) infinite alternate, blink-caret .75s step-end infinite;
 }
 
+/* Notes : "Journal de Bord & Notes" + marge */
 .typing-notes {
-    width: 24ch; /* Ajusté pour coller au texte */
-    animation: typing-notes 4s steps(24) infinite alternate, blink-caret .75s step-end infinite;
+    width: 26ch; 
+    animation: typing-notes 4s steps(26) infinite alternate, blink-caret .75s step-end infinite;
 }
 
 @keyframes typing-home {
@@ -124,8 +129,8 @@ nav a:hover {
 
 @keyframes typing-notes {
     0% { width: 0; }
-    60% { width: 24ch; }
-    100% { width: 24ch; }
+    60% { width: 26ch; }
+    100% { width: 26ch; }
 }
 
 @keyframes blink-caret { from, to { border-color: transparent } 50% { border-color: #007bff; } }
@@ -256,7 +261,7 @@ h3 i { margin-right: 8px; color: #aaa; }
 .project-card[data-category="cyber"] .btn-details { background-color: #dc3545; }
 .project-card[data-category="cyber"] .btn-details:hover { background-color: #bd2130; box-shadow: 0 0 10px #dc3545; }
 
-/* --- DOSSIERS ACCORDÉON (SANS ANIMATION CSS, GÉRÉ PAR JS) --- */
+/* --- DOSSIERS ACCORDÉON (Géré par JS) --- */
 .category-title {
     max-width: 800px;
     margin: 30px auto 10px auto;
@@ -273,8 +278,9 @@ details.folder-group {
     background: #2d2d2d;
     border-radius: 10px;
     border: 1px solid #444;
-    overflow: hidden; 
+    overflow: hidden; /* IMPORTANT pour l'animation JS */
     transition: box-shadow 0.3s, border-color 0.3s;
+    /* SUPPRESSION DES ANIMATIONS CSS ICI POUR LAISSER LE JS FAIRE */
 }
 
 details.folder-group:hover {
@@ -305,11 +311,7 @@ details.folder-group summary::after { content: '▼'; font-size: 0.8em; color: #
 /* Rotation de la flèche */
 details.folder-group[open] summary::after { transform: rotate(180deg); }
 
-/* PLUS D'ANIMATION CSS ICI, LE JS FAIT TOUT */
-.notes-list { 
-    background: #2d2d2d; 
-    overflow: hidden;
-}
+.notes-list { background: #2d2d2d; }
 
 .note-item {
     display: flex; align-items: center; padding: 20px; border-bottom: 1px solid #444; text-decoration: none; color: #ddd; transition: background 0.2s;
@@ -411,6 +413,7 @@ details.folder-group[open] summary::after { transform: rotate(180deg); }
 /* --- CONTACT & FOOTER --- */
 #contact { background-color: #111; color: white; border-top: 1px solid #333; padding: 40px; text-align: center; margin-top: 40px;}
 
+/* PIED DE PAGE FIXE (STICKY FOOTER) */
 footer {
     background-color: #000;
     color: #888;
@@ -418,6 +421,7 @@ footer {
     padding: 15px 0;
     font-size: 0.9rem;
     border-top: 3px solid #007bff;
+    
     position: fixed;
     bottom: 0;
     left: 0;
@@ -426,5 +430,10 @@ footer {
     box-shadow: 0 -2px 10px rgba(0,0,0,0.5);
 }
 
-footer p { margin: 5px 0; }
-footer strong { color: white; }
+footer p {
+    margin: 5px 0;
+}
+
+footer strong {
+    color: white;
+}
