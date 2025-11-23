@@ -52,7 +52,7 @@ nav a:hover {
     border-bottom: 3px solid #007bff;
 }
 
-/* --- MACHINE À ÉCRIRE (OPTIMISÉE) --- */
+/* --- MACHINE À ÉCRIRE (OPTIMISÉE AVEC MARGE DE SÉCURITÉ) --- */
 .typing-container {
     display: inline-block;
 }
@@ -68,29 +68,32 @@ nav a:hover {
     max-width: 100%;
 }
 
-/* Variante Accueil : "Administrateur Systèmes & Réseaux" = 32 caractères */
+/* CORRECTION : J'ai ajouté +3 caractères de marge pour être sûr que rien n'est coupé.
+   - Accueil : 32 caractères -> Réglé à 35ch
+   - Notes : 23 caractères -> Réglé à 26ch
+*/
+
 .typing-home {
-    width: 32ch; 
-    animation: typing-home 4s steps(32) infinite alternate, blink-caret .75s step-end infinite;
+    width: 35ch; 
+    animation: typing-home 4s steps(35) infinite alternate, blink-caret .75s step-end infinite;
 }
 
-/* Variante Notes : "Journal de Bord & Notes" = 23 caractères */
 .typing-notes {
-    width: 23ch;
-    animation: typing-notes 4s steps(23) infinite alternate, blink-caret .75s step-end infinite;
+    width: 26ch;
+    animation: typing-notes 4s steps(26) infinite alternate, blink-caret .75s step-end infinite;
 }
 
-/* ANIMATIONS (Aller-Retour avec Pause) */
+/* ANIMATIONS (Aller-Retour) */
 @keyframes typing-home {
     0% { width: 0; }
-    60% { width: 32ch; } /* Écrit */
-    100% { width: 32ch; } /* Pause avant retour */
+    60% { width: 35ch; } /* Écrit tout + une petite marge vide */
+    100% { width: 35ch; } /* Reste affiché */
 }
 
 @keyframes typing-notes {
     0% { width: 0; }
-    60% { width: 23ch; } /* Écrit */
-    100% { width: 23ch; } /* Pause avant retour */
+    60% { width: 26ch; } /* Écrit tout + une petite marge vide */
+    100% { width: 26ch; } /* Reste affiché */
 }
 
 @keyframes blink-caret { 
@@ -375,3 +378,4 @@ details.folder-group[open] summary::after { transform: rotate(180deg); }
 footer { background-color: #000; color: #888; text-align: center; padding: 20px; font-size: 0.9rem; border-top: 3px solid #007bff; }
 footer p { margin: 5px 0; }
 footer strong { color: white; }
+
