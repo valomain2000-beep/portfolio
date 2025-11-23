@@ -52,55 +52,51 @@ nav a:hover {
     border-bottom: 3px solid #007bff;
 }
 
-/* --- MACHINE À ÉCRIRE (CORRIGÉE : Aller-Retour + Curseur collé) --- */
+/* --- MACHINE À ÉCRIRE (OPTIMISÉE) --- */
+.typing-container {
+    display: inline-block;
+}
+
 .typing-effect {
     font-family: "Iosevka ExtraLight", "Iosevka", "Source Code Pro", "Consolas", monospace;
     font-weight: 200;
-    
     overflow: hidden; 
-    border-right: 3px solid #007bff; /* Le curseur */
+    border-right: 3px solid #007bff; /* Curseur */
     white-space: nowrap; 
     margin: 0 auto;
     letter-spacing: 1px;
     max-width: 100%;
-    
-    /* CORRECTIONS :
-       1. Width: 34ch (33 lettres + 1 de marge) -> Règle le problème d'espace.
-       2. Animation: 'alternate' -> Fait l'aller-retour (écrit puis efface).
-       3. Infinite: -> Répète à l'infini.
-    */
-    width: 34ch; 
-    
-    animation: 
-        typing 4s steps(34) infinite alternate, 
-        blink-caret .75s step-end infinite;
 }
 
-/* LOGIQUE DE L'ANIMATION ALLER-RETOUR :
-   - De 0% à 60% : Le texte s'écrit.
-   - De 60% à 100% : Le texte reste affiché (PAUSE de lecture).
-   - Ensuite, grâce à 'alternate', l'animation se joue à l'envers :
-     elle attend (de 100% à 60%) puis s'efface (de 60% à 0%).
-*/
-@keyframes typing {
+/* Variante pour l'accueil (34 caractères) */
+.typing-home {
+    width: 34ch; 
+    animation: typing-home 4s steps(34) infinite alternate, blink-caret .75s step-end infinite;
+}
+
+/* Variante pour les notes (23 caractères) */
+.typing-notes {
+    width: 23ch;
+    animation: typing-notes 4s steps(23) infinite alternate, blink-caret .75s step-end infinite;
+}
+
+/* ANIMATIONS */
+@keyframes typing-home {
     0% { width: 0; }
-    60% { width: 34ch; }  /* Fin de l'écriture */
-    100% { width: 34ch; } /* Pause avant le retour arrière */
+    60% { width: 34ch; }
+    100% { width: 34ch; }
+}
+
+@keyframes typing-notes {
+    0% { width: 0; }
+    60% { width: 23ch; }
+    100% { width: 23ch; }
 }
 
 @keyframes blink-caret { 
     from, to { border-color: transparent } 
     50% { border-color: #007bff; } 
 }
-
-@keyframes typing {
-    0% { width: 0; }
-    40% { width: 100%; } 
-    90% { width: 100%; } 
-    100% { width: 100%; } 
-}
-
-@keyframes blink-caret { from, to { border-color: transparent } 50% { border-color: #007bff; } }
 
 /* --- BOUTONS HERO --- */
 .hero-buttons { margin-top: 30px; display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
@@ -299,7 +295,7 @@ details.folder-group[open] summary::after { transform: rotate(180deg); }
 .note-info p { margin: 0; font-size: 0.9rem; color: #aaa; }
 .note-arrow { color: #666; }
 
-/* --- MODALE D'ACCUEIL (PROJETS) --- */
+/* --- MODALE UNIVERSELLE --- */
 .modal {
     display: none; 
     position: fixed; 
@@ -328,14 +324,14 @@ details.folder-group[open] summary::after { transform: rotate(180deg); }
 
 @keyframes slideDown { from { transform: translateY(-50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
 
-/* Style de la croix pour la modale PROJETS (absolute) */
+/* Croix pour la modale PROJETS */
 .close-btn { position: absolute; top: 10px; right: 15px; color: #aaa; font-size: 40px; font-weight: bold; cursor: pointer; transition: 0.2s; line-height: 1; padding: 5px; z-index: 1010; }
 .close-btn:hover { color: #fff; transform: scale(1.1); }
 
 #modal-title { color: #fff; margin-top: 10px; margin-right: 30px; }
 #modal-desc { line-height: 1.6; color: #ccc; text-align: justify; }
 
-/* --- VISIONNEUSE PDF (MODALE SÉPARÉE) --- */
+/* --- VISIONNEUSE PDF --- */
 .modal-content.pdf-viewer { 
     width: 95%; 
     height: 95vh; 
@@ -354,21 +350,20 @@ details.folder-group[open] summary::after { transform: rotate(180deg); }
     background-color: #222; 
     border-bottom: 1px solid #444; 
     display: flex; 
-    justify-content: space-between; /* Aligne Titre à gauche et Croix à droite */
-    align-items: center;            /* Centre verticalement */
+    justify-content: space-between; 
+    align-items: center;            
     flex-shrink: 0; 
 }
 
 .pdf-header h3 { margin: 0; color: #fff; font-size: 1rem; }
 
-/* CORRECTION CROIX PDF : Style spécifique non-absolu */
+/* Croix pour le PDF */
 .close-pdf { 
     font-size: 32px; 
     font-weight: bold; 
     cursor: pointer; 
     color: #aaa; 
     line-height: 1; 
-    /* Pas de position absolute ici, le flexbox s'en occupe */
 }
 
 .close-pdf:hover { color: #e74c3c; transform: scale(1.1); transition: 0.2s; }
@@ -380,4 +375,3 @@ details.folder-group[open] summary::after { transform: rotate(180deg); }
 footer { background-color: #000; color: #888; text-align: center; padding: 20px; font-size: 0.9rem; border-top: 3px solid #007bff; }
 footer p { margin: 5px 0; }
 footer strong { color: white; }
-
