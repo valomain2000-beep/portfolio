@@ -391,9 +391,32 @@ footer { background-color: #000; color: #888; text-align: center; padding: 20px;
 footer p { margin: 5px 0; }
 footer strong { color: white; }
 
+/* --- MODIFICATIONS NOTES : RETOUR PORTFOLIO --- */
 
+/* 1. Permet au menu de prendre toute la largeur (Coin Gauche) */
+.nav-content.full-width {
+    max-width: 100%; /* Annule la limite de 1200px */
+    margin: 0;       /* Annule le centrage auto */
+    /* Le padding du 'nav' (1rem) garde un petit espace propre au bord */
+}
 
+/* 2. Style du lien "Retour" (Plus petit et discret) */
+.back-link {
+    font-size: 1rem; /* Taille de texte normale (plus petit que le H1 d'avant) */
+    font-weight: bold;
+    color: #ccc;     /* Gris clair discret */
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;        /* Espace entre la flèche et le texte */
+    transition: color 0.3s, transform 0.3s;
+}
 
+.back-link:hover {
+    color: #007bff;       /* Devient bleu au survol */
+    transform: translateX(-5px); /* Petite animation de recul vers la gauche */
+}
 
-
-
+.back-link i {
+    font-size: 0.9em; /* La flèche un peu plus petite que le texte */
+}
