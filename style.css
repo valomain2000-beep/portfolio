@@ -68,29 +68,29 @@ nav a:hover {
     max-width: 100%;
 }
 
-/* Variante pour l'accueil (34 caractères) */
+/* Variante Accueil : "Administrateur Systèmes & Réseaux" = 32 caractères */
 .typing-home {
-    width: 34ch; 
-    animation: typing-home 4s steps(34) infinite alternate, blink-caret .75s step-end infinite;
+    width: 32ch; 
+    animation: typing-home 4s steps(32) infinite alternate, blink-caret .75s step-end infinite;
 }
 
-/* Variante pour les notes (23 caractères) */
+/* Variante Notes : "Journal de Bord & Notes" = 23 caractères */
 .typing-notes {
     width: 23ch;
     animation: typing-notes 4s steps(23) infinite alternate, blink-caret .75s step-end infinite;
 }
 
-/* ANIMATIONS */
+/* ANIMATIONS (Aller-Retour avec Pause) */
 @keyframes typing-home {
     0% { width: 0; }
-    60% { width: 34ch; }
-    100% { width: 34ch; }
+    60% { width: 32ch; } /* Écrit */
+    100% { width: 32ch; } /* Pause avant retour */
 }
 
 @keyframes typing-notes {
     0% { width: 0; }
-    60% { width: 23ch; }
-    100% { width: 23ch; }
+    60% { width: 23ch; } /* Écrit */
+    100% { width: 23ch; } /* Pause avant retour */
 }
 
 @keyframes blink-caret { 
