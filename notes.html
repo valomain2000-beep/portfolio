@@ -16,9 +16,15 @@
         </div>
     </nav>
 
-    <header class="hero">
+    <header class="hero" style="min-height: 200px; padding: 40px 20px;">
         <div class="hero-content">
-            <h2>Journal de Bord & Notes</h2>
+            
+            <div class="typing-container">
+                <h2 class="typing-effect" style="width: 23ch; animation: typing 4s steps(23) infinite alternate, blink-caret .75s step-end infinite;">
+                    Journal de Bord & Notes
+                </h2>
+            </div>
+
             <p>Documentation technique et procédures réalisées en entreprise</p>
         </div>
     </header>
@@ -82,7 +88,7 @@
                 <a href="fichiers/Synthese_Veille_BenLanne.pdf" target="_blank" class="note-item">
                     <div class="note-icon"><i class="fas fa-file-pdf" style="color: #e74c3c;"></i></div>
                     <div class="note-info">
-                        <h3>Ma Fiche de Synthèse (PDF)</h3>
+                        <h3 style="color: #e74c3c;">Ma Fiche de Synthèse (PDF)</h3>
                         <p>Document récapitulatif de mes recherches sur l'IA et la Cybersécurité.</p>
                     </div>
                     <div class="note-arrow"><i class="fas fa-download"></i></div>
@@ -128,7 +134,7 @@
         <div class="modal-content pdf-viewer">
             <div class="pdf-header">
                 <h3 id="pdf-title">Titre du document</h3>
-                <span class="close-pdf close-btn">&times;</span>
+                <span class="close-pdf">&times;</span>
             </div>
             <iframe id="pdf-frame" src=""></iframe>
         </div>
@@ -164,7 +170,6 @@
             }
         });
         
-        // Scroll reveal pour la page notes aussi
         const revealElements = document.querySelectorAll('.folder-group');
         function reveal() {
             const windowHeight = window.innerHeight;
