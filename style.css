@@ -53,23 +53,25 @@ nav a:hover {
     border-bottom: 3px solid #007bff;
 }
 
-/* --- MACHINE À ÉCRIRE (TYPING EFFECT) --- */
-.typing-container {
-    display: inline-block;
-}
-
+/* --- MACHINE À ÉCRIRE (CORRECTION LARGEUR) --- */
 .typing-effect {
-    /* MODIFICATION ICI : Police Iosevka ExtraLight demandée */
-    /* On met 'Source Code Pro' en secours car elle lui ressemble beaucoup et se charge via Google Fonts */
     font-family: "Iosevka ExtraLight", "Iosevka", "Source Code Pro", "Consolas", monospace;
-    font-weight: 200; /* Force la finesse (ExtraLight) */
+    font-weight: 200;
     
     overflow: hidden; 
     border-right: 3px solid #007bff; /* Curseur */
     white-space: nowrap; 
     margin: 0 auto;
-    letter-spacing: 1px; /* Un peu moins d'espace pour Iosevka qui est étroite */
+    letter-spacing: 1px;
     max-width: 100%;
+    
+    /* CORRECTION ICI : On augmente la largeur pour inclure les espaces */
+    width: 38ch; /* Était à 33ch, passé à 38ch pour éviter de couper la fin */
+    
+    animation: 
+        typing 6s steps(33) infinite alternate, 
+        blink-caret .75s step-end infinite;
+}
     
     /* 33 caractères dans la phrase = 33 steps */
     width: 33ch; 
@@ -335,3 +337,4 @@ details.folder-group[open] summary::after { transform: rotate(180deg); }
 footer { background-color: #000; color: #888; text-align: center; padding: 20px; font-size: 0.9rem; border-top: 3px solid #007bff; }
 footer p { margin: 5px 0; }
 footer strong { color: white; }
+
