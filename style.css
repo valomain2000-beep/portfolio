@@ -1,17 +1,18 @@
-/* Reset de base */
+/* --- 1. RESET & FOND SOMBRE (DARK MODE) --- */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f9;
-    color: #333;
+    background-color: #1e1e1e; /* Fond principal gris très foncé */
+    color: #e0e0e0; /* Texte gris clair pour la lecture */
 }
 
-/* Navigation */
+/* --- 2. NAVIGATION --- */
 nav {
-    background-color: #333;
+    background-color: #111; /* Menu encore plus sombre */
     color: white;
     padding: 1rem;
+    border-bottom: 1px solid #333;
 }
 
 .nav-content {
@@ -32,37 +33,70 @@ nav a {
     color: white;
     text-decoration: none;
     font-weight: bold;
+    transition: color 0.3s;
 }
 
-/* Hero Header */
+nav a:hover {
+    color: #007bff;
+}
+
+/* --- 3. HERO HEADER (ACCUEIL) --- */
 .hero {
     text-align: center;
-    padding: 50px 20px;
-    background-color: #2c3e50;
+    padding: 60px 20px;
+    background: linear-gradient(135deg, #2c3e50 0%, #000000 100%); /* Dégradé sombre */
     color: white;
+    border-bottom: 3px solid #007bff;
 }
 
-/* Section Projets */
+/* TITRE TYPING EFFECT (Machine à écrire) */
+.typing-container {
+    display: inline-block;
+}
+
+.typing-effect {
+    overflow: hidden; /* Cache le texte qui dépasse */
+    border-right: 3px solid #007bff; /* Curseur */
+    white-space: nowrap; 
+    margin: 0 auto;
+    letter-spacing: 2px;
+    animation: 
+        typing 3.5s steps(40, end),
+        blink-caret .75s step-end infinite;
+    max-width: 100%;
+}
+
+/* Animation d'écriture */
+@keyframes typing { from { width: 0 } to { width: 100% } }
+@keyframes blink-caret { from, to { border-color: transparent } 50% { border-color: #007bff; } }
+
+/* --- BOUTONS HERO --- */
+.hero-buttons { margin-top: 30px; display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
+.btn-hero { padding: 12px 25px; border-radius: 30px; text-decoration: none; font-weight: bold; font-size: 1.1rem; transition: transform 0.3s ease, box-shadow 0.3s ease; display: inline-flex; align-items: center; gap: 10px; }
+.btn-hero.primary { background-color: #e74c3c; color: white; box-shadow: 0 4px 15px rgba(231, 76, 60, 0.4); }
+.btn-hero.primary i { color: white !important; } /* Force icône blanche */
+.btn-hero.primary:hover { background-color: #c0392b; transform: translateY(-3px); box-shadow: 0 6px 20px rgba(231, 76, 60, 0.6); }
+.btn-hero.secondary { background-color: transparent; border: 2px solid white; color: white; }
+.btn-hero.secondary:hover { background-color: white; color: #2c3e50; transform: translateY(-3px); }
+.btn-hero.notes { background-color: #f39c12; color: white; box-shadow: 0 4px 15px rgba(243, 156, 18, 0.4); border: none; }
+.btn-hero.notes:hover { background-color: #d35400; transform: translateY(-3px); }
+
+/* --- 4. SECTIONS GÉNÉRALES --- */
 #projets {
     max-width: 1000px;
     margin: 40px auto;
     padding: 0 20px;
 }
 
-/* --- CORRECTION 1 : TITRES H2 --- */
-/* Par défaut, les titres sont foncés (pour être vus sur le fond blanc) */
 h2 {
     text-align: center;
     margin-bottom: 30px;
-    color: #2c3e50; 
+    color: #fff; /* Blanc partout en dark mode */
 }
 
-/* Exception : Les titres dans le Hero et le Contact doivent rester blancs */
-.hero h2, #contact h2 {
-    color: white;
-}
+h3 i { margin-right: 8px; color: #aaa; }
 
-/* --- FILTRES --- */
+/* --- 5. FILTRES --- */
 .filter-container {
     display: flex;
     justify-content: center;
@@ -73,8 +107,9 @@ h2 {
 
 .filter-btn {
     padding: 8px 16px;
-    border: none;
-    background-color: #e0e0e0;
+    border: 1px solid #444;
+    background-color: #2d2d2d;
+    color: #ccc;
     cursor: pointer;
     transition: 0.3s;
     border-radius: 20px;
@@ -82,41 +117,45 @@ h2 {
 }
 
 .filter-btn:hover, .filter-btn.active {
-    background-color: #555;
+    background-color: #007bff;
     color: white;
+    border-color: #007bff;
 }
 
-/* Grille des projets */
+/* --- 6. GRILLE & CARTES (DARK MODE) --- */
 .projects-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 20px;
 }
 
-/* Cartes */
 .project-card {
-    background: white;
+    background: #2d2d2d; /* Carte gris foncé */
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    border: 1px solid #444;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    transition: transform 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s;
 }
 
+/* EFFET CYBER GLOW AU SURVOL */
 .project-card:hover {
     transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 123, 255, 0.3); /* Lueur bleue */
+    border-color: #007bff;
 }
 
-.project-card.hide {
-    display: none;
-}
+.project-card h3 { color: white; }
+.project-card p { color: #bbb; }
+
+.project-card.hide { display: none; }
 
 .tag {
     display: inline-block;
-    background: #f1f1f1;
-    color: #555;
+    background: #444; /* Tag plus sombre */
+    color: #fff;
     padding: 4px 8px;
     font-size: 0.85em;
     border-radius: 4px;
@@ -125,27 +164,19 @@ h2 {
     align-self: flex-start;
 }
 
-/* --- CORRECTION 2 : SECTION CONTACT --- */
-/* Elle est ici ! J'ai remis le fond foncé et le texte blanc */
-#contact {
-    text-align: center;
-    padding: 40px;
-    background-color: #2c3e50; /* Fond Bleu Nuit */
-    color: white;              /* Texte Blanc */
-    margin-top: 40px;
+/* --- 7. ANIMATION SCROLL REVEAL (APPARITION) --- */
+.reveal {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 0.8s ease-out;
 }
 
-#contact a {
-    color: white; /* Icônes en blanc */
-    transition: 0.3s;
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
 }
 
-#contact a:hover {
-    color: #007bff; /* Bleu clair au survol */
-}
-
-/* --- BOUTONS DÉTAILS COLORÉS --- */
-
+/* --- 8. BOUTONS DÉTAILS --- */
 .btn-details {
     display: inline-block;
     margin-top: 20px;
@@ -158,38 +189,78 @@ h2 {
     transition: all 0.3s ease;
 }
 
-/* Système = Bleu */
-.project-card[data-category="systeme"] .btn-details {
-    background-color: #007bff;
-}
-.project-card[data-category="systeme"] .btn-details:hover {
-    background-color: #0056b3;
-    transform: translateY(-3px);
-    box-shadow: 0 4px 8px rgba(0,123,255,0.3);
+.project-card[data-category="systeme"] .btn-details { background-color: #007bff; }
+.project-card[data-category="systeme"] .btn-details:hover { background-color: #0056b3; box-shadow: 0 0 10px #007bff; }
+
+.project-card[data-category="reseau"] .btn-details { background-color: #28a745; }
+.project-card[data-category="reseau"] .btn-details:hover { background-color: #1e7e34; box-shadow: 0 0 10px #28a745; }
+
+.project-card[data-category="cyber"] .btn-details { background-color: #dc3545; }
+.project-card[data-category="cyber"] .btn-details:hover { background-color: #bd2130; box-shadow: 0 0 10px #dc3545; }
+
+/* --- 9. PAGE NOTES (ACCORDÉON DARK) --- */
+.category-title {
+    max-width: 800px;
+    margin: 30px auto 10px auto;
+    color: #fff;
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 5px;
+    font-size: 1.2rem;
+    text-align: left;
 }
 
-/* Réseau = Vert */
-.project-card[data-category="reseau"] .btn-details {
-    background-color: #28a745;
-}
-.project-card[data-category="reseau"] .btn-details:hover {
-    background-color: #1e7e34;
-    transform: translateY(-3px);
-    box-shadow: 0 4px 8px rgba(40,167,69,0.3);
-}
-
-/* Cyber = Rouge */
-.project-card[data-category="cyber"] .btn-details {
-    background-color: #dc3545;
-}
-.project-card[data-category="cyber"] .btn-details:hover {
-    background-color: #bd2130;
-    transform: translateY(-3px);
-    box-shadow: 0 4px 8px rgba(220,53,69,0.3);
+details.folder-group {
+    max-width: 800px;
+    margin: 20px auto;
+    background: #2d2d2d;
+    border-radius: 10px;
+    border: 1px solid #444;
+    overflow: hidden;
+    transition: box-shadow 0.3s;
 }
 
-/* --- MODALE (POP-UP) --- */
+details.folder-group:hover {
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.05); /* Lueur blanche très légère */
+    border-color: #666;
+}
 
+details.folder-group summary {
+    padding: 15px 20px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1.1rem;
+    background-color: #252525;
+    color: #fff;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #444;
+}
+
+details.folder-group summary:hover { background-color: #333; }
+details.folder-group summary i { margin-right: 10px; color: #f39c12; }
+details.folder-group summary::after { content: '▼'; font-size: 0.8em; color: #888; transition: transform 0.3s; }
+details.folder-group[open] summary::after { transform: rotate(180deg); }
+
+.notes-list { background: #2d2d2d; }
+
+.note-item {
+    display: flex; align-items: center; padding: 20px; border-bottom: 1px solid #444; text-decoration: none; color: #ddd; transition: background 0.2s;
+}
+.note-item:last-child { border-bottom: none; }
+.note-item:hover { background-color: #383838; }
+
+.note-icon { font-size: 30px; margin-right: 20px; width: 40px; text-align: center; }
+.fa-file-pdf { color: #e74c3c; }
+.fa-file-word { color: #3498db; }
+.fa-file-code { color: #f1c40f; }
+
+.note-info h3 { margin: 0 0 5px 0; font-size: 1.1rem; color: #fff; text-align: left; }
+.note-info p { margin: 0; font-size: 0.9rem; color: #aaa; }
+.note-arrow { color: #666; }
+
+/* --- 10. MODALE (POP-UP) --- */
 .modal {
     display: none; 
     position: fixed; 
@@ -198,292 +269,42 @@ h2 {
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0,0,0,0.7); 
+    background-color: rgba(0,0,0,0.8); /* Fond plus sombre */
     backdrop-filter: blur(5px);
 }
 
 .modal-content {
-    background-color: #fefefe;
+    background-color: #2d2d2d; /* Fenêtre sombre */
+    color: white;
     margin: 10% auto; 
     padding: 30px;
     border-radius: 10px;
     width: 80%;
     max-width: 600px; 
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-    position: relative; /* IMPORTANT pour positionner le bouton croix */
+    box-shadow: 0 5px 25px rgba(0,0,0,0.5);
+    position: relative;
     animation: slideDown 0.4s ease;
+    border: 1px solid #555;
 }
 
-@keyframes slideDown {
-    from { transform: translateY(-50px); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
-}
+@keyframes slideDown { from { transform: translateY(-50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
 
-/* Bouton Croix */
-.close-btn {
-    position: absolute; 
-    top: 10px;          
-    right: 15px;        
-    color: #aaa;
-    font-size: 40px;    
-    font-weight: bold;
-    cursor: pointer;    
-    transition: 0.2s;
-    line-height: 1;     
-    padding: 5px;       
-    z-index: 1010;      
-}
+.close-btn { position: absolute; top: 10px; right: 15px; color: #aaa; font-size: 40px; font-weight: bold; cursor: pointer; transition: 0.2s; line-height: 1; padding: 5px; z-index: 1010; }
+.close-btn:hover { color: #fff; transform: scale(1.1); }
 
-.close-btn:hover {
-    color: #333;       
-    transform: scale(1.1); 
-}
+#modal-title { color: #fff; margin-top: 10px; margin-right: 30px; }
+#modal-desc { line-height: 1.6; color: #ccc; text-align: justify; }
 
-/* Style interne de la modale */
-#modal-title {
-    color: #2c3e50;
-    margin-top: 10px; 
-    margin-right: 30px; 
-}
+/* Visionneuse PDF */
+.modal-content.pdf-viewer { width: 95%; height: 95vh; margin: 2vh auto; max-width: 1400px; padding: 0; display: flex; flex-direction: column; overflow: hidden; background: #333; }
+.pdf-header { padding: 8px 20px; background-color: #222; border-bottom: 1px solid #444; display: flex; justify-content: space-between; align-items: center; flex-shrink: 0; }
+.pdf-header h3 { margin: 0; color: #fff; font-size: 1rem; }
+.close-pdf { font-size: 28px; font-weight: bold; cursor: pointer; color: #aaa; line-height: 1; }
+.close-pdf:hover { color: #e74c3c; }
+#pdf-frame { width: 100%; flex-grow: 1; border: none; background-color: #eee; }
 
-#modal-image {
-    width: 100%;
-    height: auto;
-    border-radius: 5px;
-    margin: 20px 0;
-    border: 1px solid #ddd;
-}
-
-#modal-desc {
-    line-height: 1.6;
-    color: #555;
-    text-align: justify;
-}
-
-/* --- BOUTONS HERO (CV & GITHUB) --- */
-
-.hero-buttons {
-    margin-top: 30px;
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-}
-
-.btn-hero {
-    padding: 12px 25px;
-    border-radius: 30px;
-    text-decoration: none;
-    font-weight: bold;
-    font-size: 1.1rem;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    display: inline-flex;
-    align-items: center;
-    gap: 10px; 
-}
-
-/* Bouton Principal (CV) */
-.btn-hero.primary {
-    background-color: #e74c3c; 
-    color: white;
-    box-shadow: 0 4px 15px rgba(231, 76, 60, 0.4);
-}
-
-.btn-hero.primary:hover {
-    background-color: #c0392b;
-    transform: translateY(-3px);
-}
-
-/* Bouton Secondaire (GitHub) */
-.btn-hero.secondary {
-    background-color: transparent;
-    border: 2px solid white;
-    color: white;
-}
-
-.btn-hero.secondary:hover {
-    background-color: white;
-    color: #2c3e50;
-    transform: translateY(-3px);
-}
-
-/* Petit ajustement pour les icônes dans les titres */
-h3 i {
-    margin-right: 8px;
-    color: #555; 
-}
-/* --- STYLE POUR LE NOUVEAU BOUTON NOTES --- */
-.btn-hero.notes {
-    background-color: #f39c12; /* Orange (Distinct du rouge et du blanc) */
-    color: white;
-    box-shadow: 0 4px 15px rgba(243, 156, 18, 0.4);
-    border: none;
-}
-
-.btn-hero.notes:hover {
-    background-color: #d35400; /* Orange foncé */
-    transform: translateY(-3px);
-}
-
-/* --- STYLE DE LA PAGE NOTES (LISTE) --- */
-
-.notes-list {
-    max-width: 800px;
-    margin: 0 auto;
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-}
-
-.note-item {
-    display: flex;
-    align-items: center;
-    padding: 20px;
-    border-bottom: 1px solid #eee;
-    text-decoration: none;
-    color: #333;
-    transition: background 0.2s;
-}
-
-.note-item:last-child {
-    border-bottom: none;
-}
-
-.note-item:hover {
-    background-color: #f9f9f9;
-}
-
-.note-icon {
-    font-size: 30px;
-    margin-right: 20px;
-    color: #2c3e50;
-    width: 40px;
-    text-align: center;
-}
-
-/* Couleurs des icones selon le type */
-.fa-file-pdf { color: #e74c3c; }   /* Rouge pour PDF */
-.fa-file-word { color: #3498db; }  /* Bleu pour Word */
-.fa-file-code { color: #f1c40f; }  /* Jaune pour Code */
-
-.note-info {
-    flex-grow: 1; /* Prend toute la place disponible */
-}
-
-.note-info h3 {
-    margin: 0 0 5px 0;
-    font-size: 1.1rem;
-    color: #2c3e50;
-    text-align: left; /* Force l'alignement à gauche */
-}
-
-.note-info p {
-    margin: 0;
-    font-size: 0.9rem;
-    color: #777;
-}
-
-.note-arrow {
-    color: #ccc;
-}
-/* --- VISIONNEUSE PDF (Version Optimisée) --- */
-
-/* On modifie la boîte blanche uniquement quand c'est pour un PDF */
-.modal-content.pdf-viewer {
-    width: 95%;        /* Plus large : 95% de l'écran */
-    height: 95vh;      /* Plus haut : 95% de la hauteur de l'écran */
-    margin: 2vh auto;  /* C'EST ICI QUE ÇA CHANGE : Seulement 2% de marge haut (au lieu de 10%) */
-    max-width: 1400px; /* On permet une plus grande largeur sur grand écran */
-    padding: 0;        
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-}
-
-/* L'en-tête de la fenêtre (Titre + Croix) */
-.pdf-header {
-    padding: 8px 20px; /* J'ai réduit l'espace (avant c'était 15px) pour gagner de la place */
-    background-color: #f9f9f9;
-    border-bottom: 1px solid #ddd;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-shrink: 0; /* Empêche l'en-tête de s'écraser */
-}
-
-.pdf-header h3 {
-    margin: 0;
-    color: #2c3e50;
-    font-size: 1rem; /* Titre un peu plus petit pour être discret */
-}
-
-/* La croix de fermeture spécifique au PDF */
-.close-pdf {
-    font-size: 28px;
-    font-weight: bold;
-    cursor: pointer;
-    color: #aaa;
-    line-height: 1;
-}
-
-.close-pdf:hover {
-    color: #e74c3c;
-}
-
-/* L'iframe qui contient le document */
-#pdf-frame {
-    width: 100%;
-    flex-grow: 1; /* Prend tout l'espace restant en hauteur */
-    border: none;
-    background-color: #eee; 
-}
-/* --- CORRECTION ICÔNE CV --- */
-/* Force l'icône à être blanche quand elle est dans le bouton rouge */
-.btn-hero.primary i {
-    color: white !important;
-}
-/* --- TITRES DES CATÉGORIES (Page Notes) --- */
-.category-title {
-    max-width: 800px;
-    margin: 30px auto 10px auto; /* Centré horizontalement */
-    color: #2c3e50;
-    border-bottom: 2px solid #007bff; /* Petite ligne bleue décorative */
-    padding-bottom: 5px;
-    /* --- PIED DE PAGE (FOOTER) --- */
-footer {
-    background-color: #222; /* Un peu plus foncé que le bleu nuit */
-    color: #aaa;
-    text-align: center;
-    padding: 20px;
-    font-size: 0.9rem;
-    border-top: 3px solid #007bff; /* Petite ligne bleue de finition */
-}
-
-footer p {
-    margin: 5px 0;
-}
-
-footer strong {
-    color: white;
-}
-    font-size: 1.2rem;
-    text-align: left; /* Alignement à gauche pour faire pro */
-
-}
-/* --- PIED DE PAGE (FOOTER) --- */
-footer {
-    background-color: #222; /* Un peu plus foncé que le bleu nuit */
-    color: #aaa;
-    text-align: center;
-    padding: 20px;
-    font-size: 0.9rem;
-    border-top: 3px solid #007bff; /* Petite ligne bleue de finition */
-}
-
-footer p {
-    margin: 5px 0;
-}
-
-footer strong {
-    color: white;
-}
+/* --- 11. CONTACT & FOOTER --- */
+#contact { background-color: #111; color: white; border-top: 1px solid #333; padding: 40px; text-align: center; margin-top: 40px;}
+footer { background-color: #000; color: #888; text-align: center; padding: 20px; font-size: 0.9rem; border-top: 3px solid #007bff; }
+footer p { margin: 5px 0; }
+footer strong { color: white; }
