@@ -3,7 +3,55 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     // =========================================
-    // 1. LOGIQUE FILTRES (Page Accueil)
+    // 1. ANIMATION FLUIDE ACCORDÉON (OUVERTURE & FERMETURE)
+    // =========================================
+    const accordions = document.querySelectorAll("details.folder-group");
+
+    accordions.forEach((acc) => {
+        const summary = acc.querySelector("summary");
+
+        summary.addEventListener("click", (e) => {
+            e.preventDefault(); // On empêche le navigateur d'ouvrir/fermer instantanément
+
+            if (acc.open) {
+                // --- SI C'EST OUVERT, ON FERME EN DOUCEUR ---
+                // 1. On calcule la hauteur actuelle (Grand)
+                const startHeight = `${acc.offsetHeight}px`;
+                // 2. On calcule la hauteur cible (Petit - juste le titre)
+                const endHeight = `${summary.offsetHeight}px`;
+
+                // 3. On joue l'animation
+                const animation = acc.animate({ height: [startHeight, endHeight] }, {
+                    duration: 300, // 0.3 secondes
+                    easing: 'ease-out'
+                });
+
+                // 4. Une fois l'animation finie, on ferme vraiment la balise HTML
+                animation.onfinish = () => {
+                    acc.open = false;
+                };
+
+            } else {
+                // --- SI C'EST FERMÉ, ON OUVRE EN DOUCEUR ---
+                // 1. On calcule la hauteur de départ (Petit)
+                const startHeight = `${acc.offsetHeight}px`;
+                
+                // 2. On ouvre la balise pour que le navigateur calcule la taille réelle du contenu
+                acc.open = true; 
+                const endHeight = `${acc.offsetHeight}px`;
+
+                // 3. On joue l'animation du petit vers le grand
+                acc.animate({ height: [startHeight, endHeight] }, {
+                    duration: 300,
+                    easing: 'ease-out'
+                });
+            }
+        });
+    });
+
+
+    // =========================================
+    // 2. LOGIQUE FILTRES (Page Accueil)
     // =========================================
     const filterButtons = document.querySelectorAll('.filter-btn');
     const projectCards = document.querySelectorAll('.project-card');
@@ -19,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 projectCards.forEach(card => {
                     if (filterValue === 'all' || card.getAttribute('data-category') === filterValue) {
                         card.classList.remove('hide');
-                        card.classList.add('active'); // Pour Scroll Reveal
+                        card.classList.add('active'); 
                     } else {
                         card.classList.add('hide');
                         card.classList.remove('active');
@@ -30,7 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // =========================================
-    // 2. MODALE PROJETS (Page Accueil)
+    // 3. MODALE PROJETS (Page Accueil)
     // =========================================
     const modal = document.getElementById("modal");
     const modalTitle = document.getElementById("modal-title");
@@ -69,7 +117,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // =========================================
-    // 3. MODALE VISIONNEUSE PDF (Page Notes)
+    // 4. MODALE VISIONNEUSE PDF (Page Notes)
     // =========================================
     const pdfLinks = document.querySelectorAll('.view-pdf');
     const pdfModal = document.getElementById('pdf-modal');
@@ -93,7 +141,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (closePdfBtn) {
             closePdfBtn.addEventListener('click', () => {
                 pdfModal.style.display = "none";
-                pdfFrame.src = ""; // Arrêter le chargement
+                pdfFrame.src = ""; 
             });
         }
 
@@ -106,7 +154,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // =========================================
-    // 4. SCROLL REVEAL (Animation d'apparition)
+    // 5. SCROLL REVEAL (Animation d'apparition)
     // =========================================
     const revealElements = document.querySelectorAll('.project-card, .notes-list, h2, .folder-group, .hero-content');
 
@@ -128,5 +176,5 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     window.addEventListener('scroll', reveal);
-    reveal(); // Lancer une fois au démarrage
+    reveal(); 
 });
