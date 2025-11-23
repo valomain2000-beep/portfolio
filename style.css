@@ -68,14 +68,11 @@ nav a:hover {
     max-width: 100%;
 }
 
-/* CORRECTION : J'ai ajouté +3 caractères de marge pour être sûr que rien n'est coupé.
-   - Accueil : 32 caractères -> Réglé à 35ch
-   - Notes : 23 caractères -> Réglé à 26ch
-*/
-
+/* Variante Accueil : "Administrateur Systèmes & Réseaux" */
+/* CORRECTION : Je passe à 36ch (33 lettres + 3 espaces vides) pour que le curseur soit bien décollé du texte */
 .typing-home {
     width: 36ch; 
-    animation: typing-home 4s steps(35) infinite alternate, blink-caret .75s step-end infinite;
+    animation: typing-home 4s steps(36) infinite alternate, blink-caret .75s step-end infinite;
 }
 
 .typing-notes {
@@ -83,11 +80,11 @@ nav a:hover {
     animation: typing-notes 4s steps(26) infinite alternate, blink-caret .75s step-end infinite;
 }
 
-/* ANIMATIONS (Aller-Retour) */
+/* Animation adaptée à la nouvelle largeur */
 @keyframes typing-home {
     0% { width: 0; }
-    60% { width: 35ch; } /* Écrit tout + une petite marge vide */
-    100% { width: 35ch; } /* Reste affiché */
+    60% { width: 36ch; } /* Va jusqu'au bout + un peu de vide */
+    100% { width: 36ch; } /* Reste en pause */
 }
 
 @keyframes typing-notes {
@@ -378,5 +375,6 @@ details.folder-group[open] summary::after { transform: rotate(180deg); }
 footer { background-color: #000; color: #888; text-align: center; padding: 20px; font-size: 0.9rem; border-top: 3px solid #007bff; }
 footer p { margin: 5px 0; }
 footer strong { color: white; }
+
 
 
