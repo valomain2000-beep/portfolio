@@ -155,7 +155,7 @@ h3 i { margin-right: 8px; color: #aaa; }
 .filter-btn { padding: 8px 16px; border: 1px solid #444; background-color: #2d2d2d; color: #ccc; cursor: pointer; transition: 0.3s; border-radius: 20px; font-weight: bold; }
 .filter-btn:hover, .filter-btn.active { background-color: #007bff; color: white; border-color: #007bff; }
 
-/* --- GRILLE PROJETS (ACCUEIL) --- */
+/* --- GRILLE PROJETS (ACCUEIL - RESTE EN GRILLE) --- */
 .projects-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -193,17 +193,19 @@ h3 i { margin-right: 8px; color: #aaa; }
 .project-card[data-category="cyber"] .btn-details { background-color: #dc3545; }
 .project-card[data-category="cyber"] .btn-details:hover { background-color: #bd2130; box-shadow: 0 0 10px #dc3545; }
 
-/* --- PAGE NOTES : GRILLE DE DOSSIERS --- */
+/* --- PAGE NOTES : LISTE VERTICALE (Modifié) --- */
+/* C'est ici que j'ai rétabli la liste verticale centrée */
 .folders-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); /* GRILLE CÔTE À CÔTE */
-    gap: 30px;
-    align-items: start;
+    display: flex;
+    flex-direction: column; /* Les dossiers s'empilent */
+    gap: 20px;
+    max-width: 800px; /* Largeur contrôlée pour le style liste */
+    margin: 0 auto; /* Centré */
 }
 
 .category-title { max-width: 100%; margin: 30px auto 10px auto; color: #fff; border-bottom: 2px solid #007bff; padding-bottom: 5px; font-size: 1.2rem; text-align: left; }
 
-/* DOSSIERS ACCORDÉON (Sans animation CSS, géré par JS) */
+/* DOSSIERS ACCORDÉON (Géré par JS) */
 details.folder-group {
     background: #2d2d2d;
     border-radius: 10px;
@@ -234,19 +236,35 @@ details.folder-group summary {
 details.folder-group summary:hover { background-color: #333; }
 details.folder-group summary i { margin-right: 10px; color: #f39c12; }
 details.folder-group summary::after { content: '▼'; font-size: 0.8em; color: #888; transition: transform 0.3s ease; }
+
+/* Rotation de la flèche */
 details.folder-group[open] summary::after { transform: rotate(180deg); }
 
 .notes-list { background: #2d2d2d; overflow: hidden; }
-.note-item { display: flex; align-items: center; padding: 20px; border-bottom: 1px solid #444; text-decoration: none; color: #ddd; transition: background 0.2s; }
+
+.note-item {
+    display: flex; align-items: center; padding: 20px; border-bottom: 1px solid #444; text-decoration: none; color: #ddd; transition: background 0.2s;
+}
 .note-item:last-child { border-bottom: none; }
 .note-item:hover { background-color: #383838; }
-.note-icon { font-size: 30px; margin-right: 40px; width: 50px; text-align: center; border-right: 1px solid #444; padding-right: 20px; }
+
+.note-icon { 
+    font-size: 30px; 
+    margin-right: 40px; 
+    width: 50px; 
+    text-align: center; 
+    border-right: 1px solid #444; 
+    padding-right: 20px;
+}
+
 .fa-file-pdf { color: #e74c3c; } .fa-file-word { color: #3498db; } .fa-file-code { color: #f1c40f; }
+
+.note-info { flex-grow: 1; }
 .note-info h3 { margin: 0 0 5px 0; font-size: 1.1rem; color: #fff; text-align: left; }
 .note-info p { margin: 0; font-size: 0.9rem; color: #aaa; }
 .note-arrow { color: #666; }
 
-/* --- MODALE --- */
+/* --- MODALE UNIVERSELLE --- */
 .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.8); backdrop-filter: blur(5px); }
 .modal-content { background-color: #2d2d2d; color: white; margin: 10% auto; padding: 30px; border-radius: 10px; width: 80%; max-width: 600px; box-shadow: 0 5px 25px rgba(0,0,0,0.5); position: relative; animation: slideDown 0.4s ease; border: 1px solid #555; }
 @keyframes slideDown { from { transform: translateY(-50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
@@ -264,7 +282,7 @@ details.folder-group[open] summary::after { transform: rotate(180deg); }
 #pdf-frame { width: 100%; flex-grow: 1; border: none; background-color: #eee; }
 
 /* --- CONTACT & FOOTER --- */
-#contact { background-color: #111; color: white; border-top: 1px solid #333; padding: 40px; text-align: center; margin-top: 40px; }
+#contact { background-color: #111; color: white; border-top: 1px solid #333; padding: 40px; text-align: center; margin-top: 40px;}
 
 /* PIED DE PAGE (STICKY BOTTOM) */
 footer {
@@ -274,8 +292,11 @@ footer {
     padding: 20px;
     font-size: 0.9rem;
     border-top: 3px solid #007bff;
-    margin-top: auto; /* Pousse le footer tout en bas */
+    
+    /* Le footer est poussé tout en bas grâce au flex sur body */
+    margin-top: auto; 
     width: 100%;
 }
+
 footer p { margin: 5px 0; }
 footer strong { color: white; }
