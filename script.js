@@ -11,36 +11,28 @@ document.addEventListener('DOMContentLoaded', () => {
         const summary = acc.querySelector("summary");
 
         summary.addEventListener("click", (e) => {
-            e.preventDefault(); // On empêche le navigateur d'ouvrir/fermer instantanément
+            e.preventDefault(); // On bloque le comportement par défaut (instantané)
 
             if (acc.open) {
-                // --- SI C'EST OUVERT, ON FERME EN DOUCEUR ---
-                // 1. On calcule la hauteur actuelle (Grand)
+                // --- SI OUVERT : ON FERME EN DOUCEUR ---
                 const startHeight = `${acc.offsetHeight}px`;
-                // 2. On calcule la hauteur cible (Petit - juste le titre)
                 const endHeight = `${summary.offsetHeight}px`;
 
-                // 3. On joue l'animation
                 const animation = acc.animate({ height: [startHeight, endHeight] }, {
-                    duration: 300, // 0.3 secondes
+                    duration: 300, // 0.3s
                     easing: 'ease-out'
                 });
 
-                // 4. Une fois l'animation finie, on ferme vraiment la balise HTML
                 animation.onfinish = () => {
-                    acc.open = false;
+                    acc.open = false; // On ferme vraiment à la fin de l'anim
                 };
 
             } else {
-                // --- SI C'EST FERMÉ, ON OUVRE EN DOUCEUR ---
-                // 1. On calcule la hauteur de départ (Petit)
+                // --- SI FERMÉ : ON OUVRE EN DOUCEUR ---
                 const startHeight = `${acc.offsetHeight}px`;
-                
-                // 2. On ouvre la balise pour que le navigateur calcule la taille réelle du contenu
-                acc.open = true; 
+                acc.open = true; // On ouvre d'abord pour calculer la taille
                 const endHeight = `${acc.offsetHeight}px`;
 
-                // 3. On joue l'animation du petit vers le grand
                 acc.animate({ height: [startHeight, endHeight] }, {
                     duration: 300,
                     easing: 'ease-out'
@@ -154,7 +146,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // =========================================
-    // 5. SCROLL REVEAL (Animation d'apparition)
+    // 5. SCROLL REVEAL
     // =========================================
     const revealElements = document.querySelectorAll('.project-card, .notes-list, h2, .folder-group, .hero-content');
 
