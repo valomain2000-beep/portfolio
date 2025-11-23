@@ -10,7 +10,7 @@ body {
     color: #e0e0e0; 
 }
 
-/* Navigation */
+/* --- NAVIGATION --- */
 nav {
     background-color: #111;
     color: white;
@@ -25,6 +25,32 @@ nav {
     max-width: 1200px;
     margin: 0 auto;
 }
+
+/* Configuration spécifique pour le bouton "Retour" (Notes) */
+.nav-content.full-width {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    justify-content: flex-start; /* Aligné à gauche */
+}
+
+.back-link {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #ccc;     
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;        
+    transition: color 0.3s, transform 0.3s;
+}
+
+.back-link:hover {
+    color: #007bff;       
+    transform: translateX(-5px); 
+}
+
+.back-link i { font-size: 0.9em; }
 
 nav ul {
     list-style: none;
@@ -43,28 +69,27 @@ nav a:hover {
     color: #007bff;
 }
 
-/* --- 1. HERO HEADER (Ligne bleue raccourcie) --- */
+/* --- HERO HEADER --- */
 .hero {
     text-align: center;
-    padding: 60px 20px 20px 20px; /* Ajustement du padding bas */
+    padding: 60px 20px 20px 20px;
     background: linear-gradient(135deg, #2c3e50 0%, #000000 100%);
     color: white;
     position: relative;
-    /* J'ai SUPPRIMÉ la ligne 'border-bottom' ici */
 }
 
-/* NOUVEAU : Crée la petite ligne bleue centrée */
+/* Petite ligne bleue centrée */
 .hero::after {
     content: '';
     display: block;
-    width: 150px; /* La largeur réduite que vous vouliez */
-    height: 4px;  /* Épaisseur */
-    background-color: #007bff; /* Bleu */
-    margin: 40px auto 0 auto; /* Centré horizontalement avec espace au-dessus */
-    border-radius: 2px; /* Bords arrondis pour faire propre */
+    width: 150px;
+    height: 4px;
+    background-color: #007bff;
+    margin: 40px auto 0 auto;
+    border-radius: 2px;
 }
 
-/* --- MACHINE À ÉCRIRE (OPTIMISÉE AVEC MARGE DE SÉCURITÉ) --- */
+/* --- MACHINE À ÉCRIRE (TYPING EFFECT) --- */
 .typing-container {
     display: inline-block;
 }
@@ -73,45 +98,38 @@ nav a:hover {
     font-family: "Iosevka ExtraLight", "Iosevka", "Source Code Pro", "Consolas", monospace;
     font-weight: 200;
     overflow: hidden; 
-    border-right: 3px solid #007bff; /* Curseur */
+    border-right: 3px solid #007bff; 
     white-space: nowrap; 
     margin: 0 auto;
     letter-spacing: 1px;
     max-width: 100%;
 }
 
-/* Variante Accueil : "Administrateur Systèmes & Réseaux" */
-/* CORRECTION : Je passe à 36ch (33 lettres + 3 espaces vides) pour que le curseur soit bien décollé du texte */
+/* Accueil : "Administrateur Systèmes & Réseaux" (+ marge sécurité) */
 .typing-home {
     width: 36ch; 
     animation: typing-home 4s steps(36) infinite alternate, blink-caret .75s step-end infinite;
 }
 
-/* Variante Notes : "Journal de Bord & Notes" */
-/* CORRECTION : Texte de 23 caractères + 3 de marge = 26ch */
+/* Notes : "Journal de Bord & Notes" (+ marge sécurité) */
 .typing-notes {
-    width: 26ch; 
+    width: 26ch;
     animation: typing-notes 4s steps(26) infinite alternate, blink-caret .75s step-end infinite;
 }
 
-/* Animation adaptée à la nouvelle largeur */
 @keyframes typing-home {
     0% { width: 0; }
-    60% { width: 36ch; } /* Va jusqu'au bout + un peu de vide */
-    100% { width: 36ch; } /* Reste en pause */
+    60% { width: 36ch; }
+    100% { width: 36ch; }
 }
 
-/* Animation ajustée à 26ch */
 @keyframes typing-notes {
     0% { width: 0; }
-    60% { width: 26ch; } /* Écrit le texte + l'espace vide de sécurité */
-    100% { width: 26ch; } /* Reste en pause */
+    60% { width: 26ch; }
+    100% { width: 26ch; }
 }
 
-@keyframes blink-caret { 
-    from, to { border-color: transparent } 
-    50% { border-color: #007bff; } 
-}
+@keyframes blink-caret { from, to { border-color: transparent } 50% { border-color: #007bff; } }
 
 /* --- BOUTONS HERO --- */
 .hero-buttons { margin-top: 30px; display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
@@ -239,7 +257,7 @@ h3 i { margin-right: 8px; color: #aaa; }
 .project-card[data-category="cyber"] .btn-details { background-color: #dc3545; }
 .project-card[data-category="cyber"] .btn-details:hover { background-color: #bd2130; box-shadow: 0 0 10px #dc3545; }
 
-/* --- PAGE NOTES & DOSSIERS --- */
+/* --- DOSSIERS ACCORDÉON ANIMÉS (SMOOTH) --- */
 .category-title {
     max-width: 800px;
     margin: 30px auto 10px auto;
@@ -257,7 +275,7 @@ details.folder-group {
     border-radius: 10px;
     border: 1px solid #444;
     overflow: hidden;
-    transition: box-shadow 0.3s;
+    transition: box-shadow 0.3s, border-color 0.3s;
 }
 
 details.folder-group:hover {
@@ -277,12 +295,24 @@ details.folder-group summary {
     align-items: center;
     justify-content: space-between;
     border-bottom: 1px solid #444;
+    position: relative;
+    z-index: 10;
 }
 
 details.folder-group summary:hover { background-color: #333; }
 details.folder-group summary i { margin-right: 10px; color: #f39c12; }
-details.folder-group summary::after { content: '▼'; font-size: 0.8em; color: #888; transition: transform 0.3s; }
+details.folder-group summary::after { content: '▼'; font-size: 0.8em; color: #888; transition: transform 0.3s ease; }
 details.folder-group[open] summary::after { transform: rotate(180deg); }
+
+/* ANIMATION D'OUVERTURE */
+details.folder-group[open] .notes-list {
+    animation: slideDownList 0.4s ease-out forwards;
+}
+
+@keyframes slideDownList {
+    from { opacity: 0; transform: translateY(-20px); max-height: 0; }
+    to { opacity: 1; transform: translateY(0); max-height: 1000px; }
+}
 
 .notes-list { background: #2d2d2d; }
 
@@ -339,7 +369,6 @@ details.folder-group[open] summary::after { transform: rotate(180deg); }
 
 @keyframes slideDown { from { transform: translateY(-50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
 
-/* Croix pour la modale PROJETS */
 .close-btn { position: absolute; top: 10px; right: 15px; color: #aaa; font-size: 40px; font-weight: bold; cursor: pointer; transition: 0.2s; line-height: 1; padding: 5px; z-index: 1010; }
 .close-btn:hover { color: #fff; transform: scale(1.1); }
 
@@ -372,7 +401,6 @@ details.folder-group[open] summary::after { transform: rotate(180deg); }
 
 .pdf-header h3 { margin: 0; color: #fff; font-size: 1rem; }
 
-/* Croix pour le PDF */
 .close-pdf { 
     font-size: 32px; 
     font-weight: bold; 
@@ -390,33 +418,3 @@ details.folder-group[open] summary::after { transform: rotate(180deg); }
 footer { background-color: #000; color: #888; text-align: center; padding: 20px; font-size: 0.9rem; border-top: 3px solid #007bff; }
 footer p { margin: 5px 0; }
 footer strong { color: white; }
-
-/* --- MODIFICATIONS NOTES : RETOUR PORTFOLIO --- */
-/* 1. Permet au menu de prendre toute la largeur */
-.nav-content.full-width {
-    width: 100%;      /* Force la largeur totale */
-    max-width: 100%;  /* Annule la limite de 1200px */
-    margin: 0;        /* Annule le centrage */
-    justify-content: flex-start; /* FORCE L'ALIGNEMENT À GAUCHE */
-}
-
-/* 2. Style du lien "Retour" (Taille ajustée) */
-.back-link {
-    font-size: 1.3rem; /* CORRECTION : Taille augmentée (c'était 1rem) */
-    font-weight: bold;
-    color: #ccc;     
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;        
-    transition: color 0.3s, transform 0.3s;
-}
-
-.back-link:hover {
-    color: #007bff;       
-    transform: translateX(-5px); 
-}
-
-.back-link i {
-    font-size: 0.9em; 
-}
