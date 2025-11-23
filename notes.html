@@ -18,13 +18,9 @@
 
     <header class="hero" style="min-height: 200px; padding: 40px 20px;">
         <div class="hero-content">
-            
             <div class="typing-container">
-                <h2 class="typing-effect" style="width: 23ch; animation: typing 4s steps(23) infinite alternate, blink-caret .75s step-end infinite;">
-                    Journal de Bord & Notes
-                </h2>
+                <h2 class="typing-effect typing-notes">Journal de Bord & Notes</h2>
             </div>
-
             <p>Documentation technique et procédures réalisées en entreprise</p>
         </div>
     </header>
@@ -34,7 +30,6 @@
         <details class="folder-group" open>
             <summary><i class="fas fa-folder-open"></i> Lecture directe sur le site</summary>
             <div class="notes-list">
-                
                 <a href="fichiers/Préparation poste AMD-Energies.pdf" class="note-item view-pdf" data-title="Préparation poste AMD-Energies">
                     <div class="note-icon"><i class="fas fa-file-pdf"></i></div>
                     <div class="note-info">
@@ -43,7 +38,6 @@
                     </div>
                     <div class="note-arrow"><i class="fas fa-eye"></i></div>
                 </a>
-
                 <a href="fichiers/archi_reseau.pdf" class="note-item view-pdf" data-title="Architecture Réseau">
                     <div class="note-icon"><i class="fas fa-file-pdf"></i></div>
                     <div class="note-info">
@@ -52,14 +46,12 @@
                     </div>
                     <div class="note-arrow"><i class="fas fa-eye"></i></div>
                 </a>
-
             </div>
         </details>
 
         <details class="folder-group">
             <summary><i class="fas fa-folder"></i> Téléchargements (Scripts, Word...)</summary>
             <div class="notes-list">
-                
                 <a href="fichiers/Mail Type SC-CONSULT.docx" class="note-item">
                     <div class="note-icon"><i class="fas fa-file-word"></i></div>
                     <div class="note-info">
@@ -68,7 +60,6 @@
                     </div>
                     <div class="note-arrow"><i class="fas fa-download"></i></div>
                 </a>
-                
                 <a href="fichiers/script_backup.ps1" class="note-item">
                     <div class="note-icon"><i class="fas fa-file-code"></i></div>
                     <div class="note-info">
@@ -77,14 +68,12 @@
                     </div>
                     <div class="note-arrow"><i class="fas fa-download"></i></div>
                 </a>
-
             </div>
         </details>
 
         <details class="folder-group">
             <summary><i class="fas fa-rss"></i> Veille Technologique & IA</summary>
             <div class="notes-list">
-                
                 <a href="fichiers/Synthese_Veille_BenLanne.pdf" target="_blank" class="note-item">
                     <div class="note-icon"><i class="fas fa-file-pdf" style="color: #e74c3c;"></i></div>
                     <div class="note-info">
@@ -93,7 +82,6 @@
                     </div>
                     <div class="note-arrow"><i class="fas fa-download"></i></div>
                 </a>
-
                 <a href="https://gemini.google.com/" target="_blank" class="note-item">
                     <div class="note-icon"><i class="fas fa-robot" style="color: #8e44ad;"></i></div>
                     <div class="note-info">
@@ -102,7 +90,6 @@
                     </div>
                     <div class="note-arrow"><i class="fas fa-external-link-alt"></i></div>
                 </a>
-
                 <a href="https://blog.google/technology/ai/" target="_blank" class="note-item">
                     <div class="note-icon"><i class="fas fa-newspaper" style="color: #2980b9;"></i></div>
                     <div class="note-info">
@@ -111,7 +98,6 @@
                     </div>
                     <div class="note-arrow"><i class="fas fa-external-link-alt"></i></div>
                 </a>
-
             </div>
         </details>
 
@@ -140,48 +126,7 @@
         </div>
     </div>
 
-    <script>
-        const pdfLinks = document.querySelectorAll('.view-pdf');
-        const pdfModal = document.getElementById('pdf-modal');
-        const pdfFrame = document.getElementById('pdf-frame');
-        const pdfTitle = document.getElementById('pdf-title');
-        const closePdfBtn = document.querySelector('.close-pdf');
-
-        pdfLinks.forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault(); 
-                const fileUrl = link.getAttribute('href');
-                const title = link.getAttribute('data-title') || "Document PDF";
-                pdfFrame.src = fileUrl;
-                pdfTitle.innerText = title;
-                pdfModal.style.display = "block";
-            });
-        });
-
-        closePdfBtn.addEventListener('click', () => {
-            pdfModal.style.display = "none";
-            pdfFrame.src = "";
-        });
-
-        window.addEventListener('click', (e) => {
-            if (e.target == pdfModal) {
-                pdfModal.style.display = "none";
-                pdfFrame.src = "";
-            }
-        });
-        
-        const revealElements = document.querySelectorAll('.folder-group');
-        function reveal() {
-            const windowHeight = window.innerHeight;
-            revealElements.forEach((element) => {
-                const elementTop = element.getBoundingClientRect().top;
-                if (!element.classList.contains('reveal')) element.classList.add('reveal');
-                if (elementTop < windowHeight - 50) element.classList.add('active');
-            });
-        }
-        window.addEventListener('scroll', reveal);
-        reveal();
-    </script>
+    <script src="script.js"></script>
 
     <footer>
         <p>Réalisé par <strong>Ben Lanne</strong> - Étudiant BTS SIO SISR</p>
