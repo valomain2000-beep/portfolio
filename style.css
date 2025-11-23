@@ -74,7 +74,7 @@ nav a:hover {
 */
 
 .typing-home {
-    width: 35ch; 
+    width: 36ch; 
     animation: typing-home 4s steps(35) infinite alternate, blink-caret .75s step-end infinite;
 }
 
@@ -378,4 +378,5 @@ details.folder-group[open] summary::after { transform: rotate(180deg); }
 footer { background-color: #000; color: #888; text-align: center; padding: 20px; font-size: 0.9rem; border-top: 3px solid #007bff; }
 footer p { margin: 5px 0; }
 footer strong { color: white; }
+
 
