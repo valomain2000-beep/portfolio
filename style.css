@@ -1,7 +1,7 @@
 /* --- IMPORTS DE POLICES --- */
 @import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@200;400;700&display=swap');
 
-/* Reset de base */
+/* --- RESET & STRUCTURE PRINCIPALE --- */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -9,10 +9,15 @@ body {
     background-color: #1e1e1e; 
     color: #e0e0e0;
     
-    /* CONFIGURATION POUR LE FOOTER EN BAS */
-    min-height: 100vh;      /* La page fait au moins 100% de la hauteur de l'écran */
-    display: flex;          /* On active le mode flexible */
-    flex-direction: column; /* Les éléments s'empilent verticalement */
+    /* C'EST ICI LE SECRET DU FOOTER : */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* La page fait au minimum 100% de la hauteur de l'écran */
+}
+
+/* Le contenu principal pousse le footer vers le bas */
+section, header, nav {
+    flex-shrink: 0;
 }
 
 /* --- NAVIGATION --- */
@@ -31,12 +36,12 @@ nav {
     margin: 0 auto;
 }
 
-/* Configuration spécifique pour le bouton "Retour" (Notes) */
+/* Style spécifique pour le bouton "Retour" (Notes) */
 .nav-content.full-width {
     width: 100%;
     max-width: 100%;
     margin: 0;
-    justify-content: flex-start; /* Aligné à gauche */
+    justify-content: flex-start; 
 }
 
 .back-link {
@@ -110,16 +115,16 @@ nav a:hover {
     max-width: 100%;
 }
 
-/* Accueil : "Administrateur Systèmes & Réseaux" + marge */
+/* Accueil : 36 caractères */
 .typing-home {
     width: 36ch; 
     animation: typing-home 4s steps(36) infinite alternate, blink-caret .75s step-end infinite;
 }
 
-/* Notes : "Journal de Bord & Notes" + marge */
+/* Notes : 24 caractères */
 .typing-notes {
-    width: 26ch; 
-    animation: typing-notes 4s steps(26) infinite alternate, blink-caret .75s step-end infinite;
+    width: 24ch; 
+    animation: typing-notes 4s steps(24) infinite alternate, blink-caret .75s step-end infinite;
 }
 
 @keyframes typing-home {
@@ -130,8 +135,8 @@ nav a:hover {
 
 @keyframes typing-notes {
     0% { width: 0; }
-    60% { width: 26ch; }
-    100% { width: 26ch; }
+    60% { width: 24ch; }
+    100% { width: 24ch; }
 }
 
 @keyframes blink-caret { from, to { border-color: transparent } 50% { border-color: #007bff; } }
@@ -152,6 +157,7 @@ nav a:hover {
     max-width: 1000px;
     margin: 40px auto;
     padding: 0 20px;
+    flex: 1; /* Permet à la section de grandir pour pousser le footer */
 }
 
 h2 {
@@ -279,9 +285,8 @@ details.folder-group {
     background: #2d2d2d;
     border-radius: 10px;
     border: 1px solid #444;
-    overflow: hidden; /* IMPORTANT pour l'animation JS */
+    overflow: hidden; 
     transition: box-shadow 0.3s, border-color 0.3s;
-    /* SUPPRESSION DES ANIMATIONS CSS ICI POUR LAISSER LE JS FAIRE */
 }
 
 details.folder-group:hover {
@@ -312,7 +317,7 @@ details.folder-group summary::after { content: '▼'; font-size: 0.8em; color: #
 /* Rotation de la flèche */
 details.folder-group[open] summary::after { transform: rotate(180deg); }
 
-.notes-list { background: #2d2d2d; }
+.notes-list { background: #2d2d2d; overflow: hidden; }
 
 .note-item {
     display: flex; align-items: center; padding: 20px; border-bottom: 1px solid #444; text-decoration: none; color: #ddd; transition: background 0.2s;
@@ -414,7 +419,7 @@ details.folder-group[open] summary::after { transform: rotate(180deg); }
 /* --- CONTACT & FOOTER --- */
 #contact { background-color: #111; color: white; border-top: 1px solid #333; padding: 40px; text-align: center; margin-top: 40px;}
 
-/* --- PIED DE PAGE (FOOTER) --- */
+/* PIED DE PAGE (STICKY BOTTOM) */
 footer {
     background-color: #000;
     color: #888;
@@ -423,11 +428,9 @@ footer {
     font-size: 0.9rem;
     border-top: 3px solid #007bff;
     
-    /* C'EST ICI QUE LA MAGIE OPÈRE : */
-    margin-top: auto; /* Pousse le footer tout en bas de l'espace disponible */
+    /* Le footer est poussé tout en bas grâce au flex sur body */
+    margin-top: auto; 
     width: 100%;
-    
-    /* On a supprimé position: fixed, bottom, left, z-index */
 }
 
 footer p { margin: 5px 0; }
