@@ -304,3 +304,33 @@ footer {
 
 footer p { margin: 5px 0; }
 footer strong { color: white; }
+
+/* --- RESPONSIVE : ADAPTATION MOBILE --- */
+
+/* Pour les tablettes et petits écrans (moins de 768px) */
+@media (max-width: 768px) {
+    .typing-effect {
+        font-size: 1.2rem; /* On réduit la police */
+    }
+    
+    .hero {
+        padding-top: 40px; /* Un peu moins d'espace en haut */
+    }
+}
+
+/* Pour les téléphones mobiles (moins de 480px) */
+@media (max-width: 480px) {
+    .typing-effect {
+        font-size: 0.9rem; /* On réduit encore pour que ça rentre */
+    }
+
+    /* Optionnel : Ajuster aussi les titres H2 généraux */
+    h2 {
+        font-size: 1.5rem;
+    }
+    
+    /* Pour éviter que le texte de navigation ne soit trop gros ou désaligné */
+    .nav-content h1 {
+        font-size: 1.2rem;
+    }
+}
