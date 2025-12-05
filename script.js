@@ -40,24 +40,58 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // =========================================
-    // 2. LOGIQUE FILTRES (Index)
+    // 2. LOGIQUE FILTRES (Avec Slide Directionnel)
     // =========================================
     const filterButtons = document.querySelectorAll('.filter-btn');
     const projectCards = document.querySelectorAll('.project-card');
 
     if (filterButtons.length > 0) {
+        // On convertit la NodeList en Array pour pouvoir utiliser .indexOf() facilement
+        const buttonsArray = Array.from(filterButtons);
+
         filterButtons.forEach(button => {
             button.addEventListener('click', () => {
+                
+                // 1. On repère le bouton qui ÉTAIT actif avant le clic
+                const currentActiveBtn = document.querySelector('.filter-btn.active');
+                const oldIndex = buttonsArray.indexOf(currentActiveBtn);
+                const newIndex = buttonsArray.indexOf(button);
+
+                // 2. On détermine la direction du slide
+                let animationClass = '';
+
+                if (newIndex > oldIndex) {
+                    // Si le nouveau bouton est à DROITE -> On fait venir le contenu de la droite
+                    animationClass = 'slide-in-right';
+                } else if (newIndex < oldIndex) {
+                    // Si le nouveau bouton est à GAUCHE -> On fait venir le contenu de la gauche
+                    animationClass = 'slide-in-left';
+                } else {
+                    // Si on reclique sur le même, on ne fait rien ou une anim par défaut
+                    animationClass = 'slide-in-right'; 
+                }
+
+                // 3. Mise à jour visuelle des boutons
                 filterButtons.forEach(btn => btn.classList.remove('active'));
                 button.classList.add('active');
                 
                 const filterValue = button.getAttribute('data-filter');
 
+                // 4. Application du filtre et de l'animation
                 projectCards.forEach(card => {
+                    // On nettoie TOUTES les anciennes classes d'animation pour éviter les conflits
+                    card.classList.remove('reveal', 'animate-card', 'slide-in-left', 'slide-in-right');
+                    
+                    // Petite astuce pour "redémarrer" l'animation (Reflow)
+                    void card.offsetWidth; 
+
                     if (filterValue === 'all' || card.getAttribute('data-category') === filterValue) {
                         card.classList.remove('hide');
                         card.classList.add('active');
-                        card.classList.remove('reveal');
+                        
+                        // On ajoute la classe de direction calculée au dessus
+                        card.classList.add(animationClass);
+                        
                     } else {
                         card.classList.add('hide');
                         card.classList.remove('active');
@@ -173,6 +207,7 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('scroll', reveal);
     reveal(); 
 });
+
 
 
 
