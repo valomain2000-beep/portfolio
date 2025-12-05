@@ -67,12 +67,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
    // =========================================
-    // 3. MODALE PROJETS (MODIFIÉ POUR MULTI-IMAGES)
+    // 3. MODALE PROJETS (AVEC BLOCAGE DU FOND)
     // =========================================
     const modal = document.getElementById("modal");
     const modalTitle = document.getElementById("modal-title");
     const modalDesc = document.getElementById("modal-desc");
-    // On sélectionne le nouveau conteneur au lieu de l'image unique
     const modalImagesContainer = document.getElementById("modal-images-container"); 
     const closeBtn = document.querySelector(".close-btn");
     const detailButtons = document.querySelectorAll(".btn-details");
@@ -81,36 +80,43 @@ document.addEventListener('DOMContentLoaded', () => {
         detailButtons.forEach(btn => {
             btn.addEventListener("click", (e) => {
                 e.preventDefault(); 
+                
+                // --- AJOUTEZ CETTE LIGNE ---
+                document.body.style.overflow = 'hidden'; // Bloque le scroll du site
+                // ---------------------------
+
                 const card = btn.closest(".project-card");
                 const title = card.querySelector("h3").innerText;
                 const desc = card.getAttribute("data-details");
-                
-                // On récupère les chemins d'images (séparés par une virgule)
                 const imageSrcs = card.getAttribute("data-image").split(',');
 
                 modalTitle.innerText = title;
                 modalDesc.innerText = desc;
                 
-                // --- NOUVELLE LOGIQUE IMAGE ---
-                modalImagesContainer.innerHTML = ''; // On vide les anciennes images
-                
+                modalImagesContainer.innerHTML = ''; 
                 imageSrcs.forEach(src => {
-                    const img = document.createElement("img"); // On crée une balise <img>
-                    img.src = src.trim(); // On ajoute le lien (en enlevant les espaces inutiles)
-                    modalImagesContainer.appendChild(img); // On l'ajoute au conteneur
+                    const img = document.createElement("img");
+                    img.src = src.trim();
+                    modalImagesContainer.appendChild(img);
                 });
-                // ------------------------------
 
                 modal.style.display = "block";
             });
         });
 
-        // (Le reste du code de fermeture reste identique...)
+        // Fonction pour fermer et RÉACTIVER le scroll
+        function closeModal() {
+            modal.style.display = "none";
+            // --- AJOUTEZ CETTE LIGNE ---
+            document.body.style.overflow = 'auto'; // Réactive le scroll du site
+            // ---------------------------
+        }
+
         if(closeBtn) {
-            closeBtn.addEventListener("click", () => { modal.style.display = "none"; });
+            closeBtn.addEventListener("click", closeModal);
         }
         window.addEventListener("click", (e) => {
-            if (e.target == modal) { modal.style.display = "none"; }
+            if (e.target == modal) { closeModal(); }
         });
     }
     
@@ -166,4 +172,5 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('scroll', reveal);
     reveal(); 
 });
+
 
