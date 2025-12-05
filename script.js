@@ -159,7 +159,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // =========================================
     // 5. SCROLL REVEAL
     // =========================================
-    const revealElements = document.querySelectorAll('.project-card, .notes-list, h2, .folder-group, .hero-content');
+    const revealElements = document.querySelectorAll('.notes-list, h2, .folder-group, .hero-content');
 
     function reveal() {
         const windowHeight = window.innerHeight;
@@ -173,6 +173,7 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('scroll', reveal);
     reveal(); 
 });
+
 
 
 
