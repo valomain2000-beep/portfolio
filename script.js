@@ -57,6 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (filterValue === 'all' || card.getAttribute('data-category') === filterValue) {
                         card.classList.remove('hide');
                         card.classList.add('active');
+                        card.classList.remove('reveal');
                     } else {
                         card.classList.add('hide');
                         card.classList.remove('active');
@@ -172,5 +173,6 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('scroll', reveal);
     reveal(); 
 });
+
 
 
