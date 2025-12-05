@@ -379,5 +379,39 @@ footer strong { color: white; }
     box-shadow: 0 5px 15px rgba(0, 123, 255, 0.4);
 }
 
+/* --- ANIMATIONS DIRECTIONNELLES (Slide) --- */
 
+/* 1. Animation : Ça vient de la GAUCHE et ça glisse vers la droite (->) */
+/* Utilisé quand on clique sur un bouton situé à GAUCHE */
+@keyframes slideFromLeft {
+    0% { 
+        opacity: 0; 
+        transform: translateX(-50px); /* Part de la gauche */
+    }
+    100% { 
+        opacity: 1; 
+        transform: translateX(0); 
+    }
+}
 
+/* 2. Animation : Ça vient de la DROITE et ça glisse vers la gauche (<-) */
+/* Utilisé quand on clique sur un bouton situé à DROITE */
+@keyframes slideFromRight {
+    0% { 
+        opacity: 0; 
+        transform: translateX(50px); /* Part de la droite */
+    }
+    100% { 
+        opacity: 1; 
+        transform: translateX(0); 
+    }
+}
+
+/* Classes que le JavaScript va ajouter */
+.slide-in-left {
+    animation: slideFromLeft 0.4s ease-out forwards;
+}
+
+.slide-in-right {
+    animation: slideFromRight 0.4s ease-out forwards;
+}
