@@ -66,13 +66,14 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // =========================================
-    // 3. MODALE PROJETS
+   // =========================================
+    // 3. MODALE PROJETS (MODIFIÉ POUR MULTI-IMAGES)
     // =========================================
     const modal = document.getElementById("modal");
     const modalTitle = document.getElementById("modal-title");
     const modalDesc = document.getElementById("modal-desc");
-    const modalImage = document.getElementById("modal-image");
+    // On sélectionne le nouveau conteneur au lieu de l'image unique
+    const modalImagesContainer = document.getElementById("modal-images-container"); 
     const closeBtn = document.querySelector(".close-btn");
     const detailButtons = document.querySelectorAll(".btn-details");
 
@@ -83,15 +84,28 @@ document.addEventListener('DOMContentLoaded', () => {
                 const card = btn.closest(".project-card");
                 const title = card.querySelector("h3").innerText;
                 const desc = card.getAttribute("data-details");
-                const imageSrc = card.getAttribute("data-image");
+                
+                // On récupère les chemins d'images (séparés par une virgule)
+                const imageSrcs = card.getAttribute("data-image").split(',');
 
                 modalTitle.innerText = title;
                 modalDesc.innerText = desc;
-                modalImage.src = imageSrc;
+                
+                // --- NOUVELLE LOGIQUE IMAGE ---
+                modalImagesContainer.innerHTML = ''; // On vide les anciennes images
+                
+                imageSrcs.forEach(src => {
+                    const img = document.createElement("img"); // On crée une balise <img>
+                    img.src = src.trim(); // On ajoute le lien (en enlevant les espaces inutiles)
+                    modalImagesContainer.appendChild(img); // On l'ajoute au conteneur
+                });
+                // ------------------------------
+
                 modal.style.display = "block";
             });
         });
 
+        // (Le reste du code de fermeture reste identique...)
         if(closeBtn) {
             closeBtn.addEventListener("click", () => { modal.style.display = "none"; });
         }
@@ -99,7 +113,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (e.target == modal) { modal.style.display = "none"; }
         });
     }
-
+    
     // =========================================
     // 4. VISIONNEUSE PDF
     // =========================================
@@ -152,3 +166,4 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('scroll', reveal);
     reveal(); 
 });
+
