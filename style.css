@@ -386,7 +386,7 @@ footer strong { color: white; }
     0% { 
         opacity: 0; 
         /* On augmente la distance : -150px au lieu de -50px */
-        transform: translateX(-150px); 
+        transform: translateX(-200px); 
     }
     100% { 
         opacity: 1; 
@@ -410,9 +410,10 @@ footer strong { color: white; }
 /* Classes appliquées par le JavaScript */
 .slide-in-left {
     /* On passe à 0.8s (au lieu de 0.4s) pour ralentir */
-    animation: slideFromLeft 0.8s ease-out forwards;
+    animation: slideFromLeft 0.7s ease-out forwards;
 }
 
 .slide-in-right {
-    animation: slideFromRight 0.8s ease-out forwards;
+    animation: slideFromRight 0.7s ease-out forwards;
 }
+
