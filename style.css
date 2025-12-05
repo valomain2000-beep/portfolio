@@ -334,3 +334,23 @@ footer strong { color: white; }
         font-size: 1.2rem;
     }
 }
+
+/* Conteneur des images dans la modale */
+#modal-images-container {
+    display: flex;           /* Active l'alignement horizontal */
+    gap: 10px;               /* Espace entre les images */
+    justify-content: center; /* Centre les images */
+    margin-bottom: 20px;     /* Espace avant la description */
+    flex-wrap: wrap;         /* Permet de passer à la ligne si petit écran */
+}
+
+/* Style des images générées */
+#modal-images-container img {
+    max-width: 100%;         /* Sécurité */
+    height: auto;
+    flex: 1;                 /* Les images se partagent l'espace équitablement */
+    object-fit: cover;       /* Remplissage propre */
+    border-radius: 5px;
+    max-height: 300px;       /* Limite la hauteur pour ne pas casser l'écran */
+}
+
