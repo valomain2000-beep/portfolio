@@ -165,7 +165,7 @@ h3 i { margin-right: 8px; color: #aaa; }
 /* --- GRILLE PROJETS (ACCUEIL) --- */
 .projects-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 30px;
 }
 
@@ -353,5 +353,6 @@ footer strong { color: white; }
     border-radius: 5px;
     max-height: 300px;       /* Limite la hauteur pour ne pas casser l'écran */
 }
+
 
 
