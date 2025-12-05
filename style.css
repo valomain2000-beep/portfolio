@@ -358,9 +358,26 @@ footer strong { color: white; }
     max-height: 300px;       /* Limite la hauteur pour ne pas casser l'écran */
 }
 
+/* --- COULEURS DE SURVOL PAR CATÉGORIE --- */
 
+/* Catégorie CYBER (Pfsense) -> Rouge */
+.project-card[data-category="cyber"]:hover {
+    border-color: #dc3545;
+    /* On change aussi l'ombre pour qu'elle soit rouge et non bleue */
+    box-shadow: 0 5px 15px rgba(220, 53, 69, 0.4); 
+}
 
+/* Catégorie RÉSEAU (Cisco, Supervision) -> Vert */
+.project-card[data-category="reseau"]:hover {
+    border-color: #28a745;
+    box-shadow: 0 5px 15px rgba(40, 167, 69, 0.4);
+}
 
+/* Catégorie SYSTÈME (AD, Cluster) -> Bleu (C'est déjà le défaut, mais on le force ici) */
+.project-card[data-category="systeme"]:hover {
+    border-color: #007bff;
+    box-shadow: 0 5px 15px rgba(0, 123, 255, 0.4);
+}
 
 
 
