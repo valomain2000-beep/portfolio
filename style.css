@@ -379,14 +379,14 @@ footer strong { color: white; }
     box-shadow: 0 5px 15px rgba(0, 123, 255, 0.4);
 }
 
-/* --- ANIMATIONS DIRECTIONNELLES (Slide) --- */
+/* --- ANIMATIONS DIRECTIONNELLES (Version Longue & Lente) --- */
 
-/* 1. Animation : Ça vient de la GAUCHE et ça glisse vers la droite (->) */
-/* Utilisé quand on clique sur un bouton situé à GAUCHE */
+/* 1. Animation : Arrive de la GAUCHE (de loin) */
 @keyframes slideFromLeft {
     0% { 
         opacity: 0; 
-        transform: translateX(-50px); /* Part de la gauche */
+        /* On augmente la distance : -150px au lieu de -50px */
+        transform: translateX(-150px); 
     }
     100% { 
         opacity: 1; 
@@ -394,12 +394,12 @@ footer strong { color: white; }
     }
 }
 
-/* 2. Animation : Ça vient de la DROITE et ça glisse vers la gauche (<-) */
-/* Utilisé quand on clique sur un bouton situé à DROITE */
+/* 2. Animation : Arrive de la DROITE (de loin) */
 @keyframes slideFromRight {
     0% { 
         opacity: 0; 
-        transform: translateX(50px); /* Part de la droite */
+        /* On augmente la distance : 150px au lieu de 50px */
+        transform: translateX(150px); 
     }
     100% { 
         opacity: 1; 
@@ -407,11 +407,12 @@ footer strong { color: white; }
     }
 }
 
-/* Classes que le JavaScript va ajouter */
+/* Classes appliquées par le JavaScript */
 .slide-in-left {
-    animation: slideFromLeft 0.4s ease-out forwards;
+    /* On passe à 0.8s (au lieu de 0.4s) pour ralentir */
+    animation: slideFromLeft 0.8s ease-out forwards;
 }
 
 .slide-in-right {
-    animation: slideFromRight 0.4s ease-out forwards;
+    animation: slideFromRight 0.8s ease-out forwards;
 }
