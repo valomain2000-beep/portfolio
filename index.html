@@ -1,679 +1,173 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Ben Lanne — SISR</title>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
-    <style>
-        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        :root {
-            /* Tes couleurs strictes conservées */
-            --bg: #04080f;
-            --blue: #0ea5e9;
-            --teal: #2dd4bf;
-            --indigo: #818cf8;
-            --text: #e2eeff;
-            --muted: #64748b; /* Légèrement éclairci pour une meilleure lisibilité */
-            --card: rgba(14, 165, 233, 0.03);
-            --card-hover: rgba(14, 165, 233, 0.08);
-            --border: rgba(14, 165, 233, 0.15);
-            --border-hover: rgba(45, 212, 191, 0.4);
-        }
-
-        html { scroll-behavior: smooth; }
-        
-        body {
-            background: var(--bg);
-            color: var(--text);
-            font-family: 'Space Grotesk', sans-serif;
-            overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
-        
-        a { text-decoration: none; color: inherit; }
-        canvas { display: block; }
-        
-        ::selection { background: var(--blue); color: var(--bg); }
-
-        #preloader {
-            position: fixed; inset: 0; z-index: 1000;
-            background: var(--bg);
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-            transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), visibility 0.8s;
-        }
-        #preloader.done { opacity: 0; visibility: hidden; pointer-events: none; }
-        
-        .pre-bar-wrap {
-            width: 280px; height: 2px;
-            background: rgba(255, 255, 255, 0.05);
-            margin-top: 2rem; position: relative; overflow: hidden;
-            border-radius: 2px;
-        }
-        .pre-bar {
-            height: 100%; width: 0%;
-            background: linear-gradient(90deg, transparent, var(--blue), var(--teal));
-            transition: width 0.05s linear;
-            box-shadow: 0 0 10px var(--blue);
-        }
-        .pre-text {
-            font-family: 'Space Mono', monospace; font-size: 0.75rem;
-            color: var(--blue); letter-spacing: 0.2em; text-transform: uppercase;
-            text-shadow: 0 0 10px rgba(14, 165, 233, 0.3);
-        }
-        .pre-pct {
-            font-family: 'Space Mono', monospace; font-size: 0.7rem;
-            color: var(--muted); margin-top: 1rem; letter-spacing: 0.15em;
-        }
-
-        .wrap {
-            position: relative; z-index: 1;
-            max-width: 900px; /* Un peu plus large pour laisser respirer le contenu */
-            margin: 0 auto; padding: 0 2rem;
-        }
-
-        nav {
-            position: fixed; top: 0; width: 100%; z-index: 100;
-            padding: 1.2rem 0;
-            backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-            background: rgba(4, 8, 15, 0.75);
-            border-bottom: 1px solid var(--border);
-            opacity: 0; transform: translateY(-20px);
-            transition: opacity 0.8s 2.8s ease-out, transform 0.8s 2.8s ease-out;
-        }
-        nav.show { opacity: 1; transform: none; }
-        
-        .nav-inner {
-            max-width: 900px; margin: 0 auto; padding: 0 2rem;
-            display: flex; justify-content: space-between; align-items: center;
-        }
-        .nlogo {
-            font-family: 'Space Mono', monospace; font-size: 0.85rem; font-weight: 700;
-            color: var(--blue); letter-spacing: 0.1em;
-            text-shadow: 0 0 15px rgba(14, 165, 233, 0.4);
-        }
-        .nlinks { display: flex; gap: 2.5rem; list-style: none; }
-        .nlinks a {
-            font-family: 'Space Mono', monospace; font-size: 0.75rem;
-            color: var(--muted); letter-spacing: 0.05em; text-transform: uppercase;
-            transition: color 0.3s;
-        }
-        .nlinks a:hover { color: var(--text); }
-        
-        .ncv {
-            font-family: 'Space Mono', monospace; font-size: 0.75rem;
-            color: var(--teal); border: 1px solid rgba(45, 212, 191, 0.3);
-            padding: 0.5rem 1rem; border-radius: 4px;
-            transition: all 0.3s ease; display: flex; align-items: center; gap: 0.5rem;
-        }
-        .ncv:hover {
-            background: rgba(45, 212, 191, 0.1);
-            box-shadow: 0 0 20px rgba(45, 212, 191, 0.2);
-            border-color: var(--teal);
-        }
-
-        #hero {
-            min-height: 100vh; display: flex; align-items: center;
-            padding: 8rem 0 5rem;
-        }
-        .hero-inner { width: 100%; }
-        
-        .h-eyebrow {
-            display: flex; align-items: center; gap: 0.8rem;
-            font-family: 'Space Mono', monospace; font-size: 0.75rem;
-            color: var(--blue); letter-spacing: 0.15em; text-transform: uppercase;
-            margin-bottom: 2.5rem;
-            opacity: 0; animation: fadeUp 0.8s 2.9s forwards cubic-bezier(0.22, 1, 0.36, 1);
-        }
-        .h-dot {
-            width: 8px; height: 8px; border-radius: 50%;
-            background: var(--blue);
-            box-shadow: 0 0 12px var(--blue), 0 0 24px rgba(14, 165, 233, 0.4);
-            animation: glow 2s ease-in-out infinite;
-        }
-        @keyframes glow {
-            0%, 100% { box-shadow: 0 0 8px var(--blue); }
-            50% { box-shadow: 0 0 20px var(--blue), 0 0 40px rgba(14, 165, 233, 0.5); }
-        }
-
-        .h-name {
-            font-size: clamp(3.5rem, 8vw, 6.5rem); font-weight: 700;
-            line-height: 0.95; letter-spacing: -0.04em; color: #ffffff;
-            margin-bottom: 1.5rem; overflow: hidden;
-        }
-        .h-name .word { display: inline-block; opacity: 0; transform: translateY(100%); animation: wordUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
-        .h-name .w1 { animation-delay: 3s; }
-        .h-name .w2 {
-            animation-delay: 3.15s; color: transparent;
-            -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.4);
-        }
-        @keyframes wordUp { to { opacity: 1; transform: none; } }
-
-        .h-role {
-            font-size: clamp(1.2rem, 3vw, 1.8rem); font-weight: 300;
-            color: var(--muted); letter-spacing: 0.02em; margin-bottom: 2.5rem;
-            opacity: 0; animation: fadeUp 0.8s 3.4s forwards; line-height: 1.4;
-        }
-        .h-role span { color: var(--teal); font-weight: 500; }
-
-        .h-desc {
-            font-size: 1rem; color: rgba(226, 238, 255, 0.65);
-            max-width: 500px; line-height: 1.8; margin-bottom: 3.5rem;
-            opacity: 0; animation: fadeUp 0.8s 3.55s forwards;
-            border-left: 2px solid rgba(14, 165, 233, 0.3); padding-left: 1.5rem;
-        }
-
-        .h-btns {
-            display: flex; align-items: center; gap: 2rem; flex-wrap: wrap;
-            opacity: 0; animation: fadeUp 0.8s 3.7s forwards;
-        }
-        .btn-main {
-            font-family: 'Space Grotesk', sans-serif; font-size: 0.9rem; font-weight: 600;
-            padding: 0.8rem 2rem; border-radius: 6px;
-            background: linear-gradient(135deg, var(--blue), var(--teal));
-            color: var(--bg); position: relative; overflow: hidden;
-            transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s;
-        }
-        .btn-main::before {
-            content: ''; position: absolute; inset: 0;
-            background: linear-gradient(135deg, var(--teal), var(--blue));
-            opacity: 0; transition: opacity 0.3s;
-        }
-        .btn-main:hover {
-            box-shadow: 0 10px 30px rgba(14, 165, 233, 0.4);
-        }
-        .btn-main span { position: relative; z-index: 1; display: flex; align-items: center; gap: 0.5rem; }
-        
-        .btn-link {
-            font-family: 'Space Mono', monospace; font-size: 0.85rem;
-            color: var(--muted); display: flex; align-items: center; gap: 0.6rem;
-            transition: color 0.3s; text-transform: uppercase; letter-spacing: 0.05em;
-        }
-        .btn-link:hover { color: var(--text); }
-        .btn-link .aw { transition: transform 0.3s; color: var(--teal); }
-        .btn-link:hover .aw { transform: translateX(5px); }
-
-        .h-scroll {
-            position: absolute; bottom: 1rem; left: 50%; transform: translateX(-50%);
-            display: flex; flex-direction: column; align-items: center; gap: 0.8rem;
-            opacity: 0; animation: fadeUp 0.8s 4.2s forwards;
-        }
-        .h-scroll span {
-            font-family: 'Space Mono', monospace; font-size: 0.65rem;
-            color: var(--muted); letter-spacing: 0.2em; text-transform: uppercase;
-        }
-        .scroll-mouse {
-            width: 24px; height: 38px; border: 1.5px solid rgba(14, 165, 233, 0.3);
-            border-radius: 12px; display: flex; justify-content: center; padding-top: 6px;
-        }
-        .scroll-wheel {
-            width: 3px; height: 6px; background: var(--blue); border-radius: 2px;
-            animation: scrollW 2s cubic-bezier(0.68, -0.55, 0.26, 1.55) infinite;
-        }
-        @keyframes scrollW {
-            0% { transform: translateY(0); opacity: 1; }
-            80% { transform: translateY(12px); opacity: 0; }
-            100% { transform: translateY(0); opacity: 0; }
-        }
-
-        @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: none; }
-        }
-
-        .hdiv {
-            height: 1px; width: 100%;
-            background: linear-gradient(90deg, transparent, var(--border), transparent);
-            margin: 0;
-        }
-
-        .sec { padding: 7rem 0; }
-        .slabel {
-            font-family: 'Space Mono', monospace; font-size: 0.75rem;
-            letter-spacing: 0.2em; text-transform: uppercase;
-            color: var(--blue); margin-bottom: 1.5rem; opacity: 0.8;
-            display: flex; align-items: center; gap: 1rem;
-        }
-        .slabel::after {
-            content: ''; height: 1px; width: 40px; background: var(--blue); opacity: 0.5;
-        }
-        .stitle {
-            font-size: clamp(2rem, 5vw, 3rem); font-weight: 700;
-            letter-spacing: -0.03em; color: #ffffff;
-            margin-bottom: 0.5rem; line-height: 1.1;
-        }
-        .stitle .dim { font-weight: 300; color: rgba(255, 255, 255, 0.2); }
-
-        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; margin-top: 4rem; }
-        .about-p { font-size: 0.95rem; color: rgba(226, 238, 255, 0.7); line-height: 1.9; }
-        .about-p strong { color: #ffffff; font-weight: 500; }
-        .about-p + .about-p { margin-top: 1.2rem; }
-
-        .skill-list { display: flex; flex-direction: column; gap: 1.5rem; }
-        .sk-top { display: flex; justify-content: space-between; margin-bottom: 0.6rem; }
-        .sk-name { font-size: 0.85rem; font-weight: 500; color: var(--text); }
-        .sk-val { font-family: 'Space Mono', monospace; font-size: 0.75rem; color: var(--teal); }
-        .sk-track { height: 3px; background: rgba(255, 255, 255, 0.05); border-radius: 2px; overflow: hidden; }
-        .sk-fill {
-            height: 100%; border-radius: 2px;
-            background: linear-gradient(90deg, var(--blue), var(--teal));
-            transform: scaleX(0); transform-origin: left;
-            transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
-        }
-        .sk-fill.on { transform: scaleX(1); }
-
-        .tags { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 2.5rem; }
-        .t {
-            font-family: 'Space Mono', monospace; font-size: 0.7rem;
-            color: rgba(14, 165, 233, 0.8); background: rgba(14, 165, 233, 0.05);
-            border: 1px solid rgba(14, 165, 233, 0.2);
-            padding: 0.4rem 0.8rem; border-radius: 4px; letter-spacing: 0.05em;
-            transition: all 0.3s ease; cursor: default;
-        }
-        .t:hover {
-            color: var(--blue); border-color: var(--blue);
-            background: rgba(14, 165, 233, 0.15); box-shadow: 0 0 15px rgba(14, 165, 233, 0.2);
-        }
-
-        .pgrid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem; margin-top: 4rem;
-        }
-        .pcard {
-            background: var(--card); border: 1px solid var(--border);
-            padding: 2.5rem; border-radius: 12px;
-            position: relative; overflow: hidden;
-            transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-            cursor: crosshair; /* Curseur technique */
-        }
-        .pcard::before {
-            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(800px circle at var(--mouse-x, 0) var(--mouse-y, 0), rgba(14, 165, 233, 0.06), transparent 40%);
-            opacity: 0; transition: opacity 0.3s; z-index: 0; pointer-events: none;
-        }
-        .pcard:hover {
-            background: var(--card-hover); border-color: var(--border-hover);
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(14, 165, 233, 0.1);
-        }
-        .pcard:hover::before { opacity: 1; }
-        
-        .pcard > * { position: relative; z-index: 1; }
-        .pn {
-            font-family: 'Space Mono', monospace; font-size: 0.7rem;
-            color: rgba(14, 165, 233, 0.5); margin-bottom: 1.5rem; letter-spacing: 0.15em;
-            display: flex; justify-content: space-between; align-items: center;
-        }
-        .pn::after {
-            content: 'SYS_REQ'; font-size: 0.55rem; background: rgba(14, 165, 233, 0.1);
-            padding: 0.2rem 0.5rem; border-radius: 2px; color: var(--blue);
-        }
-        .pico { font-size: 2rem; margin-bottom: 1.5rem; display: block; line-height: 1; text-shadow: 0 0 10px rgba(255,255,255,0.2); }
-        .pttl { font-size: 1.2rem; font-weight: 600; color: #ffffff; margin-bottom: 0.8rem; }
-        .pdsc { font-size: 0.85rem; color: rgba(226, 238, 255, 0.55); line-height: 1.8; margin-bottom: 2rem; }
-        
-        .ptgs { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: auto; }
-        .ptg {
-            font-family: 'Space Mono', monospace; font-size: 0.65rem;
-            color: var(--teal); background: rgba(45, 212, 191, 0.05);
-            border: 1px solid rgba(45, 212, 191, 0.15);
-            padding: 0.2rem 0.6rem; border-radius: 4px;
-        }
-
-        .tl { margin-top: 4rem; position: relative; padding-left: 2rem; }
-        .tl::before {
-            content: ''; position: absolute; left: 0; top: 0.5rem; bottom: 0.5rem; width: 1px;
-            background: linear-gradient(to bottom, var(--blue), var(--teal), transparent);
-            opacity: 0.3;
-        }
-        .tl-row {
-            padding-bottom: 3.5rem; position: relative;
-            opacity: 0; transform: translateX(-20px);
-            transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s;
-        }
-        .tl-row.on { opacity: 1; transform: none; }
-        .tl-row::before {
-            content: ''; position: absolute;
-            left: -2.25rem; top: 0.4rem;
-            width: 10px; height: 10px; border-radius: 50%;
-            background: var(--bg); border: 2px solid var(--blue);
-            box-shadow: 0 0 12px rgba(14, 165, 233, 0.5);
-            transition: all 0.3s;
-        }
-        .tl-row:hover::before { background: var(--blue); transform: scale(1.2); }
-        
-        .tld { font-family: 'Space Mono', monospace; font-size: 0.75rem; color: var(--teal); margin-bottom: 0.6rem; letter-spacing: 0.1em; }
-        .tlt { font-size: 1.1rem; font-weight: 600; color: #ffffff; margin-bottom: 0.4rem; }
-        .tls { font-size: 0.9rem; color: rgba(226, 238, 255, 0.5); line-height: 1.6; max-width: 600px; }
-
-        .ct-big {
-            font-size: clamp(2rem, 6vw, 4.5rem); font-weight: 700;
-            letter-spacing: -0.04em; color: #ffffff;
-            display: inline-block; margin: 3rem 0;
-            background: linear-gradient(135deg, #ffffff 20%, var(--teal));
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-            transition: opacity 0.3s, transform 0.3s;
-        }
-        .ct-big:hover { opacity: 0.8; transform: translateX(10px); }
-        
-        .ct-links { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1rem; }
-        .ct-l {
-            font-family: 'Space Grotesk', sans-serif; font-size: 0.85rem; font-weight: 500;
-            color: rgba(226, 238, 255, 0.7);
-            border: 1px solid var(--border); background: var(--card);
-            padding: 0.8rem 1.5rem; border-radius: 6px;
-            display: flex; align-items: center; gap: 0.6rem;
-            transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
-        }
-        .ct-l svg { width: 16px; height: 16px; fill: currentColor; flex-shrink: 0; transition: transform 0.3s; }
-        .ct-l:hover {
-            color: #ffffff; border-color: var(--blue);
-            background: rgba(14, 165, 233, 0.1); box-shadow: 0 5px 15px rgba(14, 165, 233, 0.15);
-            transform: translateY(-2px);
-        }
-        .ct-l:hover svg { transform: scale(1.1); color: var(--blue); }
-
-        footer {
-            padding: 3rem 0; border-top: 1px solid var(--border);
-            display: flex; justify-content: space-between; align-items: center;
-            font-family: 'Space Mono', monospace; font-size: 0.7rem; color: var(--muted);
-            letter-spacing: 0.1em;
-        }
-        .f-status { display: flex; align-items: center; gap: 0.5rem; color: var(--teal); }
-        .f-status::before {
-            content: ''; width: 6px; height: 6px; border-radius: 50%;
-            background: var(--teal); box-shadow: 0 0 8px var(--teal);
-            animation: pulse 2s infinite;
-        }
-        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
-
-        .rv { opacity: 0; transform: translateY(30px); transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1); }
-        .rv.on { opacity: 1; transform: none; }
-
-        @media(max-width: 768px) {
-            .about-grid { grid-template-columns: 1fr; gap: 3rem; }
-            .nlinks { display: none; }
-            footer { flex-direction: column; gap: 1.5rem; text-align: center; }
-            .wrap { padding: 0 1.5rem; }
-            .h-btns { flex-direction: column; align-items: flex-start; gap: 1.5rem; }
-            .pgrid { grid-template-columns: 1fr; }
-        }
-    </style>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Ben Lanne — SISR</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="style.css"/>
 </head>
 <body>
 
-    <div id="preloader">
-        <div class="pre-text" id="pre-msg">INITIALISATION DU SYSTÈME</div>
-        <div class="pre-bar-wrap"><div class="pre-bar" id="pre-bar"></div></div>
-    <div class="pre-pct" id="pre-pct">0%</div>
+<!-- PRELOADER -->
+<div id="preloader">
+  <div class="pre-text" id="pre-msg">INITIALISATION DU SYSTÈME</div>
+  <div class="pre-bar-wrap"><div class="pre-bar" id="pre-bar"></div></div>
+  <div class="pre-pct" id="pre-pct">0%</div>
 </div>
 
+<!-- NAV -->
 <nav id="nav">
-    <div class="nav-inner">
-            <span class="nlogo">BL_SYS</span>
-            <ul class="nlinks">
-                <li><a href="#about">Profil</a></li>
-                <li><a href="#projets">Projets</a></li>
-                <li><a href="#parcours">Parcours</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-            <a href="https://valomain2000-beep.github.io/portfolio/fichiers/CV BEN LANNE.pdf" class="ncv" target="_blank">CV.pdf →</a>
+  <div class="nav-inner">
+    <span class="nlogo">BL_SYS</span>
+    <ul class="nlinks">
+      <li><a href="#about">Profil</a></li>
+      <li><a href="#projets">Projets</a></li>
+      <li><a href="#veille">Veille</a></li>
+      <li><a href="#parcours">Parcours</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a href="https://valomain2000-beep.github.io/portfolio/fichiers/CV BEN LANNE.pdf" class="ncv" target="_blank">CV.pdf →</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="wrap">
+  <section id="hero" style="position:relative">
+    <div class="hero-inner">
+      <div class="h-eyebrow"><span class="h-dot"></span>BTS SIO — Option SISR · Disponible</div>
+      <h1 class="h-name">
+        <span class="word w1">Ben&nbsp;</span><span class="word w2">Lanne</span>
+      </h1>
+      <p class="h-role">Administrateur <span>Systèmes</span> &amp; <span>Réseaux</span></p>
+      <p class="h-desc">Passionné par la cybersécurité et les infrastructures réseau. Je déploie et sécurise des environnements d'entreprise — du pare-feu au cluster haute disponibilité.</p>
+      <div class="h-btns">
+        <a href="#projets" class="btn-main"><span>Voir mes projets →</span></a>
+        <a href="#contact" class="btn-link">Me contacter <span class="aw">→</span></a>
+      </div>
+    </div>
+    <div class="h-scroll">
+      <div class="scroll-mouse"><div class="scroll-wheel"></div></div>
+      <span>Défiler</span>
+    </div>
+  </section>
+</div>
+
+<div class="hdiv"></div>
+
+<!-- ABOUT -->
+<div class="wrap">
+  <section class="sec rv" id="about">
+    <div class="slabel">01 — Profil</div>
+    <h2 class="stitle">Qui suis-je <span class="dim">/ About</span></h2>
+    <div class="about-grid">
+      <div>
+        <p class="about-p">Étudiant en BTS SIO option SISR, je me spécialise dans l'administration <strong>Windows Server</strong>, la virtualisation sous <strong>Proxmox</strong> et la sécurisation d'infrastructures avec <strong>pfSense</strong>.</p>
+        <p class="about-p">Chaque projet est documenté et conduit de l'architecture jusqu'en production. Mon objectif : une certification cybersécurité.</p>
+        <div class="tags" style="margin-top:1.8rem">
+          <span class="t">Active Directory</span><span class="t">Windows Server</span>
+          <span class="t">Cisco</span><span class="t">VLANs</span><span class="t">pfSense</span>
+          <span class="t">Proxmox</span><span class="t">Ceph</span><span class="t">GLPI</span>
+          <span class="t">SNMP</span><span class="t">Linux</span><span class="t">GPO</span>
         </div>
-    </nav>
+      </div>
+      <div class="skill-list">
+        <div class="sk-item"><div class="sk-top"><span class="sk-name">Windows Server / AD</span><span class="sk-val">88%</span></div><div class="sk-track"><div class="sk-fill" style="width:88%"></div></div></div>
+        <div class="sk-item"><div class="sk-top"><span class="sk-name">Cisco / Réseaux</span><span class="sk-val">82%</span></div><div class="sk-track"><div class="sk-fill" style="width:82%"></div></div></div>
+        <div class="sk-item"><div class="sk-top"><span class="sk-name">pfSense / Firewall</span><span class="sk-val">80%</span></div><div class="sk-track"><div class="sk-fill" style="width:80%"></div></div></div>
+        <div class="sk-item"><div class="sk-top"><span class="sk-name">Linux / Bash</span><span class="sk-val">75%</span></div><div class="sk-track"><div class="sk-fill" style="width:75%"></div></div></div>
+        <div class="sk-item"><div class="sk-top"><span class="sk-name">Proxmox / Virtualisation</span><span class="sk-val">78%</span></div><div class="sk-track"><div class="sk-fill" style="width:78%"></div></div></div>
+        <div class="sk-item"><div class="sk-top"><span class="sk-name">Cybersécurité</span><span class="sk-val">70%</span></div><div class="sk-track"><div class="sk-fill" style="width:70%"></div></div></div>
+      </div>
+    </div>
+  </section>
+</div>
 
-    <div class="wrap">
-        <section id="hero" style="position:relative">
-            <div class="hero-inner">
-                <div class="h-eyebrow"><span class="h-dot"></span>BTS SIO — Option SISR · Disponible</div>
-                <h1 class="h-name">
-                    <span class="word w1">Ben&nbsp;</span><span class="word w2">Lanne</span>
-                </h1>
-                <p class="h-role">Administrateur <span>Systèmes</span> &amp; <span>Réseaux</span></p>
-                <p class="h-desc">Passionné par la cybersécurité et la résilience des infrastructures. Je conçois, déploie et sécurise des environnements d'entreprise de bout en bout — du pare-feu au cluster haute disponibilité.</p>
-                <div class="h-btns">
-                    <a href="#projets" class="btn-main"><span>Voir mes déploiements →</span></a>
-                    <a href="#contact" class="btn-link">Établir la connexion <span class="aw">→</span></a>
-                </div>
-            </div>
-            <div class="h-scroll">
-                <div class="scroll-mouse"><div class="scroll-wheel"></div></div>
-                <span>Défiler</span>
-            </div>
-        </section>
+<div class="hdiv"></div>
+
+<!-- PROJECTS -->
+<div class="wrap">
+  <section class="sec rv" id="projets">
+    <div class="slabel">02 — Réalisations</div>
+    <h2 class="stitle">Projets <span class="dim">/ Work</span></h2>
+    <div class="pgrid">
+      <div class="pcard"><div class="pn">01</div><span class="pico">🖧</span><div class="pttl">Active Directory</div><div class="pdsc">Déploiement Windows Server complet — GPO, OUs, gestion des comptes utilisateurs en domaine.</div><div class="ptgs"><span class="ptg">Windows Server</span><span class="ptg">GPO</span><span class="ptg">DNS</span></div></div>
+      <div class="pcard"><div class="pn">02</div><span class="pico">🔀</span><div class="pttl">VLANs & Cisco</div><div class="pdsc">Segmentation réseau sur switch Catalyst. Trunks 802.1Q, inter-VLAN routing et ACL.</div><div class="ptgs"><span class="ptg">Cisco</span><span class="ptg">Packet Tracer</span><span class="ptg">802.1Q</span></div></div>
+      <div class="pcard"><div class="pn">03</div><span class="pico">🛡</span><div class="pttl">Pare-feu pfSense</div><div class="pdsc">Filtrage stateful, NAT/PAT et portail captif pour l'authentification des utilisateurs wifi.</div><div class="ptgs"><span class="ptg">pfSense</span><span class="ptg">NAT</span><span class="ptg">Captive portal</span></div></div>
+      <div class="pcard"><div class="pn">04</div><span class="pico">⚡</span><div class="pttl">Cluster HA</div><div class="pdsc">Haute disponibilité sur Proxmox VE avec stockage distribué Ceph. Bascule automatique.</div><div class="ptgs"><span class="ptg">Proxmox</span><span class="ptg">Ceph</span><span class="ptg">Linux</span></div></div>
+      <div class="pcard"><div class="pn">05</div><span class="pico">📡</span><div class="pttl">Supervision SNMP</div><div class="pdsc">GLPI pour la gestion de parc et tickets. Monitoring réseau en temps réel via agents SNMP.</div><div class="ptgs"><span class="ptg">GLPI</span><span class="ptg">SNMP</span><span class="ptg">Monitoring</span></div></div>
+    </div>
+  </section>
+</div>
+
+<div class="hdiv"></div>
+
+<!-- VEILLE & LOGS -->
+<div class="wrap">
+  <section class="sec rv" id="veille">
+    <div class="slabel">03 — Technologique</div>
+    <h2 class="stitle">Veille & Logs <span class="dim">/ Intelligence</span></h2>
+    
+    <div class="about-grid" style="margin-bottom: 3rem;">
+      <div>
+        <p class="about-p"><strong>Veille Passive :</strong> Je m'informe quotidiennement sur les dernières vulnérabilités (CVE), les évolutions de Windows Server et les bonnes pratiques réseau via des flux RSS (BleepingComputer, CERT-FR) et des communautés spécialisées.</p>
+      </div>
+      <div>
+        <p class="about-p"><strong>Veille Active :</strong> L'information ne suffit pas. Je mets en pratique mes découvertes sur mon propre environnement de laboratoire (Homelab sous Proxmox) pour tester le déploiement de nouveaux services et la configuration d'outils de sécurité avant de les utiliser en production.</p>
+      </div>
     </div>
 
-    <div class="hdiv"></div>
-
-    <div class="wrap">
-        <section class="sec rv" id="about">
-            <div class="slabel">01 // Profil Opérationnel</div>
-            <h2 class="stitle">Capacités <span class="dim">/ Skills</span></h2>
-            <div class="about-grid">
-                <div>
-                    <p class="about-p">Étudiant en BTS SIO option SISR, j'évolue au cœur des architectures informatiques. Mon expertise couvre l'administration <strong>Windows Server</strong>, la virtualisation haute disponibilité sous <strong>Proxmox</strong>, et le durcissement réseau via <strong>pfSense</strong>.</p>
-                    <p class="about-p">J'aborde chaque infrastructure avec une logique "Secure by design", en visant toujours la scalabilité et la tolérance aux pannes. Mon objectif à terme : une expertise certifiée en cybersécurité.</p>
-                    <div class="tags">
-                        <span class="t">Active Directory</span><span class="t">Windows Server</span>
-                        <span class="t">Cisco IOS</span><span class="t">VLANs / STP</span><span class="t">pfSense</span>
-                        <span class="t">Proxmox VE</span><span class="t">Ceph HA</span><span class="t">GLPI</span>
-                        <span class="t">SNMP</span><span class="t">Linux Bash</span><span class="t">GPO</span>
-                    </div>
-                </div>
-                <div class="skill-list">
-                    <div class="sk-item"><div class="sk-top"><span class="sk-name">Windows Server / AD</span><span class="sk-val">88%</span></div><div class="sk-track"><div class="sk-fill" style="width:88%"></div></div></div>
-                    <div class="sk-item"><div class="sk-top"><span class="sk-name">Cisco (Routage/Commutation)</span><span class="sk-val">82%</span></div><div class="sk-track"><div class="sk-fill" style="width:82%"></div></div></div>
-                    <div class="sk-item"><div class="sk-top"><span class="sk-name">pfSense / Firewalling</span><span class="sk-val">80%</span></div><div class="sk-track"><div class="sk-fill" style="width:80%"></div></div></div>
-                    <div class="sk-item"><div class="sk-top"><span class="sk-name">Proxmox / Virtualisation HA</span><span class="sk-val">78%</span></div><div class="sk-track"><div class="sk-fill" style="width:78%"></div></div></div>
-                    <div class="sk-item"><div class="sk-top"><span class="sk-name">Linux / Bash Scripting</span><span class="sk-val">75%</span></div><div class="sk-track"><div class="sk-fill" style="width:75%"></div></div></div>
-                </div>
-            </div>
-        </section>
+    <div style="text-align: center; margin-top: 2rem;">
+      <a href="notes.html" class="btn-main" target="_blank" style="display: inline-block;"><span>Accéder à mes notes d'entreprise →</span></a>
     </div>
+  </section>
+</div>
 
-    <div class="hdiv"></div>
+<div class="hdiv"></div>
 
-    <div class="wrap">
-        <section class="sec rv" id="projets">
-            <div class="slabel">02 // Déploiements</div>
-            <h2 class="stitle">Missions <span class="dim">/ Logs</span></h2>
-            <div class="pgrid">
-                
-                <div class="pcard">
-                    <div class="pn">SYS.01</div>
-                    <span class="pico">🖧</span>
-                    <div class="pttl">Arborescence Active Directory</div>
-                    <div class="pdsc">Déploiement d'un domaine Windows Server complet. Structuration des OUs, application de stratégies GPO restrictives et gestion centralisée des accès.</div>
-                    <div class="ptgs"><span class="ptg">Windows Server</span><span class="ptg">GPO</span><span class="ptg">AD DS</span></div>
-                </div>
-                
-                <div class="pcard">
-                    <div class="pn">NET.02</div>
-                    <span class="pico">🔀</span>
-                    <div class="pttl">Segmentation Cisco</div>
-                    <div class="pdsc">Configuration de commutateurs Catalyst. Création de trunks 802.1Q, implémentation du protocole STP et routage inter-VLAN (Router-on-a-Stick).</div>
-                    <div class="ptgs"><span class="ptg">Cisco IOS</span><span class="ptg">802.1Q</span><span class="ptg">VLANs</span></div>
-                </div>
-                
-                <div class="pcard">
-                    <div class="pn">SEC.03</div>
-                    <span class="pico">🛡</span>
-                    <div class="pttl">Gateway & Firewall pfSense</div>
-                    <div class="pdsc">Architecture sécurisée incluant filtrage stateful, gestion stricte des règles NAT/PAT, et déploiement d'un portail captif pour le réseau Guest.</div>
-                    <div class="ptgs"><span class="ptg">pfSense</span><span class="ptg">NAT/PAT</span><span class="ptg">Captive Portal</span></div>
-                </div>
-                
-                <div class="pcard">
-                    <div class="pn">SYS.04</div>
-                    <span class="pico">⚡</span>
-                    <div class="pttl">Cluster Haute Disponibilité</div>
-                    <div class="pdsc">Mise en production d'un cluster HA sur Proxmox VE couplé à un stockage distribué Ceph. Bascule automatique des VMs validée en test de panne.</div>
-                    <div class="ptgs"><span class="ptg">Proxmox</span><span class="ptg">Ceph HA</span><span class="ptg">Debian</span></div>
-                </div>
-                
-                <div class="pcard">
-                    <div class="pn">MON.05</div>
-                    <span class="pico">📡</span>
-                    <div class="pttl">Supervision SNMP & GLPI</div>
-                    <div class="pdsc">Mise en place d'un outil de gestion de parc et Helpdesk (GLPI). Monitoring proactif du réseau en temps réel via des requêtes SNMP.</div>
-                    <div class="ptgs"><span class="ptg">GLPI</span><span class="ptg">SNMP</span><span class="ptg">Monitoring</span></div>
-                </div>
-                
-                <div class="pcard" style="border-style: dashed; background: transparent;">
-                    <div class="pn">SYS.WIP</div>
-                    <span class="pico" style="opacity: 0.5;">🔬</span>
-                    <div class="pttl" style="color: var(--muted)">En cours d'investigation...</div>
-                    <div class="pdsc">De nouvelles architectures sont actuellement en test dans mon lab. Consultez mon journal de bord pour suivre l'évolution.</div>
-                    <div class="ptgs"><span class="ptg" style="border-color: var(--muted); color: var(--muted)">Loading...</span></div>
-                </div>
-                
-            </div>
-        </section>
+<!-- PARCOURS -->
+<div class="wrap">
+  <section class="sec rv" id="parcours">
+    <div class="slabel">04 — Parcours</div>
+    <h2 class="stitle">Mon chemin <span class="dim">/ Timeline</span></h2>
+    <div class="tl">
+      <div class="tl-row"><div class="tld">Futur Proche</div><div class="tlt">Spécialisation & Certification</div><div class="tls">Objectif d'approfondir les compétences en Cybersécurité et architecture Cloud</div></div>
+      <div class="tl-row"><div class="tld">2023 → Aujourd'hui</div><div class="tlt">BTS SIO — Option SISR</div><div class="tls">Réseaux, systèmes, cybersécurité et virtualisation</div></div>
+      <div class="tl-row"><div class="tld">2023</div><div class="tlt">Stages en entreprise</div><div class="tls">Interventions réseau, support N2, gestion de parc informatique</div></div>
+      <div class="tl-row"><div class="tld">2021 → 2023</div><div class="tlt">Baccalauréat — Spécialité NSI</div><div class="tls">Algorithmique, réseaux et premiers pas en programmation</div></div>
     </div>
+  </section>
+</div>
 
-    <div class="hdiv"></div>
+<div class="hdiv"></div>
 
-    <div class="wrap">
-        <section class="sec rv" id="parcours">
-            <div class="slabel">03 // Historique</div>
-            <h2 class="stitle">Parcours <span class="dim">/ Timeline</span></h2>
-            <div class="tl">
-                <div class="tl-row">
-                    <div class="tld">Futur Proche</div>
-                    <div class="tlt">Expertise Cybersécurité & Infrastructure</div>
-                    <div class="tls">Poursuite vers un cursus de spécialisation (Bachelor/Master) ou intégration d'une équipe d'exploitation. Objectif : approfondir l'automatisation, la sécurité des architectures complexes et valider des certifications reconnues (Cisco, Fortinet, etc.).</div>
-                </div>
-                <div class="tl-row">
-                    <div class="tld">2023 → Aujourd'hui</div>
-                    <div class="tlt">BTS SIO — Option SISR</div>
-                    <div class="tls">Formation intensive spécialisée en Solutions d'Infrastructure, Systèmes et Réseaux. Apprentissage approfondi de la virtualisation, du routage avancé et de la cybersécurité.</div>
-                </div>
-                <div class="tl-row">
-                    <div class="tld">2023</div>
-                    <div class="tlt">Stages d'Immersion en Entreprise</div>
-                    <div class="tls">Interventions directes sur site : brassage baie de brassage, support utilisateur N1/N2, déploiement de postes et découverte approfondie des outils de gestion de parc informatique (GLPI).</div>
-                </div>
-                <div class="tl-row">
-                    <div class="tld">2021 → 2023</div>
-                    <div class="tlt">Baccalauréat — Spécialité NSI</div>
-                    <div class="tls">Numérique et Sciences Informatiques. Bases solides en algorithmique, compréhension de l'architecture matérielle, des réseaux fondamentaux et premiers scripts.</div>
-                </div>
-            </div>
-        </section>
+<!-- CONTACT -->
+<div class="wrap">
+  <section class="sec rv" id="contact">
+    <div class="slabel">05 — Contact</div>
+    <h2 class="stitle">Travaillons ensemble <span class="dim">/ Let's talk</span></h2>
+    <p style="font-size:.88rem;color:rgba(226,238,255,.4);max-width:420px;margin-top:1rem;line-height:1.8">Disponible pour un stage ou une alternance. N'hésitez pas à m'écrire.</p>
+    <a href="mailto:BenLanne2005@gmail.com" class="ct-big">BenLanne2005@gmail.com</a>
+    <div class="ct-links">
+      <a href="https://github.com/valomain2000-beep" class="ct-l" target="_blank">
+        <svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+        GitHub
+      </a>
+      <a href="https://valomain2000-beep.github.io/portfolio/fichiers/CV BEN LANNE.pdf" class="ct-l" target="_blank">
+        <svg viewBox="0 0 24 24"><path d="M12 16l4-5h-3V4h-2v7H8l4 5zm-6 2v2h12v-2H6z"/></svg>
+        Télécharger CV
+      </a>
     </div>
+  </section>
+</div>
 
-    <div class="hdiv"></div>
+<div class="wrap">
+  <footer>
+    <span>BEN LANNE © 2025</span>
+    <span>GitHub Pages</span>
+  </footer>
+</div>
 
-    <div class="wrap">
-        <section class="sec rv" id="contact">
-            <div class="slabel">04 // Transmission</div>
-            <h2 class="stitle">Travaillons ensemble <span class="dim">/ Link up</span></h2>
-            <p style="font-size: 0.95rem; color: rgba(226, 238, 255, 0.6); max-width: 500px; margin-top: 1.5rem; line-height: 1.8;">
-                Mon port est ouvert. Je suis actuellement à la recherche d'une opportunité d'alternance ou de stage pour mettre en pratique mes compétences sur des infrastructures critiques.
-            </p>
-            
-            <a href="mailto:BenLanne2005@gmail.com" class="ct-big">BenLanne2005@gmail.com</a>
-            
-            <div class="ct-links">
-                <a href="https://github.com/valomain2000-beep" class="ct-l" target="_blank">
-                    <svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
-                    Dépôt GitHub
-                </a>
-                <a href="https://valomain2000-beep.github.io/portfolio/notes.html" class="ct-l" target="_blank">
-                    <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm4 18H6V4h7v5h5v11z"/></svg>
-                    Notes d'entreprise
-                </a>
-                <a href="https://valomain2000-beep.github.io/portfolio/fichiers/CV BEN LANNE.pdf" class="ct-l" target="_blank">
-                    <svg viewBox="0 0 24 24"><path d="M12 16l4-5h-3V4h-2v7H8l4 5zm-6 2v2h12v-2H6z"/></svg>
-                    Télécharger CV.pdf
-                </a>
-            </div>
-        </section>
-    </div>
-
-    <div class="wrap">
-        <footer>
-            <span>BEN LANNE © 2025</span>
-            <div class="f-status">Système Opérationnel</div>
-            <span>PORTFOLIO_SISR</span>
-        </footer>
-    </div>
-
-    <script>
-        const msgs = ['CHARGEMENT DES MODULES NOYAU...', 'ÉTABLISSEMENT DE LA CONNEXION SECURISEE...', 'VÉRIFICATION DES STRATÉGIES GPO...', 'ACCÈS AUTORISÉ.'];
-        let pct = 0, msgIdx = 0;
-        const bar = document.getElementById('pre-bar');
-        const pctEl = document.getElementById('pre-pct');
-        const msgEl = document.getElementById('pre-msg');
-        const pre = document.getElementById('preloader');
-
-        // Bloquer le scroll pendant le preload
-        document.body.style.overflowY = 'hidden';
-
-        const pInt = setInterval(() => {
-            pct += Math.random() * 4 + 1;
-            if(pct >= 100) { pct = 100; clearInterval(pInt); }
-            bar.style.width = pct + '%';
-            pctEl.textContent = Math.floor(pct) + '%';
-            
-            const mi = Math.floor(pct / 26);
-            if(mi !== msgIdx && mi < msgs.length) { 
-                msgIdx = mi; 
-                msgEl.textContent = msgs[msgIdx]; 
-            }
-            
-            if(pct >= 100) {
-            setTimeout(() => {
-                pre.classList.add('done');
-                document.getElementById('nav').classList.add('show');
-                document.body.style.overflowY = 'auto'; // Réactiver le scroll
-            }, 500);
-        }
-    }, 40);
-
-    // Animations d'apparition globales
-    const rObs = new IntersectionObserver(entries => {
-        entries.forEach(e => { if(e.isIntersecting) { e.target.classList.add('on'); rObs.unobserve(e.target); } });
-        }, { threshold: 0.15, rootMargin: "0px 0px -50px 0px" });
-        document.querySelectorAll('.rv').forEach(el => rObs.observe(el));
-
-        // Remplissage des barres de compétences en cascade
-        const skObs = new IntersectionObserver(entries => {
-            entries.forEach(e => {
-                if(e.isIntersecting) {
-                    e.target.querySelectorAll('.sk-fill').forEach((f, i) => {
-                        setTimeout(() => f.classList.add('on'), i * 150);
-                    });
-                    skObs.unobserve(e.target);
-                }
-            });
-        }, { threshold: 0.4 });
-        document.querySelectorAll('.skill-list').forEach(el => skObs.observe(el));
-
-        // Apparition de la timeline en cascade
-        const tlObs = new IntersectionObserver(entries => {
-            entries.forEach(e => {
-                if(e.isIntersecting) {
-                    e.target.querySelectorAll('.tl-row').forEach((r, i) => {
-                        setTimeout(() => r.classList.add('on'), i * 200);
-                    });
-                    tlObs.unobserve(e.target);
-                }
-            });
-        }, { threshold: 0.2 });
-    document.querySelectorAll('.tl').forEach(el => tlObs.observe(el));
-
-    // Effet de lumière dynamique sur les cartes projets
-    document.querySelectorAll('.pcard').forEach(card => {
-        card.addEventListener('mousemove', e => {
-                const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                card.style.setProperty('--mouse-x', `${x}px`);
-                card.style.setProperty('--mouse-y', `${y}px`);
-            });
-        });
-    </script>
+<script src="script.js"></script>
 </body>
 </html>
