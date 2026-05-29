@@ -1,0 +1,82 @@
+---
+layout: default
+title: "Espace Documentaire"
+body_class: no-scroll
+---
+
+<div class="notes-app">
+  
+  <aside class="notes-sidebar">
+    
+    <div class="sidebar-header">
+      <h2 class="sidebar-title">Base de connaissances</h2>
+      
+      <div class="search-box">
+        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        <input type="text" id="searchInput" placeholder="Rechercher une note..." class="search-input">
+      </div>
+    </div>
+
+    <ul class="tree-root" id="fileTree">
+      
+      <li>
+        <details>
+          <summary>📁 Comptes rendus Entreprise</summary>
+          <ul class="tree-branch">
+            <li><a href="#" class="tree-file" data-type="doc">📄 Rapport de stage Sudériane (Exemple)</a></li>
+          </ul>
+        </details>
+      </li>
+
+      <li>
+        <details>
+          <summary>📁 Téléchargements (Scripts, Word...)</summary>
+          <ul class="tree-branch">
+            <li><a href="#" class="tree-file" data-type="script">📜 Script_Backup_Proxmox.sh (Exemple)</a></li>
+          </ul>
+        </details>
+      </li>
+
+      <li>
+        <details open>
+          <summary>📡 Veille Technologique & IA</summary>
+          <ul class="tree-branch">
+            <li>
+              <details open>
+                <summary style="color: var(--teal);">🔬 Veille Active (Tests & Labs)</summary>
+                <ul class="tree-branch">
+                  {% for post in site.posts %}
+                    {% if post.category == 'Active' %}
+                      <li><a href="{{ site.baseurl }}{{ post.url }}" target="_blank" class="tree-file type-html" data-type="html">🌐 {{ post.title }}</a></li>
+                    {% endif %}
+                  {% endfor %}
+                </ul>
+              </details>
+            </li>
+            <li>
+              <details open>
+                <summary style="color: var(--accent);">📡 Veille Passive (Lectures)</summary>
+                <ul class="tree-branch">
+                  {% for post in site.posts %}
+                    {% if post.category == 'Passive' %}
+                      <li><a href="{{ site.baseurl }}{{ post.url }}" target="_blank" class="tree-file type-html" data-type="html">🌐 {{ post.title }}</a></li>
+                    {% endif %}
+                  {% endfor %}
+                </ul>
+              </details>
+            </li>
+          </ul>
+        </details>
+      </li>
+
+    </ul>
+  </aside>
+
+  <main class="notes-viewer">
+    <div id="viewer-empty" class="viewer-empty">
+      <div class="empty-icon">📂</div>
+      <h3>Sélectionnez un document</h3>
+      <p>Parcourez l'arborescence à gauche pour afficher un compte rendu, une note de veille ou un script. (Note: tes articles de veille s'ouvriront proprement dans un nouvel onglet).</p>
+    </div>
+  </main>
+</div>

@@ -1,0 +1,31 @@
+---
+layout: default
+body_class: article-body
+---
+
+<main class="article-container">
+  
+  <header class="article-header">
+    <div class="article-meta">
+      {% if page.category == 'Active' %}
+        <span class="note-badge type-active">Veille Active</span>
+      {% elsif page.category == 'Passive' %}
+        <span class="note-badge type-passive">Veille Passive</span>
+      {% else %}
+        <span class="note-badge">{{ page.category }}</span>
+      {% endif %}
+      
+      <span class="article-date">{{ page.date | date: "%d/%m/%Y" }}</span>
+    </div>
+    
+    <h1 class="article-title">{{ page.title }}</h1>
+    
+    {% if page.excerpt %}
+    <p class="article-intro">{{ page.excerpt | strip_html }}</p>
+    {% endif %}
+  </header>
+
+  <div class="article-content">
+    {{ content }}
+  </div>
+</main>
