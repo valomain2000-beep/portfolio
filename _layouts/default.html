@@ -7,6 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  
   <link rel="stylesheet" href="{{ site.baseurl }}/style.css">
 </head>
 <body class="{{ page.body_class }}">
@@ -15,7 +16,7 @@
     <a href="{{ site.baseurl }}/" class="nav-logo">BL<span>.</span></a>
     <ul class="nav-links">
       {% if page.layout == 'post' or page.url == '/notes.html' %}
-        <li><a href="{{ site.baseurl }}/notes.html" class="nav-cta" style="background: transparent; border: 1px solid var(--border); color: var(--text) !important;">← Retour à l'explorateur</a></li>
+        <li><a href="{{ site.baseurl }}/notes.html" class="nav-cta" style="background: transparent; border: 1px solid var(--border); color: var(--text) !important;">← Retour aux notes</a></li>
       {% else %}
         <li><a href="#about">Profil</a></li>
         <li><a href="#projets">Projets</a></li>
@@ -34,9 +35,6 @@
     <div class="footer-links">
       <a href="mailto:BenLanne2005@gmail.com">Email</a>
       <a href="https://github.com/valomain2000-beep" target="_blank">GitHub</a>
-      {% if page.url != '/notes.html' and page.layout != 'post' %}
-      <a href="#cv">CV</a>
-      {% endif %}
     </div>
   </footer>
 
