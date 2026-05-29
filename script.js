@@ -48,8 +48,8 @@ document.querySelectorAll('.project-card, .veille-card, .frise-item').forEach(el
 // Frise navigation buttons
 const friseScroll = document.getElementById('frise-scroll');
 document.getElementById('frise-left').addEventListener('click', () => {
-  friseScroll.scrollBy({ left: -200, behavior: 'smooth' });
+  friseScroll.scrollBy({ left: -250, behavior: 'smooth' }); // Un peu augmenté pour coller à la nouvelle largeur
 });
 document.getElementById('frise-right').addEventListener('click', () => {
-  friseScroll.scrollBy({ left: 200, behavior: 'smooth' });
+  friseScroll.scrollBy({ left: 250, behavior: 'smooth' }); // Un peu augmenté pour coller à la nouvelle largeur
 });
