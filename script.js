@@ -1,54 +1,55 @@
-/* ── PRELOADER ── */
-const msgs = ['CHARGEMENT DES MODULES...','CONNEXION AU RÉSEAU...','AUTHENTIFICATION...','BIENVENUE'];
-let pct = 0, msgIdx = 0;
-const bar = document.getElementById('pre-bar');
-const pctEl = document.getElementById('pre-pct');
-const msgEl = document.getElementById('pre-msg');
-const pre = document.getElementById('preloader');
-
-const pInt = setInterval(() => {
-  pct += Math.random() * 4 + 1;
-  if(pct >= 100) { pct = 100; clearInterval(pInt); }
-  bar.style.width = pct + '%';
-  pctEl.textContent = Math.floor(pct) + '%';
-  const mi = Math.floor(pct / 25);
-  if(mi !== msgIdx && mi < msgs.length) { msgIdx = mi; msgEl.textContent = msgs[msgIdx]; }
-  if(pct >= 100) {
-    setTimeout(() => {
-      pre.classList.add('done');
-      document.getElementById('nav').classList.add('show');
-    }, 400);
-  }
-}, 35);
-
-/* ── SCROLL REVEAL ── */
-const rObs = new IntersectionObserver(entries => {
-  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('on'); });
-}, { threshold: .1 });
-document.querySelectorAll('.rv').forEach(el => rObs.observe(el));
-
-/* ── SKILL BARS ── */
-const skObs = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if(e.isIntersecting) {
-      e.target.querySelectorAll('.sk-fill').forEach((f, i) => {
-        setTimeout(() => f.classList.add('on'), i * 100);
+// Skill bars animation
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.querySelectorAll('.skill-fill').forEach(fill => {
+        const w = fill.style.getPropertyValue('--w');
+        fill.style.transform = `scaleX(${w})`;
+        fill.classList.add('animated');
       });
-      skObs.unobserve(e.target);
     }
   });
-}, { threshold: .3 });
-document.querySelectorAll('.skill-list').forEach(el => skObs.observe(el));
+}, { threshold: 0.2 });
 
-/* ── TIMELINE STAGGER ── */
-const tlObs = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if(e.isIntersecting) {
-      e.target.querySelectorAll('.tl-row').forEach((r, i) => {
-        setTimeout(() => r.classList.add('on'), i * 150);
-      });
-      tlObs.unobserve(e.target);
+const aboutSection = document.querySelector('#about');
+if (aboutSection) observer.observe(aboutSection);
+
+// Nav active state on scroll
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
+
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => {
+    if (window.scrollY >= s.offsetTop - 120) current = s.id;
+  });
+  navLinks.forEach(a => {
+    a.style.color = a.getAttribute('href') === '#' + current ? 'var(--text)' : '';
+  });
+});
+
+// Smooth reveal on scroll
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.style.opacity = '1';
+      entry.target.style.transform = 'translateY(0)';
     }
   });
-}, { threshold: .2 });
-document.querySelectorAll('.tl').forEach(el => tlObs.observe(el));
+}, { threshold: 0.08 });
+
+document.querySelectorAll('.project-card, .veille-card, .frise-item').forEach(el => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(16px)';
+  el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+  revealObserver.observe(el);
+});
+
+// Frise navigation buttons
+const friseScroll = document.getElementById('frise-scroll');
+document.getElementById('frise-left').addEventListener('click', () => {
+  friseScroll.scrollBy({ left: -200, behavior: 'smooth' });
+});
+document.getElementById('frise-right').addEventListener('click', () => {
+  friseScroll.scrollBy({ left: 200, behavior: 'smooth' });
+});
