@@ -687,7 +687,7 @@ section {
   height: 160px; /* Hauteur fixe */
   display: flex;
   flex-direction: column;
-  justify-content: flex-start; /* Aligne le contenu en haut */
+  justify-content: center; /* Aligne le contenu en haut */
   align-items: center; /* Centre le contenu horizontalement */
   margin-top: 1.5rem;
   transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
