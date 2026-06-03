@@ -1,0 +1,7 @@
+title: "Ben Lanne — Portfolio & Notes"
+description: "Étudiant en BTS SIO, passionné par la cybersécurité."
+url: "https://valomain2000-beep.github.io"
+baseurl: "/portfolio" # Très important pour que les liens fonctionnent sur GitHub Pages
+
+# Paramètres Markdown
+markdown: kramdown
