@@ -30,7 +30,7 @@
 
 /* ASTUCE DE ZOOM GLOBAL : En passant de 16px (défaut) à 20px, 
 tout le site s'agrandit de 25% proportionnellement sans rien casser */
-html { scroll-behavior: smooth; font-size: 20px; }
+html { scroll-behavior: smooth; font-size: 18px; }
 
 body { background: var(--bg); color: var(--text); font-family: var(--font-body); font-size: 1rem; line-height: 1.7; overflow-x: hidden; }
 ::selection { background: rgba(108,99,255,0.3); }
