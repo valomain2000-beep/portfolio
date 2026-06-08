@@ -6,16 +6,23 @@
   --bg3: #16161f;
   --surface: #1c1c28;
   --surface2: #22222f;
-  --border: rgba(255,255,255,0.07);
-  --border2: rgba(255,255,255,0.12);
-  --text: #f0f0f5;
-  --text2: #9090a8;
-  --text3: #5a5a72;
-  --accent: #6c63ff;
-  --accent2: #8b83ff;
-  --accent-glow: rgba(108,99,255,0.15);
-  --teal: #2dd4bf;
-  --teal-dim: rgba(45,212,191,0.08);
+  
+  /* BORDURES : Légèrement accentuées pour mieux structurer les blocs */
+  --border: rgba(255, 255, 255, 0.12);
+  --border2: rgba(255, 255, 255, 0.20);
+  
+  /* TEXTE : Éclaircissement général pour un contraste optimal */
+  --text: #ffffff;       /* Blanc pur pour les titres principaux */
+  --text2: #b8b8d0;      /* Gris-bleu clair (anciennement #9090a8) pour les paragraphes et descriptions */
+  --text3: #8282a4;      /* Éclairci (anciennement #5a5a72) pour que les dates et badges soient parfaitement lisibles */
+  
+  /* ACCENTS : Légèrement redynamisés pour vibrer sur le fond sombre */
+  --accent: #7c75ff;
+  --accent2: #9d96ff;
+  --accent-glow: rgba(124, 117, 255, 0.18);
+  --teal: #34ecd5;
+  --teal-dim: rgba(52, 236, 213, 0.1);
+  
   --font-head: 'Syne', sans-serif;
   --font-body: 'DM Sans', sans-serif;
   --font-mono: 'Fira Code', monospace;
@@ -36,7 +43,6 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; height: var(--na
 .nav-logo { font-family: var(--font-head); font-weight: 800; font-size: 1.1rem; color: var(--text); text-decoration: none; letter-spacing: -0.02em; }
 .nav-logo span { color: var(--accent2); }
 .nav-links { display: flex; gap: 0.25rem; list-style: none; }
-/* CORRECTION ICI : Ajout de :visited et uniformisation de la couleur */
 .nav-links a, 
 .nav-links a:visited { color: var(--text); text-decoration: none; font-size: 0.875rem; padding: 0.4rem 0.8rem; border-radius: 6px; transition: color 0.2s, background 0.2s; }
 .nav-links a:hover { color: var(--accent); background: var(--surface); }
