@@ -7,16 +7,13 @@
   --surface: #1c1c28;
   --surface2: #22222f;
   
-  /* BORDURES : Épaissies pour une meilleure délimitation sur projecteur */
   --border: rgba(255, 255, 255, 0.14);
   --border2: rgba(255, 255, 255, 0.22);
   
-  /* TEXTE : Éclaircissement maximal pour un contraste parfait de loin */
   --text: #ffffff;       
-  --text2: #c5c5dd;      /* Plus clair pour éliminer la fatigue visuelle */
-  --text3: #9595ba;      /* Rehaussé pour les dates et éléments discrets */
+  --text2: #c5c5dd;
+  --text3: #9595ba;
   
-  /* ACCENTS */
   --accent: #7c75ff;
   --accent2: #9d96ff;
   --accent-glow: rgba(124, 117, 255, 0.2);
@@ -28,12 +25,14 @@
   --font-mono: 'Fira Code', monospace;
   --radius: 12px;
   --radius-lg: 20px;
-  --nav-h: 74px; /* Augmenté légèrement pour accueillir le menu plus grand */
+  --nav-h: 74px;
 }
 
-html { scroll-behavior: smooth; }
-/* ZOOM GLOBAL : Passage du texte de base de 16px à 18px */
-body { background: var(--bg); color: var(--text); font-family: var(--font-body); font-size: 18px; line-height: 1.7; overflow-x: hidden; }
+/* ASTUCE DE ZOOM GLOBAL : En passant de 16px (défaut) à 20px, 
+tout le site s'agrandit de 25% proportionnellement sans rien casser */
+html { scroll-behavior: smooth; font-size: 20px; }
+
+body { background: var(--bg); color: var(--text); font-family: var(--font-body); font-size: 1rem; line-height: 1.7; overflow-x: hidden; }
 ::selection { background: rgba(108,99,255,0.3); }
 ::-webkit-scrollbar { width: 5px; height: 5px; }
 ::-webkit-scrollbar-track { background: var(--bg); }
@@ -44,7 +43,6 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; height: var(--na
 .nav-logo { font-family: var(--font-head); font-weight: 800; font-size: 1.3rem; color: var(--text); text-decoration: none; letter-spacing: -0.02em; }
 .nav-logo span { color: var(--accent2); }
 .nav-links { display: flex; gap: 0.5rem; list-style: none; align-items: center; }
-/* Menu plus grand et plus espacé pour le clic */
 .nav-links a, 
 .nav-links a:visited { color: var(--text); text-decoration: none; font-size: 0.95rem; padding: 0.5rem 1rem; border-radius: 6px; transition: color 0.2s, background 0.2s; font-weight: 500; }
 .nav-links a:hover { color: var(--accent); background: var(--surface); }
@@ -56,14 +54,12 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; height: var(--na
 .hero-bg { position: absolute; inset: 0; z-index: 0; background: radial-gradient(ellipse 60% 50% at 70% 40%, rgba(108,99,255,0.1) 0%, transparent 60%), radial-gradient(ellipse 40% 40% at 20% 70%, rgba(45,212,191,0.06) 0%, transparent 50%); }
 .hero-grid { position: absolute; inset: 0; z-index: 0; opacity: 0.03; background-image: linear-gradient(var(--border2) 1px, transparent 1px), linear-gradient(90deg, var(--border2) 1px, transparent 1px); background-size: 60px 60px; }
 .hero-content { position: relative; z-index: 1; max-width: 800px; }
-/* Titre d'accueil massif et percutant */
 .hero-title { font-family: var(--font-head); font-size: clamp(3rem, 6.5vw, 5.5rem); font-weight: 800; line-height: 1.1; letter-spacing: -0.03em; margin-bottom: 1.75rem; animation: fadeUp 0.6s 0.1s ease both; }
 .hero-title .name { color: var(--accent2); }
 .hero-title .line2 { display: block; color: var(--text2); font-weight: 400; font-size: 0.55em; margin-top: 0.3em; }
 .hero-desc { font-size: 1.25rem; color: var(--text2); font-weight: 300; max-width: 600px; margin-bottom: 3rem; line-height: 1.8; animation: fadeUp 0.6s 0.2s ease both; }
 .hero-actions { display: flex; gap: 1.25rem; flex-wrap: wrap; animation: fadeUp 0.6s 0.3s ease both; }
 
-/* BOUTONS GENERAUX : Agrandis pour une action bien visible */
 .btn { display: inline-flex; align-items: center; gap: 0.6rem; padding: 0.85rem 1.75rem; border-radius: 8px; font-family: var(--font-body); font-size: 1rem; font-weight: 600; text-decoration: none; cursor: pointer; border: none; transition: all 0.2s; }
 .btn-primary { background: var(--accent); color: #fff; }
 .btn-primary:hover { background: var(--accent2); transform: translateY(-1px); }
