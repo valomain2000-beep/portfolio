@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Veille : Cryptographie Post-Quantique — Ben Lanne</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="article-body">
+
+  <nav>
+    <a href="index.html" class="nav-logo">BL<span>.</span></a>
+    <ul class="nav-links">
+      <li><a href="notes.html" class="nav-cta" style="background: transparent; border: 1px solid var(--border); color: var(--text) !important;">← Retour à la Veille</a></li>
+    </ul>
+  </nav>
+
+  <main class="article-container">
+    
+    <header class="article-header">
+      <div class="article-meta">
+        <span class="note-badge type-active">Cybersécurité</span>
+        <span class="article-date">Mai 2026</span>
+      </div>
+      <h1 class="article-title">Le NIST valide les standards de cryptographie Post-Quantique</h1>
+      <p class="article-intro">Face à la menace des ordinateurs quantiques capables de casser le RSA, les nouveaux algorithmes de chiffrement standardisés (PQC) sont prêts à être déployés sur nos infrastructures serveurs.</p>
+    </header>
+
+    <div class="article-content">
+      
+      <h2>1. Le constat : l'obsolescence programmée de nos clés asymétriques</h2>
+      <p>Aujourd'hui, l'essentiel de la sécurité de nos réseaux (HTTPS, VPN, SSH) repose sur des protocoles de chiffrement asymétrique comme <strong>RSA</strong> ou les courbes elliptiques (<strong>ECC</strong>). La sécurité de ces méthodes repose sur la complexité mathématique de la factorisation de grands nombres premiers.</p>
+      <p>Or, avec l'algorithme quantique de <strong>Shor</strong>, une machine quantique disposant de suffisamment de qubits logiques stables sera capable de résoudre ces calculs en quelques minutes seulement, rendant nos protections actuelles totalement caduques.</p>
+
+      <h2>2. La réponse du NIST : Les nouveaux algorithmes standardisés</h2>
+      <p>Pour contrer cette menace, le NIST (National Institute of Standards and Technology) a officialisé ses premiers standards de cryptographie post-quantique (PQC). Contrairement aux anciens systèmes, ces algorithmes reposent sur des problèmes de <strong>géométrie des réseaux euclidiens</strong>, impossibles à craquer de manière efficace par des machines classiques OU quantiques.</p>
+      <p>Les principaux algorithmes retenus sont :</p>
+      <ul>
+        <li><strong>ML-KEM (ex-Kyber) :</strong> Destiné à l'échange de clés de chiffrement (généralisation du HTTPS).</li>
+        <li><strong>ML-DSA (ex-Dilithium) :</strong> Conçu pour la signature numérique et l'authentification des certificats.</li>
+      </ul>
+
+      <h2>3. Rôle de l'administrateur d'infrastructure (Lien SIO)</h2>
+      <p>Pour un administrateur systèmes et réseaux, la transition a déjà commencé. Il ne s'agit pas de changer de matériel, mais de mettre à jour la couche logicielle de nos serveurs :</p>
+      <p>Il est désormais nécessaire d'auditer les parcs serveurs pour intégrer des implémentations <strong>hybrides</strong> (combinant par exemple RSA + ML-KEM) dans les configurations de nos pare-feux, serveurs Web Apache/IIS et passerelles VPN. Cela permet de garantir la confidentialité à long terme, notamment contre les attaques de type <em>"Store Now, Decrypt Later"</em> (intercepter et stocker les flux aujourd'hui pour les déchiffrer dès que l'ordinateur quantique sera disponible).</p>
+
+      <div class="callout">
+        <p><strong>Point de vigilance :</strong> Les clés post-quantiques et les signatures sont beaucoup plus volumineuses que les clés RSA. Lors du déploiement sur nos infrastructures, il faudra surveiller l'augmentation de la consommation de bande passante et la légère surcharge CPU lors des phases de Handshake TLS.</p>
+      </div>
+
+    </div>
+  </main>
+
+  <footer>
+    <span>Ben Lanne © 2026 — BTS SIO</span>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Veille Technologique — Ben Lanne</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="nav-logo">BL<span>.</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html" class="nav-cta" style="background: transparent; border: 1px solid var(--border); color: var(--text) !important;">← Retour au Portfolio</a></li>
+    </ul>
+  </nav>
+
+  <header class="page-header">
+    <div class="hero-bg"></div>
+    <div class="hero-grid"></div>
+    <div class="page-header-content">
+      <div class="section-label">Actualités & Tests</div>
+      <h1 class="hero-title" style="font-size: clamp(2.2rem, 5vw, 4rem);">Notes de <span>Veille</span></h1>
+      <p class="hero-desc" style="max-width: 650px; margin: 0 auto;">
+        Analyse des dernières vulnérabilités et information des différents TP réalisés ou tâches accomplies en entreprise.
+      </p>
+    </div>
+  </header>
+
+  <div class="divider"></div>
+
+  <section id="notes-content" style="padding-top: 4rem;">
+
+    <!-- 1. VEILLE ACTIVE -->
+    <h2 class="section-title" style="font-size: 1.8rem; margin-bottom: 2rem;">Veille Active</h2>
+    <div class="notes-grid">
+      <!-- Article : Info Concernant les ordinateurs quantiques -->
+      <article class="note-card">
+        <div class="note-header">
+          <span class="note-badge type-active">Active</span>
+          <span class="note-date">3 Juin 2026</span>
+        </div>
+        <h3 class="note-title">L'ordinateur quantique : tout comprendre en 15 minutes</h3>
+        <p class="note-excerpt">Résumé et analyse de l'article de Polytechnique Insights sur les fondamentaux de l'informatique quantique.</p>
+        <a href="veille-quantique.html" class="note-link">Lire la note complète →</a>
+      </article>
+
+<!-- Article Quantique 1 : Cybersécurité -->
+      <article class="note-card">
+        <div class="note-header">
+          <span class="note-badge type-active">Cybersécurité</span>
+          <span class="note-date">Mai 2026</span>
+        </div>
+        <h3 class="note-title">Le NIST valide les standards de cryptographie Post-Quantique</h3>
+        <p class="note-excerpt">Face à la menace des ordinateurs quantiques capables de casser le RSA, les nouveaux algorithmes de chiffrement standardisés (PQC) sont prêts à être déployés sur nos infrastructures serveurs.</p>
+        <a href="veille-post-quantique.html" class="note-link">Lire la note complète →</a>
+      </article>
+
+      <!-- Article Quantique 2 : Hardware -->
+      <article class="note-card">
+        <div class="note-header">
+          <span class="note-badge type-active">Hardware</span>
+          <span class="note-date">Avril 2026</span>
+        </div>
+        <h3 class="note-title">Avancée majeure dans la correction d'erreurs (QEC)</h3>
+        <p class="note-excerpt">Des chercheurs ont réussi à maintenir la stabilité de "qubits logiques" sur une durée record. Une étape matérielle indispensable pour passer des prototypes aux machines de production fiables.</p>
+        <a href="veille-hardware-qec.html" class="note-link">Lire la note complète →</a>
+      </article>
+
+		<article class="note-card">
+				<div class="note-header">
+				  <span class="note-badge type-active">Cloud & Infra</span>
+				  <span class="note-date">Février 2026</span>
+				</div>
+				<h3 class="note-title">L'hybridation Classique-Quantique arrive dans le Cloud</h3>
+				<p class="note-excerpt">AWS et Azure étendent leurs offres en couplant directement des serveurs Linux classiques à des QPU (Quantum Processing Units) pour déléguer les calculs lourds de manière transparente.</p>
+				<a href="veille-cloud-quantique.html" class="note-link">Lire la note complète →</a>
+			  </article>
+
+			</div> <h2 class="section-title" style="font-size: 1.8rem; margin-top: 5rem; margin-bottom: 2rem;">Veille Passive</h2>
+			<div class="notes-grid">
+      
+      <!-- Article : Tuto Flux RSS -->
+      <article class="note-card">
+        <div class="note-header">
+          <span class="note-badge type-passive">Tutoriel</span>
+          <span class="note-date">4 Juin 2026</span>
+        </div>
+        <h3 class="note-title">Automatisation d'un flux RSS (CERT-FR) en JS</h3>
+        <p class="note-excerpt">Comment j'ai développé un script pour remonter en direct les alertes de cybersécurité gouvernementales sur mon portfolio statique.</p>
+        <a href="article-flux-rss.html" class="note-link">Lire l'article complet →</a>
+      </article>
+
+    </div>
+
+    <!-- 3. FLUX RSS CERT-FR -->
+    <h2 class="section-title" style="font-size: 1.8rem; margin-top: 5rem; margin-bottom: 2rem;">🔴 Alertes CERT-FR en direct</h2>
+    <div id="flux-rss" class="notes-grid">
+      <p style="color: var(--text3);">Chargement des dernières alertes...</p>
+    </div>
+
+<div class="divider" style="margin: 5rem 0;"></div>
+
+<h2 class="section-title" style="font-size: 1.8rem; margin-bottom: 2rem; text-align: center;">Accès Technique</h2>
+    
+    <div style="display: flex; justify-content: center;">
+      
+      <article class="note-card" style="border: 2px solid var(--accent); background: var(--bg3); width: 100%; max-width: 600px; text-align: center; padding: 3rem 2rem;">
+        <div class="project-icon" style="margin: 0 auto 1.5rem auto; font-size: 2rem;">📚</div>
+        <h3 class="note-title" style="font-size: 1.5rem;">Documentation Professionnelle</h3>
+        <p class="note-excerpt" style="font-size: 1.05rem; margin-bottom: 2rem;">
+          Accédez à ma base de connaissances complète : rapports d'entreprise, fiches procédures, projets d'infrastructure et synthèses de cours.
+        </p>
+        
+        <a href="docs-pro.html" class="btn btn-primary" style="align-self: center;">Ouvrir la base de connaissances</a>
+      </article>
+
+    </div>
+
+  </section>
+
+  <footer>
+    <span>Ben Lanne © 2026 — BTS SIO</span>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Procédure Active Directory — Ben Lanne</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700&family=DM+Sans:wght@300;400;500&family=Fira+Code&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Design spécifique pour les listes d'étapes */
+    .step-box { background: var(--bg2); border-left: 4px solid var(--accent); padding: 1.5rem; margin-bottom: 2rem; border-radius: 0 8px 8px 0; }
+    .step-number { font-family: var(--font-head); font-size: 1.2rem; color: var(--accent); margin-bottom: 0.5rem; }
+    .step-box ul { padding-left: 1.5rem; color: var(--text2); margin-top: 1rem; }
+    .step-box li { margin-bottom: 0.5rem; }
+  </style>
+</head>
+<body class="article-body">
+
+<nav>
+    <a href="index.html" class="nav-logo">BL<span>.</span></a>
+    <ul class="nav-links">
+      <li><a href="docs-pro.html" class="nav-cta" style="background: transparent; border: 1px solid var(--border); color: var(--text) !important;">← Retour à la Doc Pro</a></li>
+    </ul>
+  </nav>
+
+  <main class="article-container">
+    <header class="article-header">
+      <div class="article-meta"><span class="note-badge" style="background: rgba(108,99,255,0.1); color: var(--accent);">Fiche Procédure</span></div>
+      <h1 class="article-title">Déploiement & Intégration Active Directory</h1>
+      <p class="article-intro">Procédure opérationnelle pour la mise en place d'un contrôleur de domaine Windows Server et l'intégration de postes clients.</p>
+    </header>
+
+    <div class="article-content">
+      
+      <h2>Prérequis Système</h2>
+      <div class="callout warning">
+        <p><strong>Avant de commencer :</strong> Le serveur doit disposer d'une IP fixe, d'un nom correctement défini, et le pare-feu doit autoriser le flux ICMP (Ping). Les machines clientes doivent utiliser le serveur AD comme serveur DNS principal.</p>
+      </div>
+
+      <h2>Procédure d'installation (Étapes)</h2>
+
+      <div class="step-box">
+        <div class="step-number">Étape 1 : Installation du Rôle AD DS</div>
+        <p>Sur le Windows Server, ouvrez le <em>Gestionnaire de serveur</em>.</p>
+        <ul>
+          <li>Cliquez sur "Ajouter des rôles et des fonctionnalités".</li>
+          <li>Sélectionnez "Services AD DS" et validez les fonctionnalités requises.</li>
+          <li>Laissez l'installation se terminer.</li>
+        </ul>
+      </div>
+
+      <div class="step-box">
+        <div class="step-number">Étape 2 : Promotion en Contrôleur de Domaine</div>
+        <p>Une fois le rôle installé, cliquez sur le drapeau d'alerte jaune en haut du gestionnaire.</p>
+        <ul>
+          <li>Choisissez "Promouvoir ce serveur en contrôleur de domaine".</li>
+          <li>Sélectionnez "Ajouter une nouvelle forêt" et nommez-la (ex: <code>cci.local</code>).</li>
+          <li>Définissez le mot de passe de restauration DSRM.</li>
+          <li>Cliquez sur Installer et laissez le serveur redémarrer.</li>
+        </ul>
+      </div>
+
+      <div class="step-box">
+        <div class="step-number">Étape 3 : Intégration d'un client Windows 10/11</div>
+        <p>Sur la machine cliente, allez dans <em>Paramètres systèmes avancés > Nom de l'ordinateur</em>.</p>
+        <ul>
+          <li>Cliquez sur "Modifier".</li>
+          <li>Cochez la case "Domaine" et saisissez <code>cci.local</code>.</li>
+          <li>Entrez les identifiants Administrateur du domaine lorsqu'ils sont demandés.</li>
+          <li>Redémarrez le poste client pour appliquer la jonction.</li>
+        </ul>
+      </div>
+
+      <h2 style="margin-top: 4rem;">Documents sources détaillés</h2>
+      <p>Pour retrouver toutes les captures d'écran, vous pouvez consulter mes documentations PDF d'origine :</p>
+      <ul>
+        <li><a href="assets/Doc/Ressource-WindowsServerAD_Installation.pdf" target="_blank" style="color:var(--accent2);">Télécharger la procédure d'installation Serveur (PDF)</a></li>
+        <li><a href="assets/Doc/Ressource-ClientAD_Int%C3%A9gration.pdf" target="_blank" style="color:var(--accent2);">Télécharger la procédure d'intégration Client (PDF)</a></li>
+      </ul>
+
+    </div>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>

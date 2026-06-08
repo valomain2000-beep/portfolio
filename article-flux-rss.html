@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tutoriel : Intégration d'un flux RSS CERT-FR — Ben Lanne</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="article-body">
+
+  <nav>
+    <a href="index.html" class="nav-logo">BL<span>.</span></a>
+    <ul class="nav-links">
+      <li><a href="notes.html" class="nav-cta" style="background: transparent; border: 1px solid var(--border); color: var(--text) !important;">← Retour aux notes</a></li>
+    </ul>
+  </nav>
+
+  <main class="article-container">
+    
+    <header class="article-header">
+      <div class="article-meta">
+        <span class="note-badge type-passive">Tutoriel Web</span>
+        <span class="article-date">4 Juin 2026</span>
+      </div>
+      <h1 class="article-title">Automatisation d'un flux RSS (CERT-FR) avec JavaScript</h1>
+      <p class="article-intro">Afin de maintenir une veille technologique active en cybersécurité, j'ai souhaité intégrer les alertes du CERT-FR directement sur mon portfolio. Voici comment j'ai contourné l'absence de backend (PHP) pour réaliser cette intégration en pur JavaScript.</p>
+    </header>
+
+    <div class="article-content">
+      
+      <h2>1. La problématique technique</h2>
+      <p>Mon portfolio est hébergé de manière 100 % statique (fichiers HTML, CSS et JS simples). Habituellement, pour lire un flux RSS (qui est au format XML), on utilise un langage côté serveur comme PHP ou Python. Si l'on essaie de lire directement le flux XML depuis le navigateur avec la fonction <code>fetch()</code> de JavaScript, on se heurte à une erreur de sécurité appelée <strong>CORS (Cross-Origin Resource Sharing)</strong> bloquant la requête.</p>
+
+      <h2>2. La solution : L'API rss2json</h2>
+      <p>Pour contourner ce problème de CORS et simplifier le traitement des données, j'ai utilisé une API publique nommée <strong>rss2json</strong>. Son rôle est d'agir comme un "pont" : elle va lire le fichier XML du CERT-FR sur leurs serveurs, et me le renvoyer sous la forme d'un objet JSON, un format natif et parfaitement géré par JavaScript.</p>
+
+      <h2>3. Le code côté HTML</h2>
+      <p>Dans mon fichier principal, j'ai simplement créé un conteneur vide qui va servir de réceptacle pour les cartes générées par le script.</p>
+
+<pre><code>&lt;!-- Emplacement dans le fichier HTML --&gt;
+&lt;div id="flux-rss" class="notes-grid"&gt;
+  &lt;p&gt;Chargement des dernières alertes...&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+
+      <h2>4. Le script de récupération (Fetch API)</h2>
+      <p>Voici le script développé. Il contacte l'API, récupère les 3 derniers articles, et génère dynamiquement la structure HTML pour les injecter dans la page.</p>
+
+<pre><code>// Sélection du conteneur HTML
+const conteneurRss = document.getElementById('flux-rss');
+
+// L'URL de l'API rss2json pointant vers le CERT-FR
+const rssUrl = 'https://api.rss2json.com/v1/api.json?rss_url=https://www.cert.ssi.gouv.fr/feed/';
+
+fetch(rssUrl)
+  .then(response =&gt; response.json())
+  .then(data =&gt; {
+    // Vider le message de chargement
+    conteneurRss.innerHTML = '';
+
+    // Récupérer uniquement les 3 premiers articles
+    const articles = data.items.slice(0, 3);
+
+    articles.forEach(article =&gt; {
+      // Formatage de la date en format français
+      const datePropre = new Date(article.pubDate).toLocaleDateString('fr-FR');
+
+      // Création de la carte HTML
+      const carteHTML = `
+        &lt;article class="note-card"&gt;
+          &lt;div class="note-header"&gt;
+            &lt;span class="note-badge type-passive"&gt;Alerte CERT-FR&lt;/span&gt;
+            &lt;span class="note-date"&gt;${datePropre}&lt;/span&gt;
+          &lt;/div&gt;
+          &lt;h3 class="note-title"&gt;${article.title}&lt;/h3&gt;
+          &lt;p class="note-excerpt"&gt;Alerte de sécurité officielle de l'ANSSI.&lt;/p&gt;
+          &lt;a href="${article.link}" target="_blank" class="note-link"&gt;Lire l'alerte officielle →&lt;/a&gt;
+        &lt;/article&gt;
+      `;
+      
+      // Injection de la carte dans le DOM
+      conteneurRss.innerHTML += carteHTML;
+    });
+  })
+  .catch(error =&gt; console.error('Erreur lors du chargement du flux :', error));
+</code></pre>
+
+      <div class="callout warning">
+        <p><strong>Conclusion :</strong> Cette méthode m'a permis d'ajouter un tableau de bord dynamique et automatisé à mon environnement statique, tout en mettant en pratique mes compétences en scripting et en manipulation du DOM via JavaScript.</p>
+      </div>
+
+    </div>
+  </main>
+
+  <footer>
+    <span>Ben Lanne © 2026 — BTS SIO</span>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
