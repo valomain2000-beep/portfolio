@@ -34,7 +34,7 @@
 html { scroll-behavior: smooth; }
 
 /* ZOOM DU TEXTE GLOBAL ICI : de 16px à 18px */
-body { background: var(--bg); color: var(--text); font-family: var(--font-body); font-size: 18px; line-height: 1.7; overflow-x: hidden; }
+body { background: var(--bg); color: var(--text); font-family: var(--font-body); font-size: 20px; line-height: 1.7; overflow-x: hidden; }
 
 ::selection { background: rgba(108,99,255,0.3); }
 ::-webkit-scrollbar { width: 5px; height: 5px; }
