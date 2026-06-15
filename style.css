@@ -229,3 +229,30 @@ p code, li code { background: var(--bg2); padding: 0.25rem 0.5rem; border-radius
   .cv-main, .cv-sidebar { padding: 2rem 1.5rem; }
   .cv-entry-header { flex-direction: column; }
 }
+
+/* ===== BOUTON VEILLE / NOTES ===== */
+.veille-notes-link { 
+    display: inline-flex; 
+    align-items: center; 
+    gap: 0.6rem; 
+    margin-top: 2rem; 
+    color: var(--accent2); 
+    font-size: 1rem; 
+    text-decoration: none; 
+    font-weight: 600; 
+    padding: 0.85rem 1.75rem; 
+    border: 1px solid rgba(108,99,255,0.3); 
+    border-radius: 8px; 
+    background: var(--accent-glow); 
+    transition: all 0.2s ease; 
+}
+
+.veille-notes-link:hover { 
+    background: rgba(108,99,255,0.2); 
+    border-color: var(--accent); 
+    transform: translateY(-2px);
+}
+
+.veille-notes-link::after { 
+    content: '→'; 
+}
