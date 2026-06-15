@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Veille : L'hybridation Quantique dans le Cloud — Ben Lanne</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="article-body">
+
+  <nav>
+    <a href="index.html" class="nav-logo">BL<span>.</span></a>
+    <ul class="nav-links">
+      <li><a href="notes.html" class="nav-cta" style="background: transparent; border: 1px solid var(--border); color: var(--text) !important;">← Retour à la Veille</a></li>
+    </ul>
+  </nav>
+
+  <main class="article-container">
+    
+    <header class="article-header">
+      <div class="article-meta">
+        <span class="note-badge type-active">Cloud & Infra</span>
+        <span class="article-date">Février 2026</span>
+      </div>
+      <h1 class="article-title">L'hybridation Classique-Quantique arrive dans le Cloud</h1>
+      <p class="article-intro">AWS et Azure étendent leurs offres en couplant directement des serveurs Linux classiques à des QPU (Quantum Processing Units) pour déléguer les calculs lourds de manière transparente.</p>
+    </header>
+
+    <div class="article-content">
+      
+      <h2>1. Le paradigme du QPU comme co-processeur</h2>
+      <p>Un ordinateur quantique n'a pas vocation à remplacer nos serveurs d'infrastructure traditionnels pour des tâches courantes (hébergement de bases de données, routage réseau ou serveurs de fichiers). À l'image du GPU pour le rendu graphique, le <strong>QPU (Quantum Processing Unit)</strong> intervient comme un accélérateur de calcul spécialisé.</p>
+      <p>L'enjeu actuel n'est pas de concevoir une infrastructure 100 % quantique, mais de parfaire l'<strong>hybridation</strong> : de puissantes instances virtuelles classiques préparent les données, externalisent la brique algorithmique lourde au processeur quantique, puis récupèrent le résultat pour finaliser le traitement.</p>
+
+      <h2>2. L'accès démocratisé via le Cloud (IaaS / PaaS)</h2>
+      <p>L'installation d'un ordinateur quantique physique nécessitant des cryostats complexes et un environnement ultra-isolé, le mode cloud est la seule approche viable pour les entreprises. Des plateformes comme <strong>AWS Braket</strong> et <strong>Azure Quantum</strong> proposent désormais des architectures hybrides matures.</p>
+      <p>Techniquement, cela se traduit par le déploiement d'images de conteneurs (Docker) exécutées au plus proche des infrastructures physiques quantiques. Des liaisons réseaux à ultra-faible latence relient ces conteneurs applicatifs aux QPU de partenaires (comme IonQ, Rigetti ou IBM) pour réduire au maximum les temps d'attente lors de l'envoi des circuits quantiques.</p>
+
+      <h2>3. Applications concrètes et perspectives d'infrastructure</h2>
+      <p>Cette connectivité hybride permet d'exécuter des algorithmes d'optimisation (comme l'algorithme variationnel <strong>VQE</strong>) utilisés pour la recherche chimique, la finance algorithmique ou l'optimisation des réseaux logistiques complexes.</p>
+      <p>Pour les professionnels de l'informatique, cette évolution implique l'apprentissage de nouveaux SDK cloud (tels que <em>Qiskit</em> ou <em>Amazon Braket SDK</em>) basés sur Python, permettant de provisionner et d'orchestrer ces ressources de calcul d'un nouveau genre à l'aide de scripts d'automatisation classiques.</p>
+
+      <div class="callout">
+        <p><strong>Perspectives Cloud :</strong> L'intégration des ressources quantiques s'aligne de plus en plus avec les standards du DevOps et de l'Infrastructure as Code (IaC), permettant d'inclure des appels à des unités quantiques directement dans des workflows applicatifs cloud standards.</p>
+      </div>
+
+<a href="https://www.capgemini.com/fr-fr/perspectives/blog/cloud-un-tremplin-vers-linformatique-quantique/" target="_blank" class="note-link">Lire l'analyse experte →</a>
+    </div>
+  </main>
+
+  <footer>
+    <span>Ben Lanne © 2026 — BTS SIO</span>
+	<div class="footer-links">
+      <a href="mailto:BenLanne2005@gmail.com">Email</a>
+      <a href="https://github.com/valomain2000-beep" target="_blank">GitHub</a>
+	  <a href="mentions-legales.html">Mentions Légales & Confidentialité</a>
+    </div>
+  </footer>
+
+</body>
+</html>

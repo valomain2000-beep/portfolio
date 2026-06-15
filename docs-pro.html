@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Documentation Pro — Ben Lanne</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="article-body">
+
+  <nav>
+    <a href="index.html" class="nav-logo">BL<span>.</span></a>
+    <ul class="nav-links">
+      <li><a href="notes.html" class="nav-cta" style="background: transparent; border: 1px solid var(--border); color: var(--text) !important; margin-right: 1rem;">← Retour aux notes</a></li>
+      <li><a href="index.html" class="nav-cta" style="background: transparent; border: 1px solid var(--border); color: var(--text) !important;">← Retour au Portfolio</a></li>
+    </ul>
+  </nav>
+
+  <header class="page-header">
+    <div class="hero-bg"></div>
+    <div class="hero-grid"></div>
+    <div class="page-header-content">
+      <div class="section-label">Base de connaissances</div>
+      <h1 class="hero-title" style="font-size: clamp(2.2rem, 5vw, 4rem);">Documentation <span>Pro</span></h1>
+      <p class="hero-desc" style="max-width: 650px; margin: 0 auto;">
+        Centralisation de mes synthèses de cours, mes procédures de déploiement (étapes) et mes travaux pratiques réalisés en BTS SIO.
+      </p>
+    </div>
+  </header>
+
+  <div class="divider"></div>
+
+  <section id="docs-content" style="padding-top: 4rem; max-width: 1200px; margin: 0 auto;">
+
+    <!-- 1. EXPÉRIENCE & EXAMENS -->
+    <h2 class="section-title" style="font-size: 1.8rem; margin-bottom: 2rem;">💼 Expérience Pro & Examens</h2>
+    <div class="notes-grid">
+      <article class="note-card">
+        <div class="note-header"><span class="note-badge" style="background: rgba(255, 170, 0, 0.1); color: #ffaa00; border: 1px solid rgba(255, 170, 0, 0.2);">Entreprise</span></div>
+        <h3 class="note-title">Compte Rendu d'Activité</h3>
+        <p class="note-excerpt">Synthèse complète de mes missions d'administration réseau et de maintenance informatique chez Microtiq.</p>
+        <a href="rapport-entreprise.html" class="note-link">Lire le rapport →</a>
+      </article>
+
+      <article class="note-card">
+        <div class="note-header"><span class="note-badge" style="background: rgba(255, 85, 85, 0.1); color: #ff5555; border: 1px solid rgba(255, 85, 85, 0.2);">Épreuve E4</span></div>
+        <h3 class="note-title">Tableau de Synthèse (Annexe 6-1)</h3>
+        <p class="note-excerpt">Portefeuille officiel récapitulant l'ensemble des compétences techniques validées lors de mes projets.</p>
+        <a href="assets/Doc/Annexe-6-1-Tableau-de-synthese-Epreuve-E4-BTS-SIO-2022.ods" download class="note-link">Télécharger (.ods) →</a>
+      </article>
+    </div>
+
+    <!-- 2. PROJETS INFRASTRUCTURE -->
+    <h2 class="section-title" style="font-size: 1.8rem; margin-top: 5rem; margin-bottom: 2rem;">🚀 Projets d'Infrastructure</h2>
+    <div class="notes-grid">
+      <article class="note-card">
+        <div class="note-header"><span class="note-badge type-active">Déploiement</span></div>
+        <h3 class="note-title">Serveur GLPI & Helpdesk (Linux)</h3>
+        <p class="note-excerpt">Mise en place d'une solution d'Asset Management sous Debian 12 avec interfaçage LDAP/Active Directory.</p>
+        <a href="tp-glpi.html" class="note-link">Voir le projet →</a>
+      </article>
+
+      <article class="note-card">
+        <div class="note-header"><span class="note-badge type-active">Sécurité</span></div>
+        <h3 class="note-title">Infrastructure HTTP / HTTPS</h3>
+        <p class="note-excerpt">Mise en place d'un environnement Web sécurisé (IIS) avec création d'une Autorité de Certification sous OPNsense.</p>
+        <a href="assets/Doc/TP%20HTTP-HTTPS.pdf" target="_blank" class="note-link">Télécharger le TP (PDF) →</a>
+      </article>
+    </div>
+
+    <!-- 3. FICHES PROCÉDURES -->
+    <h2 class="section-title" style="font-size: 1.8rem; margin-top: 5rem; margin-bottom: 2rem;">🛠️ Fiches Procédures (Étapes par étapes)</h2>
+    <div class="notes-grid">
+      <article class="note-card">
+        <div class="note-header"><span class="note-badge" style="background: rgba(108,99,255,0.1); color: var(--accent);">Procédure AD</span></div>
+        <h3 class="note-title">Déploiement Active Directory</h3>
+        <p class="note-excerpt">Étapes d'installation d'un contrôleur de domaine, de l'intégration des clients Windows 10/11 et de la gestion des GPO.</p>
+        <a href="procedure-ad.html" class="note-link">Consulter la procédure →</a>
+      </article>
+
+      <article class="note-card">
+        <div class="note-header"><span class="note-badge" style="background: rgba(108,99,255,0.1); color: var(--accent);">Procédure SysAdmin</span></div>
+        <h3 class="note-title">Gestion FSRM, Quotas & Partages</h3>
+        <p class="note-excerpt">Tutoriel de création de disques virtuels, configuration des partages NTFS et mise en place du filtrage FSRM.</p>
+        <a href="assets/Doc/Ressource-WindowsServer_Installation_FSRM.pdf" target="_blank" class="note-link">Voir le PDF →</a>
+      </article>
+
+      <article class="note-card">
+        <div class="note-header"><span class="note-badge" style="background: rgba(108,99,255,0.1); color: var(--accent);">Procédure PowerShell</span></div>
+        <h3 class="note-title">Scripting & Automatisation</h3>
+        <p class="note-excerpt">Scripts d'administration (VHD, création utilisateurs) et règles de filtrage ICMP sur Pare-Feu Windows.</p>
+        <a href="assets/Doc/Mes%20Premiers%20Scripts%20(Eleve).pdf" target="_blank" class="note-link">Voir le TP Scripting →</a>
+      </article>
+    </div>
+
+    <!-- 4. SYNTHÈSES DE COURS -->
+    <h2 class="section-title" style="font-size: 1.8rem; margin-top: 5rem; margin-bottom: 2rem;">📚 Synthèses de Cours</h2>
+    <div class="notes-grid">
+      <article class="note-card">
+        <div class="note-header"><span class="note-badge type-passive">Réseau & Cisco</span></div>
+        <h3 class="note-title">Synthèse : Architecture Réseau</h3>
+        <p class="note-excerpt">Regroupement de mes cours sur le modèle OSI, l'adressage IP, les VLANs, le routage et les listes d'accès (ACL).</p>
+        <a href="synthese-reseau.html" class="note-link">Lire la synthèse →</a>
+      </article>
+
+      <article class="note-card">
+        <div class="note-header"><span class="note-badge type-passive">Systèmes & Cybersécurité</span></div>
+        <h3 class="note-title">Synthèse : OS, PRA/PCA & SSL</h3>
+        <p class="note-excerpt">Fondamentaux sur GNU/Linux, l'architecture Client-Serveur, les certificats TLS et la continuité d'activité (PCA).</p>
+        <a href="synthese-sys.html" class="note-link">Lire la synthèse →</a>
+      </article>
+    </div>
+
+  </section>
+
+  <footer>
+    <span>Ben Lanne © 2026 — BTS SIO</span>
+	<div class="footer-links">
+      <a href="mailto:BenLanne2005@gmail.com">Email</a>
+      <a href="https://github.com/valomain2000-beep" target="_blank">GitHub</a>
+	  <a href="mentions-legales.html">Mentions Légales & Confidentialité</a>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

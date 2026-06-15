@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ben Lanne — Administrateur Systèmes & Réseaux</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav>
+    <a href="index.html" class="nav-logo">BL<span>.</span></a>
+    <ul class="nav-links">
+      <li><a href="#cv">Me découvrir</a></li>
+	  <li><a href="notes.html">Suivre ma veille</a></li>
+      <li><a href="docs-pro.html">Voir mon travail</a></li>
+      <li><a href="#contact" class="nav-cta" style="background: var(--accent); color: white !important; border: none;">Me contacter</a></li>
+    </ul>
+  </nav>
+
+  <section id="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-grid"></div>
+	<div class="hero-content">
+      <h1 class="hero-title">
+        Ben Lanne<br>
+        <span class="name">Technicien Systèmes & Réseaux</span>
+      </h1>
+      <p class="hero-desc">
+        Étudiant en BTS SIO. De l'assemblage matériel au déploiement de serveurs, je conçois et maintiens des infrastructures fiables pour les entreprises.
+      </p>
+      <div class="hero-actions">
+        <a href="#parcours" class="btn btn-primary">Découvrir mon parcours</a>
+        <a href="docs-pro.html" class="btn btn-ghost">Voir mon travail technique</a>
+      </div>
+      <div class="hero-stack">
+        <span class="stack-tag">Windows Server</span>
+        <span class="stack-tag">Debian / GNU Linux</span>
+        <span class="stack-tag">Cisco IOS</span>
+        <span class="stack-tag">PowerShell</span>
+        <span class="stack-tag">OPNsense</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <section id="about">
+    <div class="section-label">01 — Profil</div>
+    <h2 class="section-title">Qui suis-je ?</h2>
+    <p class="section-sub">Étudiant passionné, je construis mes compétences terrain par terrain.</p>
+    <div class="about-grid">
+		<div class="about-text">
+		  <p>Mon parcours dans l'informatique s'est forgé sur le terrain. Lors de mon alternance chez <strong>Microtiq</strong>, j'ai été confronté aux réalités de la production : diagnostic de pannes (Clear CMOS, clonage SSD), assemblage de stations de travail (ATX/mATX) et dépannage matériel critique en environnement professionnel (pharmacie, laboratoires).</p>
+		  
+		  <p>Au-delà du support matériel, j'ai pris en charge le déploiement de postes clients à distance via <strong>Tactical RMM</strong>, incluant la jonction au domaine, la configuration de tunnels VPN (OpenVPN) et l'installation d'agents de sécurité EDR (Kaspersky).</p>
+
+		  <p>En parallèle de mes missions en entreprise, mes projets personnels m'ont permis de consolider mon expertise sur les architectures serveurs (Windows Server, Linux Debian), la gestion centralisée (GPO, LDAP) et la sécurisation des flux (Certificats CA, Pare-feu, ACL Cisco).</p>
+		</div>
+		<div class="skills-grid">
+		  <!-- Compétence 1 -->
+		  <div class="skill-item">
+			<h4 style="color: var(--teal); margin-bottom: 0.5rem;">Systèmes & Virtualisation</h4>
+			<p style="color: var(--text2); font-size: 0.9rem;">
+			  Déploiement et administration <strong>Windows Server</strong> (AD DS, GPO, FSRM, DFS, Quotas) et <strong>GNU/Linux</strong> (Debian, Apache, MariaDB). Mise en place d'hyperviseurs (VirtualBox) et compréhension des enjeux PRA/PCA.
+			</p>
+		  </div>
+
+		  <!-- Compétence 2 -->
+		  <div class="skill-item" style="margin-top: 1.5rem;">
+			<h4 style="color: var(--teal); margin-bottom: 0.5rem;">Réseaux & Cybersécurité</h4>
+			<p style="color: var(--text2); font-size: 0.9rem;">
+			  Configuration d'équipements <strong>Cisco</strong> (VLANs, Trunking 802.1Q, Routage RIP, ACL). Sécurisation périmétrique via <strong>OPNsense</strong> (Firewall), déploiement d'autorités de certification (CA) internes et protocoles HTTPS/TLS.
+			</p>
+		  </div>
+
+		  <!-- Compétence 3 -->
+		  <div class="skill-item" style="margin-top: 1.5rem;">
+			<h4 style="color: var(--teal); margin-bottom: 0.5rem;">Support & Automatisation</h4>
+			<p style="color: var(--text2); font-size: 0.9rem;">
+			  Automatisation de l'administration via scripts <strong>PowerShell</strong> (gestion VHDX, utilisateurs AD, pare-feu). Déploiement de serveurs d'Asset Management <strong>GLPI</strong> (avec agents et SSO LDAP) et utilisation de solutions RMM.
+			</p>
+		  </div>
+		</div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <section id="projets">
+    <div class="section-label">02 — Réalisations</div>
+    <h2 class="section-title">Projets</h2>
+    <p class="section-sub">Des environnements réels, déployés de A à Z.</p>
+    <div class="projects-grid">
+      <div class="project-card">
+        <div class="project-icon">🖧</div>
+        <div class="project-num">01</div>
+        <div class="project-title">Active Directory</div>
+        <p class="project-desc">Déploiement Windows Server complet — GPO, OUs, gestion des comptes utilisateurs en domaine.</p>
+        <div class="tags">
+          <span class="tag">Windows Server</span>
+          <span class="tag">GPO</span>
+          <span class="tag">DNS</span>
+        </div>
+      </div>
+      <div class="project-card">
+        <div class="project-icon">🔀</div>
+        <div class="project-num">02</div>
+        <div class="project-title">VLANs & Cisco</div>
+        <p class="project-desc">Segmentation réseau sur switch Catalyst. Trunks 802.1Q, inter-VLAN routing et ACL.</p>
+        <div class="tags">
+          <span class="tag">Cisco</span>
+          <span class="tag">Packet Tracer</span>
+          <span class="tag">802.1Q</span>
+        </div>
+      </div>
+      <div class="project-card">
+        <div class="project-icon">🛡</div>
+        <div class="project-num">03</div>
+        <div class="project-title">Pare-feu pfSense</div>
+        <p class="project-desc">Filtrage stateful, NAT/PAT et portail captif pour l'authentification des utilisateurs wifi.</p>
+        <div class="tags">
+          <span class="tag">pfSense</span>
+          <span class="tag">NAT</span>
+          <span class="tag">Captive portal</span>
+        </div>
+      </div>
+      <article class="project-card">
+        <div class="project-icon">🌐</div>
+        <div class="project-num">PROJET WEB</div>
+        <h3 class="project-title">Portfolio Minimaliste</h3>
+        <p class="project-desc">Conception et développement de cet espace web statique pour centraliser mes documentations.</p>
+        <div class="tags">
+          <span class="tag">HTML5</span>
+          <span class="tag">CSS3</span>
+          <span class="tag">JavaScript natif</span>
+          <span class="tag">Git / GitHub</span>
+        </div>
+      </article>
+      <div class="project-card">
+        <div class="project-icon">📡</div>
+        <div class="project-num">05</div>
+        <div class="project-title">Supervision SNMP</div>
+        <p class="project-desc">GLPI pour la gestion de parc et tickets. Monitoring réseau en temps réel via agents SNMP.</p>
+        <div class="tags">
+          <span class="tag">GLPI</span>
+          <span class="tag">SNMP</span>
+          <span class="tag">Monitoring</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <section id="cv">
+    <div class="section-label">03 — Curriculum Vitæ</div>
+    <h2 class="section-title">Mon CV</h2>
+    <p class="section-sub">Formation, expériences et compétences.</p>
+    <div class="cv-layout">
+      <aside class="cv-sidebar">
+        <div class="cv-avatar">BL</div>
+        <div class="cv-name">Ben Lanne</div>
+        <div class="cv-role">Étudiant en informatique</div>
+        <div class="cv-section-title">Contact</div>
+		 <div class="cv-contact-item">PERMIS B</div>
+        <div class="cv-contact-item">06.41.28.22.98</div>
+        <div class="cv-contact-item">BenLanne2005@gmail.com</div>
+        <div class="cv-contact-item">67 Rue Philonarde, 84000 Avignon</div>
+        <div class="cv-contact-item">github.com/valomain2000-beep</div>
+
+        <div class="cv-section-title">Compétences</div>
+        <ul class="cv-skill-list">
+          <li>Connaissances réseau (general)</li>
+          <li>Windows Server / AD</li>
+          <li>pfSense / Firewall</li>
+          <li>Proxmox / Virtualisation</li>
+          <li>Linux / Bash</li>
+          <li>Cisco / VLANs</li>
+          <li>HTML & CSS (en cours)</li>
+          <li>Python (en cours)</li>
+          <li>Nmap (en cours)</li>
+          <li>Sqlmap (en cours)</li>
+        </ul>
+
+        <div class="cv-section-title">Langues</div>
+        <div class="cv-lang">
+          <div class="cv-lang-name">Français</div>
+          <div class="cv-lang-level">Langue natale</div>
+        </div>
+        <div class="cv-lang">
+          <div class="cv-lang-name">Anglais</div>
+          <div class="cv-lang-level">Niveau B1</div>
+        </div>
+      </aside>
+
+      <main class="cv-main">
+        <div class="cv-block">
+          <div class="cv-block-title">Profil</div>
+          <p style="font-size:0.875rem; color:var(--text2); font-weight:300; line-height:1.7;">
+            Motivé par une future carrière dans la cybersécurité, je recherche une entreprise en alternance pour mon BTS SIO, afin de mettre à profit mon sérieux, ma curiosité technique et mon sens de l'organisation.
+          </p>
+        </div>
+        <div class="cv-block">
+          <div class="cv-block-title">Expériences professionnelles</div>
+          <div class="cv-entry">
+            <div class="cv-entry-header">
+              <div class="cv-entry-title">Stagiaire Technicien Informatique</div>
+              <span class="cv-entry-date">2023 – 2024</span>
+            </div>
+            <div class="cv-entry-company">Megachip, Manosque</div>
+            <ul class="cv-entry-desc">
+              <li>Réparation d'ordinateurs : diagnostic, identification du problème et résolution adaptée.</li>
+            </ul>
+          </div>
+          <div class="cv-entry">
+            <div class="cv-entry-header">
+              <div class="cv-entry-title">Stagiaire Technicien Réseau</div>
+              <span class="cv-entry-date">2021 – 2023</span>
+            </div>
+            <div class="cv-entry-company">Sudériane</div>
+            <ul class="cv-entry-desc">
+              <li>Identification de problèmes réseau et résolution à distance. Intervention sur sites.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="cv-block">
+          <div class="cv-block-title">Formation</div>
+          <div class="cv-entry">
+            <div class="cv-entry-header">
+              <div class="cv-entry-title">BTS SIO — CCI du Vaucluse</div>
+              <span class="cv-entry-date">2025 – 2027</span>
+            </div>
+            <div class="cv-entry-company">Avignon</div>
+          </div>
+          <div class="cv-entry">
+            <div class="cv-entry-header">
+              <div class="cv-entry-title">Bac Professionnel Système Numérique</div>
+              <span class="cv-entry-date">2022 – 2023</span>
+            </div>
+            <div class="cv-entry-company">Lycée Professionnel Robert Schuman, Avignon</div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <section id="veille">
+    <div class="section-label">04 — Intelligence</div>
+    <h2 class="section-title">Veille technologique</h2>
+    <p class="section-sub">Rester à jour, tester, documenter.</p>
+
+    <div class="veille-grid">
+      <div class="veille-card">
+        <div class="veille-icon">📡</div>
+        <div class="veille-title">Veille Passive</div>
+        <p class="veille-desc">Je m'informe quotidiennement sur les dernières vulnérabilités (CVE) et évolutions réseau.</p>
+      </div>
+      <div class="veille-card">
+        <div class="veille-icon">🔬</div>
+        <div class="veille-title">Veille Active</div>
+        <p class="veille-desc">Je mets en pratique mes découvertes sur mon homelab (Proxmox) pour tester le déploiement de nouveaux services.</p>
+      </div>
+    </div>
+
+    <a href="notes.html" class="veille-notes-link">
+      Accéder à mes notes d'entreprise
+    </a>
+  </section>
+
+  <div class="divider"></div>
+
+  <section id="parcours">
+    <div class="section-label">05 — Timeline</div>
+    <h2 class="section-title">Mon parcours</h2>
+    <p class="section-sub">De la formation aux projets terrain.</p>
+    <div class="frise-outer">
+      <div class="frise-wrapper" id="frise-scroll">
+        <div class="frise">
+          <div class="frise-item"><div class="frise-card"><div class="frise-date">2021 – 2022</div><div class="frise-title">Brevet des Collèges</div><div class="frise-sub">Collège Ampère, Arles</div></div></div>
+          <div class="frise-item"><div class="frise-card"><div class="frise-date">2021 – 2023</div><div class="frise-title">Stages Technicien Réseau</div><div class="frise-sub">Sudériane</div></div></div>
+          <div class="frise-item"><div class="frise-card"><div class="frise-date">2022 – 2023</div><div class="frise-title">Bac Pro Système Numérique</div><div class="frise-sub">Lycée Robert Schuman</div></div></div>
+          <div class="frise-item"><div class="frise-card"><div class="frise-date">2023 – 2024</div><div class="frise-title">Stage Technicien Info</div><div class="frise-sub">Megachip, Manosque</div></div></div>
+		  <div class="frise-item"><div class="frise-card"><div class="frise-date">2024 → 2025</div><div class="frise-title">Année de Césure</div><div class="frise-sub">Ardèche</div></div></div>
+          <div class="frise-item"><div class="frise-card"><div class="frise-date">2025 → Aujourd'hui</div><div class="frise-title">BTS SIO</div><div class="frise-sub">CCI du Vaucluse, Avignon</div></div></div>
+          <div class="frise-item future"><div class="frise-card"><div class="frise-date">Futur proche</div><div class="frise-title">Spécialisation & Certification</div><div class="frise-sub">Cybersécurité & Cloud</div></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <section id="contact">
+    <div class="section-label" style="justify-content:center;">06 — Contact</div>
+    <h2 class="section-title" style="text-align:center;">Travaillons ensemble</h2>
+    <div class="contact-wrapper">
+      <div class="contact-items">
+        <a href="mailto:BenLanne2005@gmail.com" class="contact-item">✉️ BenLanne2005@gmail.com</a>
+        <a href="https://github.com/valomain2000-beep" target="_blank" class="contact-item">GitHub</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span>Ben Lanne © 2026 — BTS SIO</span>
+    <div class="footer-links">
+      <a href="mailto:BenLanne2005@gmail.com">Email</a>
+      <a href="https://github.com/valomain2000-beep" target="_blank">GitHub</a>
+	  <a href="mentions-legales.html">Mentions Légales & Confidentialité</a>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

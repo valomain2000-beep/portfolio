@@ -1,0 +1,12 @@
+Pour autoriser le PING sur une machine Windows et Activer les journaux
+
+Etapes :
+
+- Ouvrir les paramètres du pare-feu Windows
+- Changer la politique du pare-feu (enregistrer les tous les paquets - activer et renommer les fichiers journaux)
+- Créer un raccourcis vers les journaux
+- Créer une règle pour le PING (ICMP)
+- Réaliser un PING
+- Copier les journaux sur votre bureau
+- Épurer l'en-tête du fichier récupéré
+Mise en forme avec un tableur

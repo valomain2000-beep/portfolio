@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Synthèse Réseau — Ben Lanne</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700&family=DM+Sans:wght@300;400;500&family=Fira+Code&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .pdf-download-card { display: flex; align-items: center; gap: 1rem; background: var(--surface2); padding: 1rem; border-radius: 8px; border: 1px solid var(--border); margin-bottom: 1rem; transition: 0.2s; text-decoration: none; color: var(--text); }
+    .pdf-download-card:hover { border-color: var(--teal); transform: translateX(5px); }
+    .pdf-icon { font-size: 2rem; }
+    .pdf-info h4 { margin: 0; font-size: 1rem; color: var(--teal); font-family: var(--font-head); }
+    .pdf-info p { margin: 0; font-size: 0.85rem; color: var(--text2); }
+  </style>
+</head>
+<body class="article-body">
+
+<nav>
+    <a href="index.html" class="nav-logo">BL<span>.</span></a>
+    <ul class="nav-links">
+      <li><a href="docs-pro.html" class="nav-cta" style="background: transparent; border: 1px solid var(--border); color: var(--text) !important;">← Retour à la Doc Pro</a></li>
+    </ul>
+  </nav>
+
+  <main class="article-container">
+    <header class="article-header">
+      <div class="article-meta"><span class="note-badge type-passive">Fiche de Synthèse</span></div>
+      <h1 class="article-title">Fondamentaux : Architecture Réseau & Cisco</h1>
+      <p class="article-intro">Regroupement et synthèse de mes cours théoriques concernant l'infrastructure réseau, le modèle OSI et les protocoles de routage.</p>
+    </header>
+
+    <div class="article-content">
+      
+      <h2>Concepts clés maîtrisés</h2>
+      <p>Au cours de ma formation, j'ai validé l'ensemble des concepts nécessaires à la conception et au maintien d'une architecture réseau sécurisée :</p>
+      <ul>
+        <li><strong>Modèle OSI & TCP/IP :</strong> Compréhension du mécanisme d'encapsulation et de l'organisation des ports.</li>
+        <li><strong>Commutation & VLANs :</strong> Différence entre les ports "Access" et les "Trunks" (norme 802.1Q).</li>
+        <li><strong>Routage IP :</strong> Découpage en sous-réseaux (Subnetting IPv4), tables de routage, et protocoles dynamiques (RIP).</li>
+        <li><strong>Sécurité & Filtrage :</strong> Implémentation de NAT/PAT pour l'accès internet et règles de sécurité via des Access Control Lists (ACL) sur routeurs Cisco.</li>
+      </ul>
+
+      <h2 style="margin-top: 3rem;">Mes supports de cours complets (PDF)</h2>
+      <p>Vous pouvez consulter mes documents de cours détaillés ci-dessous :</p>
+
+      <a href="assets/Doc/03-Modèle_OSI.pdf" target="_blank" class="pdf-download-card">
+        <div class="pdf-icon">📄</div>
+        <div class="pdf-info"><h4>Le Modèle OSI</h4><p>Encapsulation, couches et ports TCP/UDP.</p></div>
+      </a>
+
+      <a href="assets/Doc/04-AdressageIP.pdf" target="_blank" class="pdf-download-card">
+        <div class="pdf-icon">📄</div>
+        <div class="pdf-info"><h4>Adressage IPv4</h4><p>Calcul binaire, classes d'adresses et sous-réseaux.</p></div>
+      </a>
+
+      <a href="assets/Doc/04-Cours%20VLAN%20(Concepts%20de%20base%20sur%20les%20vlan)%201.0.pdf" target="_blank" class="pdf-download-card">
+        <div class="pdf-icon">📄</div>
+        <div class="pdf-info"><h4>Concepts VLAN</h4><p>Réseaux virtuels, Taggage 802.1Q et Trunking.</p></div>
+      </a>
+
+      <a href="assets/Doc/09-Cours%20Routage.pdf" target="_blank" class="pdf-download-card">
+        <div class="pdf-icon">📄</div>
+        <div class="pdf-info"><h4>Routage Dynamique</h4><p>Tables de routage, métriques et fonctionnement global.</p></div>
+      </a>
+
+    </div>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>

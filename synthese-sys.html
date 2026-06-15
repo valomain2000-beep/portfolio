@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Synthèse Systèmes & Cyber — Ben Lanne</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700&family=DM+Sans:wght@300;400;500&family=Fira+Code&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Design des cartes pour télécharger les PDF */
+    .pdf-download-card { display: flex; align-items: center; gap: 1rem; background: var(--surface2); padding: 1rem; border-radius: 8px; border: 1px solid var(--border); margin-bottom: 1rem; transition: 0.2s; text-decoration: none; color: var(--text); }
+    .pdf-download-card:hover { border-color: var(--teal); transform: translateX(5px); }
+    .pdf-icon { font-size: 2rem; }
+    .pdf-info h4 { margin: 0; font-size: 1rem; color: var(--teal); font-family: var(--font-head); }
+    .pdf-info p { margin: 0; font-size: 0.85rem; color: var(--text2); }
+  </style>
+</head>
+<body class="article-body">
+
+  <nav>
+    <a href="index.html" class="nav-logo">BL<span>.</span></a>
+    <ul class="nav-links">
+      <li><a href="docs-pro.html" class="nav-cta" style="background: transparent; border: 1px solid var(--border); color: var(--text) !important;">← Retour à la Doc Pro</a></li>
+    </ul>
+  </nav>
+
+  <main class="article-container">
+    <header class="article-header">
+      <div class="article-meta">
+        <span class="note-badge type-passive">Fiche de Synthèse</span>
+      </div>
+      <h1 class="article-title">Fondamentaux : Systèmes, OS & Cybersécurité</h1>
+      <p class="article-intro">Regroupement et synthèse de mes cours théoriques concernant l'administration système (GNU/Linux), la continuité d'activité (PRA/PCA) et la sécurisation des échanges (SSL/TLS).</p>
+    </header>
+
+    <div class="article-content">
+      
+      <h2>Concepts clés maîtrisés</h2>
+      <p>Afin de déployer et maintenir des infrastructures résilientes, j'ai consolidé de solides bases théoriques sur les systèmes d'exploitation et les principes de la cybersécurité :</p>
+      <ul>
+        <li><strong>Administration OS (GNU/Linux) :</strong> Compréhension de l'arborescence UNIX, gestion des permissions (<code>chmod</code>/<code>chown</code>), manipulation des processus et utilisation des gestionnaires de paquets (APT).</li>
+        <li><strong>Architecture & Chiffrement :</strong> Maîtrise du modèle Client-Serveur, des différences fondamentales entre HTTP et HTTPS, et du rôle des autorités de certification (CA).</li>
+        <li><strong>Sécurité de l'Information :</strong> Connaissance des 5 piliers de la cybersécurité (Disponibilité, Intégrité, Confidentialité, Authenticité, Non-répudiation).</li>
+        <li><strong>Disponibilité & Sauvegarde :</strong> Différence entre un Plan de Reprise d'Activité (PRA) et un Plan de Continuité d'Activité (PCA), objectifs RTO/RPO, et règle de sauvegarde 3-2-1.</li>
+        <li><strong>Virtualisation :</strong> Différences entre les hyperviseurs de Type 1 (ex: ESXi) et de Type 2 (ex: VirtualBox), avantages et limites de la virtualisation.</li>
+      </ul>
+
+      <h2 style="margin-top: 3rem;">Mes supports de cours complets (PDF)</h2>
+      <p>Vous pouvez consulter ou télécharger mes documents de cours détaillés ci-dessous :</p>
+
+      <a href="assets/Doc/UNIX-GNU-Linux.pdf" target="_blank" class="pdf-download-card">
+        <div class="pdf-icon">📄</div>
+        <div class="pdf-info">
+          <h4>Système GNU/Linux</h4>
+          <p>Histoire d'UNIX, commandes Bash, permissions et gestion des paquets.</p>
+        </div>
+      </a>
+
+      <a href="assets/Doc/Cours%20Architecture%20Client-Serveur%20et%20HTTP-HTTPS.pdf" target="_blank" class="pdf-download-card">
+        <div class="pdf-icon">📄</div>
+        <div class="pdf-info">
+          <h4>Architecture & HTTP/HTTPS</h4>
+          <p>Modèle Client/Serveur, certificats TLS et piliers de la sécurité.</p>
+        </div>
+      </a>
+
+      <a href="assets/Doc/Cours%20PRA-PCA,%20Sauvegardes%20et%20Archives.pdf" target="_blank" class="pdf-download-card">
+        <div class="pdf-icon">📄</div>
+        <div class="pdf-info">
+          <h4>Continuité d'Activité (PRA/PCA)</h4>
+          <p>RTO/RPO, stratégies de sauvegarde, et cycle de vie des données (chaudes/froides).</p>
+        </div>
+      </a>
+
+      <a href="assets/Doc/Cours_Virtualisation.pdf" target="_blank" class="pdf-download-card">
+        <div class="pdf-icon">📄</div>
+        <div class="pdf-info">
+          <h4>Virtualisation</h4>
+          <p>Hyperviseurs Type 1 vs Type 2, machines virtuelles et conteneurisation.</p>
+        </div>
+      </a>
+
+    </div>
+  </main>
+  
+  <footer>
+    <span>Ben Lanne © 2026 — BTS SIO</span>
+	<div class="footer-links">
+      <a href="mailto:BenLanne2005@gmail.com">Email</a>
+      <a href="https://github.com/valomain2000-beep" target="_blank">GitHub</a>
+	  <a href="mentions-legales.html">Mentions Légales & Confidentialité</a>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
