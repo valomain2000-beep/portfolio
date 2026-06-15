@@ -12,7 +12,6 @@
 <body class="article-body">
 
   <nav>
-    <!-- Le bon logo est ici -->
     <a href="index.html" class="nav-logo">BL<span>.</span></a>
     <ul class="nav-links">
       <li><a href="docs-pro.html" class="btn btn-ghost btn-compact">← Retour à la Documentation</a></li>
@@ -57,6 +56,10 @@
         <li><strong>ACL Standard :</strong> Filtre uniquement selon l'adresse IP source (placées au plus près de la destination).</li>
         <li><strong>ACL Étendue :</strong> Filtre selon l'IP source, l'IP de destination, le protocole (TCP/UDP) et le port (ex: 80 pour HTTP, 443 pour HTTPS). Elles sont placées au plus près de la source.</li>
       </ul>
+      <p>Exemple de configuration d'une ACL étendue autorisant le trafic web (Cisco IOS) :</p>
+      <pre><code>Router(config)# access-list 100 permit tcp 192.168.10.0 0.0.0.255 any eq 443
+Router(config)# interface gigabitEthernet 0/0
+Router(config-if)# ip access-group 100 in</code></pre>
 
       <h2>6. Accès Internet : NAT et PAT</h2>
       <p>Les adresses IPv4 privées (ex: 192.168.x.x) ne sont pas routables sur Internet. Le <strong>NAT (Network Address Translation)</strong> permet à un routeur de remplacer l'adresse IP privée d'un paquet sortant par son adresse IP publique.</p>
