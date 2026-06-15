@@ -2,69 +2,75 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Synthèse Réseau — Ben Lanne</title>
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700&family=DM+Sans:wght@300;400;500&family=Fira+Code&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
-  <style>
-    .pdf-download-card { display: flex; align-items: center; gap: 1rem; background: var(--surface2); padding: 1rem; border-radius: 8px; border: 1px solid var(--border); margin-bottom: 1rem; transition: 0.2s; text-decoration: none; color: var(--text); }
-    .pdf-download-card:hover { border-color: var(--teal); transform: translateX(5px); }
-    .pdf-icon { font-size: 2rem; }
-    .pdf-info h4 { margin: 0; font-size: 1rem; color: var(--teal); font-family: var(--font-head); }
-    .pdf-info p { margin: 0; font-size: 0.85rem; color: var(--text2); }
-  </style>
 </head>
 <body class="article-body">
 
-<nav>
+  <nav>
     <a href="index.html" class="nav-logo">BL<span>.</span></a>
     <ul class="nav-links">
-      <li><a href="docs-pro.html" class="nav-cta" style="background: transparent; border: 1px solid var(--border); color: var(--text) !important;">← Retour à la Doc Pro</a></li>
+      <li><a href="docs-pro.html" class="nav-cta" style="background: transparent; border: 1px solid var(--border); color: var(--text) !important;">← Retour à la Documentation</a></li>
     </ul>
   </nav>
 
   <main class="article-container">
+    
     <header class="article-header">
-      <div class="article-meta"><span class="note-badge type-passive">Fiche de Synthèse</span></div>
-      <h1 class="article-title">Fondamentaux : Architecture Réseau & Cisco</h1>
-      <p class="article-intro">Regroupement et synthèse de mes cours théoriques concernant l'infrastructure réseau, le modèle OSI et les protocoles de routage.</p>
+      <div class="article-meta">
+        <span class="note-badge type-active">Synthèse Technique</span>
+        <span class="article-date">BTS SIO - Pôle Réseau</span>
+      </div>
+      <h1 class="article-title">Fondamentaux des Architectures Réseaux (Cisco)</h1>
+      <p class="article-intro">Cette fiche de synthèse regroupe les concepts essentiels d'infrastructure réseau : de la commutation de niveau 2 (VLANs, Switchs) au routage de niveau 3, en passant par la sécurisation des flux (ACL) et la translation d'adresses (NAT/PAT).</p>
     </header>
 
     <div class="article-content">
       
-      <h2>Concepts clés maîtrisés</h2>
-      <p>Au cours de ma formation, j'ai validé l'ensemble des concepts nécessaires à la conception et au maintien d'une architecture réseau sécurisée :</p>
+      <h2>1. Modèle OSI & Commutation (Niveau 2)</h2>
+      <p>Le modèle OSI standardise la communication réseau en 7 couches. Le rôle d'un technicien infrastructure se concentre principalement sur les couches 2 (Liaison), 3 (Réseau) et 4 (Transport).</p>
+      <p>Le <strong>Switch (Commutateur)</strong> est l'équipement central du réseau local (LAN). Contrairement à un hub, il apprend les adresses MAC des équipements connectés et crée une table de commutation (Table MAC) pour envoyer les trames de données uniquement sur le port de destination, optimisant ainsi la bande passante.</p>
+
+      <h2>2. Segmentation logique : Les VLANs</h2>
+      <p>Un <strong>VLAN (Virtual Local Area Network)</strong> permet de diviser physiquement un switch en plusieurs réseaux logiques isolés. Les avantages sont multiples :</p>
       <ul>
-        <li><strong>Modèle OSI & TCP/IP :</strong> Compréhension du mécanisme d'encapsulation et de l'organisation des ports.</li>
-        <li><strong>Commutation & VLANs :</strong> Différence entre les ports "Access" et les "Trunks" (norme 802.1Q).</li>
-        <li><strong>Routage IP :</strong> Découpage en sous-réseaux (Subnetting IPv4), tables de routage, et protocoles dynamiques (RIP).</li>
-        <li><strong>Sécurité & Filtrage :</strong> Implémentation de NAT/PAT pour l'accès internet et règles de sécurité via des Access Control Lists (ACL) sur routeurs Cisco.</li>
+        <li><strong>Sécurité :</strong> Les postes d'un VLAN (ex: Comptabilité) ne peuvent pas communiquer directement avec un autre VLAN (ex: Invités).</li>
+        <li><strong>Performance :</strong> Réduction des domaines de diffusion (broadcasts).</li>
+      </ul>
+      <p>Pour faire transiter plusieurs VLANs sur un seul câble (entre deux switchs ou vers un routeur), on utilise des liens <strong>Trunk</strong> basés sur la norme d'encapsulation <strong>IEEE 802.1Q</strong>, qui ajoute une "étiquette" (Tag) à chaque trame pour l'identifier.</p>
+
+      <h2>3. Routage et Inter-VLAN (Niveau 3)</h2>
+      <p>Puisque les VLANs sont isolés, il faut un équipement de couche 3 (Routeur ou Switch L3) pour permettre la communication entre eux : c'est le routage inter-VLAN (souvent configuré via la méthode "Router-on-a-Stick" avec des sous-interfaces).</p>
+      <p>Plus globalement, le <strong>Routage</strong> permet d'interconnecter des réseaux différents en utilisant les adresses IP. Le routeur utilise une table de routage, alimentée soit manuellement (routes statiques), soit dynamiquement via des protocoles (RIP, OSPF) pour trouver le meilleur chemin vers une destination.</p>
+
+      <h2>4. Adressage IP et Service DHCP</h2>
+      <p>Chaque équipement réseau a besoin d'une adresse IP unique. Le protocole <strong>DHCP (Dynamic Host Configuration Protocol)</strong> permet d'automatiser cette distribution. Lorsqu'un poste client se connecte, il effectue une requête broadcast (DORA : Discover, Offer, Request, Acknowledge) pour obtenir une adresse IP, un masque de sous-réseau, une passerelle par défaut et un serveur DNS.</p>
+
+      <h2>5. Sécurité : Filtrage par ACL (Access Control Lists)</h2>
+      <p>Les ACL agissent comme un pare-feu basique sur un routeur Cisco. Elles filtrent le trafic réseau entrant ou sortant sur une interface selon des règles précises :</p>
+      <ul>
+        <li><strong>ACL Standard :</strong> Filtre uniquement selon l'adresse IP source (placées au plus près de la destination).</li>
+        <li><strong>ACL Étendue :</strong> Filtre selon l'IP source, l'IP de destination, le protocole (TCP/UDP) et le port (ex: 80 pour HTTP, 443 pour HTTPS). Elles sont placées au plus près de la source.</li>
       </ul>
 
-      <h2 style="margin-top: 3rem;">Mes supports de cours complets (PDF)</h2>
-      <p>Vous pouvez consulter mes documents de cours détaillés ci-dessous :</p>
+      <h2>6. Accès Internet : NAT et PAT</h2>
+      <p>Les adresses IPv4 privées (ex: 192.168.x.x) ne sont pas routables sur Internet. Le <strong>NAT (Network Address Translation)</strong> permet à un routeur de remplacer l'adresse IP privée d'un paquet sortant par son adresse IP publique.</p>
+      <p>En entreprise, on utilise massivement le <strong>PAT (Port Address Translation)</strong>, ou NAT Overload. Cela permet à des centaines de machines du réseau local d'accéder à Internet en partageant une seule et unique adresse IP publique, le routeur différenciant les sessions grâce aux numéros de ports source.</p>
 
-      <a href="assets/Doc/03-Modèle_OSI.pdf" target="_blank" class="pdf-download-card">
-        <div class="pdf-icon">📄</div>
-        <div class="pdf-info"><h4>Le Modèle OSI</h4><p>Encapsulation, couches et ports TCP/UDP.</p></div>
-      </a>
-
-      <a href="assets/Doc/04-AdressageIP.pdf" target="_blank" class="pdf-download-card">
-        <div class="pdf-icon">📄</div>
-        <div class="pdf-info"><h4>Adressage IPv4</h4><p>Calcul binaire, classes d'adresses et sous-réseaux.</p></div>
-      </a>
-
-      <a href="assets/Doc/04-Cours%20VLAN%20(Concepts%20de%20base%20sur%20les%20vlan)%201.0.pdf" target="_blank" class="pdf-download-card">
-        <div class="pdf-icon">📄</div>
-        <div class="pdf-info"><h4>Concepts VLAN</h4><p>Réseaux virtuels, Taggage 802.1Q et Trunking.</p></div>
-      </a>
-
-      <a href="assets/Doc/09-Cours%20Routage.pdf" target="_blank" class="pdf-download-card">
-        <div class="pdf-icon">📄</div>
-        <div class="pdf-info"><h4>Routage Dynamique</h4><p>Tables de routage, métriques et fonctionnement global.</p></div>
-      </a>
+      <div class="callout">
+        <p><strong>Note d'Administration :</strong> L'ensemble de ces concepts a été appliqué et validé lors de la réalisation des maquettes Packet Tracer (TP Cisco) et lors du déploiement de l'infrastructure complète (TP03 / TP04).</p>
+      </div>
 
     </div>
   </main>
-  <script src="script.js"></script>
+
+  <footer>
+    <span>Ben Lanne © 2026 — Synthèses Documentaires</span>
+  </footer>
+
 </body>
 </html>
